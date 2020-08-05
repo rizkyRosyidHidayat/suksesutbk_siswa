@@ -1,0 +1,23 @@
+.btn-primary{
+  @apply px-4 py-2 transition ease-in-out duration-100 tracking-wider;
+  @apply bg-teal-500;
+  @apply font-bold text-white rounded cursor-pointer;
+}
+.btn-primary:hover{
+  @apply bg-teal-600;
+}
+.btn-primary:focus{
+  @apply outline-none;
+}
+.btn-primary:disabled{
+  @apply bg-gray-500 cursor-not-allowed;
+}
+.btn-icon{
+  @apply bg-transparent transition duration-100 rounded-full p-2 cursor-pointer;
+}
+.btn-icon:hover{
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.btn-icon:focus{
+  @apply outline-none;
+}

@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+
+@import'./css/button.css';
+@import'./css/textfield.css';
+.navbar{
+  @apply flex items-center bg-gray-900 text-white flex-wrap px-6 py-2;
+}
+.title{
+  @apply text-lg tracking-wider font-bold;
+}
+.avatar{
+  @apply rounded-full overflow-hidden;  
+  width: 40px;
+  height: 40px;
+}
+.avatar img{
+  object-fit: cover;
+}
+.card{
+  @apply w-full rounded overflow-hidden shadow-lg bg-white;
+}
+.card-body{
+  @apply px-6 py-4;
+}
+@tailwind utilities;
