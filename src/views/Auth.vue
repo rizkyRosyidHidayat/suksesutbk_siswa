@@ -2,7 +2,7 @@
   <div class="login min-h-screen">
     <div class="container">
       <div class="flex justify-between">
-        <div class="w-1/2">
+        <div class="w-1/2 hidden md:block">
           <div class="h-screen flex items-center">
             <div>
               <img src="@/assets/img/edubrand.png" alt="edubrand" class="mb-4">
@@ -23,8 +23,9 @@
             <div class="mt-3">&copy; {{ new Date().getFullYear() }}. All Rights Reserved</div>
           </div>
         </div>
-        <div style="width: 400px;" class="flex-shrink-0 mb-12">
-          <img src="@/assets/img/logo.png" alt="logo" class="w-1/2 mx-auto my-6">
+        <div class="form flex-shrink-0 mb-12 mx-auto md:mx-0">
+          <img src="@/assets/img/logo.png" alt="logo" class="w-1/2 mx-auto my-6 hidden md:block">
+          <img src="@/assets/img/logo_white.png" alt="logo" class="w-1/2 mx-auto my-6 block md:hidden">
           <div class="card">
             <div class="flex">
               <button 
@@ -76,13 +77,27 @@ export default {
 
 <style scoped>
   .login{
-    background-image: url('../assets/img/banner.png');
-    @apply bg-top bg-cover bg-no-repeat;
+    background-image: url('../assets/img/banner_mobile.png');
+    @apply bg-right bg-cover bg-no-repeat;
   }
   .btn-primary.not-active{
     @apply bg-gray-400;
   }
   .btn-primary.not-active:hover{
     @apply bg-teal-500;
+  }
+  .form{
+    width: 100%;
+  }
+  @screen md{
+    .login{
+      background-image: url('../assets/img/banner.png');
+      @apply bg-top;
+    }
+  }
+  @screen sm{
+    .form{
+      width: 400px;
+    }
   }
 </style>

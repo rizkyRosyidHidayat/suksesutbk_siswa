@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import dataAuth from './auth'
+import dataDashboard from './dashboard'
+import dataPtn from './ptn'
 
 Vue.use(Vuex)
 
@@ -37,7 +39,9 @@ const store = new Vuex.Store({
     }
   },
   modules: {
-    dataAuth: dataAuth
+    dataPtn: dataPtn,
+    dataDashboard: dataDashboard,
+    dataAuth: dataAuth,
   }
 })
 

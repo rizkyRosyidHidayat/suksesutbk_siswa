@@ -15,7 +15,8 @@ module.exports = {
   },
   variants: {
     backgroundColor: ['hover', 'focus', 'active', 'disabled'],
-    cursor: ['disabled']
+    cursor: ['disabled'],
+    width: ['responsive']
   },
   plugins: [],
 }

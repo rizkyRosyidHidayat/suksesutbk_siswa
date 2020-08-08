@@ -50,22 +50,17 @@
       <hr class="mb-4 -mx-6">
       <div class="font-bold text-gray-700 mb-2">Dapatkan Paket FREE dari SUKSESUTBK</div>
       <div class="mb-4">
-        <Option :items="paket" :data="data">
-          <ValidationProvider name="kelompok" rules="required" v-slot="{ errors }">
-            <div class="flex">
-              <input
-                v-model="data.kelompok_uji"
-                class="text-field rounded-tr-none rounded-br-none cursor-pointer" 
-                type="text" 
-                readonly
-                placeholder="Pilih PAKET">
-              <div class="text-field-icon border-l-0 rounded-tl-none rounded-bl-none">
-                <img src="@/assets/icons/menu-down.svg" alt="icon" width="25px">
-              </div>  
-            </div>
-            <p class="field-message">{{ errors[0] }}</p>              
-          </ValidationProvider>   
-        </Option>
+        <ValidationProvider name="kelompok" rules="required" v-slot="{ errors }">            
+          <Option 
+            :items="paket" 
+            :item="{
+              text: 'text',
+              value: 'value',
+            }"
+            placeholder="Pilih Kelompok Uji"
+            v-model="data.kelompok_uji"></Option>
+          <p class="field-message">{{ errors[0] }}</p>              
+        </ValidationProvider>   
       </div>
       <Notif class="mb-4"/>
       <button :disabled="invalid" type="submit" class="btn-primary rounded-full w-full">

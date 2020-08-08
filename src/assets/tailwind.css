@@ -3,9 +3,6 @@
 
 @import'./css/button.css';
 @import'./css/textfield.css';
-.navbar{
-  @apply flex items-center bg-gray-900 text-white flex-wrap px-6 py-2;
-}
 .title{
   @apply text-lg tracking-wider font-bold;
 }

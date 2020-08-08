@@ -29,7 +29,7 @@ var dataAuth = {
               msg: 'Login berhasil'
             })
             store.dispatch('updateLoading', false)
-						// window.location.href="/peserta"
+						window.location.reload()
 					} else {
 						store.dispatch('updateNotif', {
               visible: true,
@@ -68,7 +68,7 @@ var dataAuth = {
                       msg: 'Pendaftaran berhasil'
                     })
                     store.dispatch('updateLoading', false)
-										// window.location.href="/peserta"										
+										window.location.reload()									
 									} else {
                     store.dispatch('updateNotif', {
                       visible: true,
