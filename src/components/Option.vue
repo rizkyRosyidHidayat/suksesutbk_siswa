@@ -5,7 +5,7 @@
         <input
           class="text-field rounded-tr-none rounded-br-none cursor-pointer" 
           type="text"
-          :value="text"
+          :value="selectedValue"
           readonly
           :placeholder="placeholder">
         <div class="text-field-icon border-l-0 rounded-tl-none rounded-bl-none">
@@ -29,7 +29,8 @@ export default {
     'items', 
     'return-object', 
     'placeholder', 
-    'item'
+    'item',
+    'selected-value'
   ],
   model: {
     prop: 'value',
@@ -57,7 +58,7 @@ export default {
       // } else {
       //   this.item = data.value
       // }
-      this.text = data[this.item.text]
+      this.$emit('update:selected-value', data[this.item.text])
       this.value = data[this.item.value]
       this.visible = false
     }

@@ -16,6 +16,16 @@
 
 <script>
 export default {
+  computed: {
+    visible() {
+      return this.$store.getters.getNotif.visible
+    }
+  },
+  watch: {
+    visible() {
+      this.autoclose()
+    }
+  },
   methods: {
     close() {
       this.$store.dispatch('updateNotif', {
@@ -23,6 +33,16 @@ export default {
         status: null,
         msg: ''
       })
+    },
+    autoclose: function () {
+      const vm = this
+      setTimeout(() => {
+        vm.$store.dispatch('updateNotif', {
+          visible: false,
+          status: null,
+          msg: ''
+        })
+      }, 3000)
     }
   }
 }

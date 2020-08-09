@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="text-right mt-4">
-        <button class="btn-primary">
+        <button @click="$router.push({ name: 'biodata' })" class="btn-primary">
           EDIT PROFIL
         </button>
       </div>

@@ -5,7 +5,7 @@
         <input
           class="text-field rounded-tr-none rounded-br-none cursor-pointer" 
           type="text"
-          :value="text"
+          :value="selectedValue"
           readonly
           :placeholder="placeholder">
         <div class="text-field-icon border-l-0 rounded-tl-none rounded-bl-none">
@@ -20,7 +20,6 @@
         <input
           class="text-field rounded-tr-none rounded-br-none" 
           type="search"
-          autofocus
           v-model="search"
           placeholder="Cari data">
         <div @click="$emit('dataSearching', search)" class="text-field-icon bg-teal-500 border-l-0 rounded-tl-none rounded-bl-none">          
@@ -38,7 +37,7 @@
         <li 
           v-else
           @click="selected(data)"
-          v-for="(data, i) in items" :key="i">
+          v-for="(data, i) in dataSearch" :key="i">
           {{ data[item.text] }}
         </li>
       </ul>
@@ -50,13 +49,14 @@
 export default {
   props: [
     'items', 
-    'return-object', 
+    'returnObject', 
     'loading', 
     'item',
     'placeholder',
-    'position'
+    'position',
+    'selectedValue'
   ],
-  modal: {
+  model: {
     props: 'value',
     event: 'input'
   },
@@ -64,11 +64,19 @@ export default {
     visible: false,
     search: '',
     text: '',
-    value: ''
+    value: '',
+    data: []
   }),
   watch: {
     value(val) {
       this.$emit('input', val)
+    },
+  },
+  computed: {
+    dataSearch: {
+      get() {
+        return this.items.filter(data => data[this.item.text].toLowerCase().includes(this.search))
+      }
     }
   },
   methods: {
@@ -78,14 +86,13 @@ export default {
       }
     },
     selected(data) {
-      // if (this.returnObject) {
-      //   this.item = data        
-      // } else {
-      //   this.item = data.value
-      // }
-      this.text = data[this.item.text]
-      this.value = data[this.item.value]
-      this.visible = false
+      this.$emit('update:selected-value', data[this.item.text])
+      if (this.returnObject) {
+        this.value = data
+      } else {
+        this.value = data[this.item.value]
+      }      
+      this.visible = false       
     },
   },
   mounted() {

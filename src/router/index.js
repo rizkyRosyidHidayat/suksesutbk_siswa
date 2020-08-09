@@ -6,8 +6,14 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: () => import('../views/Home.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/biodata',
+    name: 'biodata',
+    component: () => import('../views/Biodata.vue'),
     meta: { requiresAuth: true }
   },
   {
@@ -31,7 +37,7 @@ router.beforeEach((to, from, next) => {
   if (requiresAuth && !isLoggedIn){ 
     next({ name: 'auth', params: { form: 'login' } })
   }else if(isLoggedIn && to.name === 'auth') {
-    next({ name: 'Home' })
+    next({ name: 'home' })
   }else if (requiresAuth && isLoggedIn) {
     next()
   }else {

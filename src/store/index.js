@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import dataAuth from './auth'
 import dataDashboard from './dashboard'
 import dataPtn from './ptn'
+import dataBiodata from './biodata'
 
 Vue.use(Vuex)
 
@@ -39,6 +40,7 @@ const store = new Vuex.Store({
     }
   },
   modules: {
+    dataBiodata: dataBiodata,
     dataPtn: dataPtn,
     dataDashboard: dataDashboard,
     dataAuth: dataAuth,

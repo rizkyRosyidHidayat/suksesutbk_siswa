@@ -1,7 +1,7 @@
 <template>
   <Modal :visible="visible">
     <template v-slot:activator>
-      <div @click="visible=true" class="btn-primary text-gray-700 bg-white hover:bg-gray-200 text-sm inline-block">
+      <div @click="mulai" class="btn-primary text-gray-700 bg-white hover:bg-gray-200 text-sm inline-block">
         <span>MULAI</span>
       </div>
     </template>
@@ -16,7 +16,7 @@
           </div>
         </div>
         <div class="bg-white card-body rounded-br rounded-bl">
-          <PilihPtnProdi/>      
+          <Form/>      
         </div>
       </div>
     </template>                        
@@ -25,14 +25,24 @@
 
 <script>
 import Modal from '@/components/Modal'
-import PilihPtnProdi from './PilihPtnProdi'
+import Form from './Form'
 export default {
   data: () => ({
-    visible: false,
+    visible: true,
   }),
   components: {
-    PilihPtnProdi,
+    Form,
     Modal
   },
+  methods: {
+    mulai() {
+      const peserta = JSON.parse(window.localStorage.getItem('dataPeserta'))
+      if (peserta.sekolah.tahun_kelulusan === null) {
+        this.$router.push({name: 'biodata'})
+      } else {
+        this.visible = true
+      }
+    }
+  }
 }
 </script>

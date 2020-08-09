@@ -1,4 +1,4 @@
-import { getDataDashboard } from '@/config/dashboard'
+import { getDataDashboard, getDataPaketSoal } from '@/config/dashboard'
 import store from './index'
 
 var dataDashboard = {
@@ -36,16 +36,7 @@ var dataDashboard = {
 			state.dataBonusFasilitas = payload.bonus_fasilitas
 		},
 		updateDataPaketSoal (state, payload) {
-			state.dataPaketSoal = payload.map(paket => {
-				/**
-				 * Component option hanya menerima data object
-				 * dengan key text dan value
-				 */
-				return {
-					text: paket.nama,
-					value: paket.id
-				}
-			})
+			state.dataPaketSoal = payload
 		},
 		updateDataPaket (state, payload) {
 			/**
@@ -116,6 +107,21 @@ var dataDashboard = {
 						context.commit('updateDataProgressPaket', res.data)
 						context.commit('updateDataBonusFasilitas', res.data)
 						context.commit('updateDataPaketSoal', res.data.paket[0].subpaket.paket_soal)
+            store.dispatch('updateLoading', false)
+					} else {
+            store.dispatch('updateLoading', false)
+          }
+				})
+				.catch(() => {
+          store.dispatch('updateLoading', false)
+				})
+		},
+		getDataPaketSoal (context, payload) {
+      store.dispatch('updateLoading', true)
+      getDataPaketSoal (payload)
+				.then(res => {
+					if (res.status === 200) {
+						context.commit('updateDataPaketSoal', res.data.data)
             store.dispatch('updateLoading', false)
 					} else {
             store.dispatch('updateLoading', false)

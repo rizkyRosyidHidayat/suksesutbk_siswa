@@ -1,76 +1,42 @@
 <template>
   <div>
-    <ValidationObserver v-slot="{ invalid }">  
-    <form>
-      <div class="mb-4">
-        <label for="">Pilih Paket Soal</label>
-        <ValidationProvider name="paket_soal" rules="required" v-slot="{ errors }">
-          <Option 
-            v-model="data.id_paket_soal"
-            :items="dataPaketSoal"
-            :item="{
-              text: 'text',
-              value: 'value',
-            }"
-            placeholder="Pilih Paket Soal"></Option>
-          <p class="field-message">{{ errors[0] }}</p>              
-        </ValidationProvider>   
-      </div>
-      <!--  -->
-      <hr class="-mx-6 mb-4">
-      <!--  -->
-      <p class="text-white rounded block bg-blue-500 py-2 px-4">
-        Silahkan pilih Perguruan Tinggi Negeri dan Program Studi 
-        yang ke {{ pilihan_ptn_ke+1 }}
-      </p>
-      <div class="my-4">
-        <label for="">Pilih PTN</label>
-        <ValidationProvider name="ptn" rules="required" v-slot="{ errors }">
-          <Autocomplete 
-            v-model="data.pilihan_ptn[pilihan_ptn_ke].id_ptn"
-            :items="dataPtn" 
-            :item="{
-              text: 'text',
-              value: 'value',
-            }"
-            :return-object="true"
-            :loading="loading"
-            placeholder="Pilih PTN"
-            position="top"
-            @dataSearching="getDataSearching"
-            :key="pilihan_ptn_ke">
-          </Autocomplete>
-          <p class="field-message">{{ errors[0] }}</p>              
-        </ValidationProvider>   
-      </div>
-      <!--  -->
-      <div class="mb-4">
-        <label for="">Pilih Prodi</label>
-        <ValidationProvider name="prodi" rules="required" v-slot="{ errors }">
-          <Autocomplete 
-            v-model="data.pilihan_ptn[pilihan_ptn_ke].id_prodi"
-            :items="dataProdi" 
-            :item="{
-              text: 'prodi',
-              value: 'kode_prodi',
-            }"
-            :return-object="true"
-            :loading="loading"
-            placeholder="Pilih Prodi"
-            position="bottom"
-            @dataSearching="getDataSearchingProdi"
-            :key="pilihan_ptn_ke+1">
-          </Autocomplete>
-          <p class="field-message">{{ errors[0] }}</p>              
-        </ValidationProvider>   
-      </div>
-      <div class="text-right"> 
-        <button :disabled="invalid" class="btn-primary">
-          Simpan
-        </button>
-      </div>
-    </form>
-  </ValidationObserver>  
+    <div class="mb-4">
+      <label for="">Pilih PTN</label>
+      <ValidationProvider name="ptn" rules="required" v-slot="{ errors }">
+        <Autocomplete
+          :items="dataPtn" 
+          :item="{
+            text: 'text',
+            value: 'value',
+          }"
+          :loading="loading"
+          :selected-value.sync="nama_ptn"
+          placeholder="Pilih PTN"
+          position="top">
+        </Autocomplete>
+        <p class="field-message">{{ errors[0] }}</p>              
+      </ValidationProvider>   
+    </div>
+    <!--  -->
+    <div class="mb-4">
+      <label for="">Pilih Prodi</label>
+      <ValidationProvider name="prodi" rules="required" v-slot="{ errors }">
+        <Autocomplete 
+          v-model="prodi"
+          :items="data_prodi" 
+          :item="{
+            text: 'prodi',
+            value: 'kode_prodi',
+          }"
+          :loading="loading"
+          :return-object="true"
+          :selected-value.sync="nama_prodi"
+          placeholder="Pilih Prodi"
+          position="bottom">
+        </Autocomplete>
+        <p class="field-message">{{ errors[0] }}</p>              
+      </ValidationProvider>   
+    </div>
   </div>
 </template>
 
@@ -78,6 +44,7 @@
 import { extend } from 'vee-validate';
 import { required } from 'vee-validate/dist/rules';
 import { mapState } from "vuex";
+import { getDataProdi } from "@/config/ptn";
 
 extend('required', {
   ...required,
@@ -85,69 +52,58 @@ extend('required', {
 });
 
 import Autocomplete from '@/components/Autocomplete'
-import Option from '@/components/Option'
 export default {
   components: {
-    Autocomplete,
-    Option
+    Autocomplete
   },
   data: () => ({
-    data: {
-      id_paket_soal: '',
-      pilihan_ptn: [
-        {
-          id_ptn: '',
-          id_prodi: ''
-        },
-        {
-          id_ptn: '',
-          id_prodi: ''
-        }
-      ]
-    },
-    pilihan_ptn_ke: 0
+    nama_ptn: '',
+    nama_prodi: '',
+    data_prodi: [],
+    selectedKelompokUji: '',
+    prodi: ''
   }),
   computed: {
-    ...mapState('dataPtn', ['dataPtn', 'loading', 'dataProdi']),
+    ...mapState('dataPtn', ['dataPtn', 'loading', 'dataPilihanPtn']),
     ...mapState('dataDashboard', ['dataPaketSoal']),
-    watchPtn1() {
-      return this.data.pilihan_ptn[0].id_ptn
-    },
-    watchPtn2() {
-      return this.data.pilihan_ptn[1].id_ptn
-    },
-    watchProdi1() {
-      return this.data.pilihan_ptn[0].id_prodi
-    },
   },
   watch: {
-    watchPtn1: function (val) {
-      this.$store.commit('dataPtn/updateDataProdi', this.dataProdi
-      .filter(prodi => prodi.kode_ptn == val))
+    nama_ptn: function (val) {
+      this.$store.commit('dataPtn/updateLoading', true)
+      getDataProdi({
+        kelompok: this.selectedKelompokUji,
+        ptn: val
+      })
+        .then(res => {
+          if (res.status == 200) {
+            this.data_prodi = res.data
+            this.$store.commit('dataPtn/updateLoading', false)            
+          } else {
+            this.$store.commit('dataPtn/updateLoading', false)
+          }
+        })
+        .catch(() => this.$store.commit('dataPtn/updateLoading', false))          
     },
-    watchPtn2: function (val) {
-      this.$store.commit('dataPtn/updateDataProdi', this.dataProdi
-      .filter(prodi => prodi.kode_ptn == val))
-    },
-    watchProdi1: function () {
-      this.pilihan_ptn_ke = 1
-      // this.$store.commit('dataPtn/updateDataProdi', [])
-      // this.$store.commit('dataPtn/updateDataPtn', [])
+    prodi(val) {
+      this.$emit('update:pilihan_ptn', {
+        id_ptn: val.kode_ptn,
+        id_prodi: val.kode_prodi
+      })
     }
   },
-  methods: {
-    getDataSearching(val) {
-      const search = val.toUpperCase()
-      this.$store.dispatch('dataPtn/getDataPtn', {
-        kelompok: 'SAINTEK',
-        ptn: search
-      })
-    },
-    getDataSearchingProdi(val) {
-      const search = val.toUpperCase()
-      this.$store.commit('dataPtn/updateDataProdi', this.dataProdi
-      .filter(prodi => prodi.prodi.includes(search)))
-    }
-  }
+  created() {
+    /**
+     * Menentukan kelompok uji
+     * berdasarkan nama paket soal
+     */
+    const kelompokUji = ['SAINTEK', 'SOSHUM']
+    this.selectedKelompokUji = kelompokUji
+      .filter((kelompok) => {
+        const result = this.dataPaketSoal[0].nama.includes(kelompok)
+        if (result) {
+          return kelompok
+        }
+      })[0]
+  },
 }
 </script>
