@@ -3,6 +3,11 @@ import {
   getDataPtn,
   cekPilihanPtn
 } from "@/config/ptn";
+import {
+  addData,
+  getAllData
+} from '@/indexedDB'
+
 const dataPtn = {
   namespaced: true,
   state: {
@@ -70,6 +75,14 @@ const dataPtn = {
           }
         })
         .catch(() => context.commit('updateLoading', false))
+    },
+    addPilihanPtn(context, payload) {
+      addData(payload, 'pilihan_ptn', { autoIncrement: true })
+    },
+    getDataPilihanPtn(context) {
+      getAllData('pilihan_ptn').then(res => {
+        context.commit('updateDataPilihanPtn', res)
+      })
     }
   }
 }

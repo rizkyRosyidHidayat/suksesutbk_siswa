@@ -1,5 +1,5 @@
 <template>
-  <nav class="fixed w-full bg-white py-3 shadow-lg z-10 hidden">
+  <nav class="fixed w-full bg-white py-3 shadow-lg z-10">
     <div class="container flex justify-between items-center">
       <div class="btn-icon block sm:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="25px" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
@@ -13,12 +13,12 @@
         </svg>
       </div>
       <div class="items-center hidden sm:flex">
-        <a 
+        <div 
           v-for="item in nav" :key="item.text"
-          :href="item.link"
-          class="capitalize ml-5 text-gray-700 font-bold">
+          @click="$router.push({ name: item.link })"
+          class="capitalize ml-5 text-gray-700 font-bold cursor-pointer">
           {{ item.text }}
-        </a>
+        </div>
         <div @click="logout" class="btn-primary bg-red-500 ml-5 font-normal hover:bg-red-600">
           Logout
         </div>
@@ -31,7 +31,7 @@
 export default {
   data: () => ({
     nav: [
-      { text: 'Beranda', link: '' },
+      { text: 'Beranda', link: 'home' },
       { text: 'Fitur', link: '' },
       { text: 'Cara Pemakaian', link: '' },
       { text: 'riwayat transaksi', link: '' }

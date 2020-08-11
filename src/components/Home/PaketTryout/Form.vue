@@ -1,9 +1,11 @@
 <template>
   <ValidationObserver v-slot="{ invalid }">
-    <form>
+    <form @submit.prevent="onSubmit">
       <PilihPaketSoal v-if="!isSelectPtn" :id_paket_soal.sync="data.id_paket_soal" />
       <div v-else>
+        <div class="mb-2 font-xl font-bold text-gray-700">Pilihan PTN dan Prodi Pertama</div>
         <PilihPtnProdi :pilihan_ptn.sync="data.pilihan_ptn[0]" />
+        <div class="mb-2 font-xl font-bold text-gray-700">Pilihan PTN dan Prodi Kedua</div>
         <PilihPtnProdi :pilihan_ptn.sync="data.pilihan_ptn[1]" />
         <div class="text-right"> 
           <button @click="isSelectPtn=false;data.id_paket_soal=0" class="btn-primary bg-white text-teal-500">
@@ -78,14 +80,11 @@ export default {
     this.$store.dispatch('dataPtn/getDataPtn', this.selectedKelompokUji)
   },
   methods: {
-    onSubmit() {
-      window.localStorage.setItem('pilihan_ptn', this.data.pilihan_ptn)
-      this.$router.push({ name: 'paket-soal', params: { id: this.data.id_paket_soal } })
+    onSubmit() {      
+      this.$store.dispatch('dataPtn/addPilihanPtn', this.data.pilihan_ptn)
+      window.localStorage.setItem('id_paket_soal', this.data.id_paket_soal)
+      this.$router.push({ name: 'paket-soal'})
     }
   }
 }
 </script>
-
-<style>
-
-</style>

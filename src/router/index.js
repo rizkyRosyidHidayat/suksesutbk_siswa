@@ -17,6 +17,18 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path: '/paket-soal',
+    name: 'paket-soal',
+    component: () => import('../views/PaketSoal.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/pengerjaan-soal',
+    name: 'pengerjaan-soal',
+    component: () => import('../views/PengerjaanSoal.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/auth/:form',
     name: 'auth',
     component: () => import('../views/Auth.vue'),

@@ -56,9 +56,8 @@ var dataDashboard = {
 			.paket.map(paket => {
 				return paketView.map((data) => {
 					const namaPaket = paket.nama_paket==data.name?true:false
-					if (namaPaket && paket.status === true && paket.is_activated === true && paket.is_paid === true) {								
-						data.id = paket.id_paket
-						data.id_subpaket_tryout = paket.subpaket.id
+					if (namaPaket && paket.status === true && paket.is_activated === true && paket.is_paid === true) {						
+						window.localStorage.setItem('id_subpaket', paket.subpaket.id)
 						/**
 							* Jika hasil cek pengerjaan paket soal selesai 
 							* maka status 4 (cek hasil) jika tidak maka
@@ -121,7 +120,7 @@ var dataDashboard = {
       getDataPaketSoal (payload)
 				.then(res => {
 					if (res.status === 200) {
-						context.commit('updateDataPaketSoal', res.data.data)
+						context.commit('updateDataPaketSoal', res.data[0])
             store.dispatch('updateLoading', false)
 					} else {
             store.dispatch('updateLoading', false)

@@ -3,7 +3,7 @@
     <img src="@/assets/img/banner.png" alt="banner" class="img-banner sm:w-full">
     <div class="absolute w-full" style="top: 0;letf: 0;">
       <!-- navbar -->
-      <FixedNavbar id="fixedHeader"/>
+      <FixedNavbar id="fixedHeader" class="hidden"/>
       <Navbar/>
       <!-- banner -->
       <section class="h-screen hidden sm:flex items-center mt-12">
@@ -121,7 +121,7 @@ export default {
   },
   created() {
     var peserta = JSON.parse(window.localStorage.getItem('dataPeserta'))
-    this.$store.dispatch('dataDashboard/getDataDashboard', peserta.id)
+    this.$store.dispatch('dataDashboard/getDataDashboard', peserta.id)  
   },
   computed: {
     nama() {

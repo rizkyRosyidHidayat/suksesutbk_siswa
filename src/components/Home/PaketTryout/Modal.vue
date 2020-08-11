@@ -6,7 +6,7 @@
       </div>
     </template>
     <template v-slot:content>
-      <div class="card max-w-md overflow-visible mx-auto">
+      <div class="card max-w-full sm:max-w-md overflow-visible mx-4 sm:mx-auto">
         <div class="card-body">
           <div class="flex justify-between items-center">
             <div class="text-xl font-bold text-gray-800">Pilih Paket Soal dan PTN</div>
@@ -28,7 +28,7 @@ import Modal from '@/components/Modal'
 import Form from './Form'
 export default {
   data: () => ({
-    visible: true,
+    visible: false,
   }),
   components: {
     Form,

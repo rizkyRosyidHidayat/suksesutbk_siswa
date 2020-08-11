@@ -2,15 +2,14 @@
   <div class="biodata overflow-hidden">
     <!-- navbar -->
     <FixedNavbar id="fixedHeader"/>
-    <Navbar/>
     <!-- banner -->
     <div class="w-1/2 block mx-auto mb-12">
-      <p class="mt-48 text-white font-bold text-4xl tracking-widest">
+      <p class="mt-24 text-white font-bold text-4xl tracking-widest">
         Biodata Siswa
       </p>
     </div>
     <!-- form -->
-    <section class="w-1/2 block mx-auto mb-24">
+    <section class="px-4 w-full md:w-1/2 block mx-auto mb-24">
       <div class="card overflow-visible">
         <div class="card-body">
           <ValidationObserver v-slot="{ invalid }">
@@ -43,7 +42,7 @@
                 <div class="px-3 w-1/4 mb-4">
                   Nomor Handphone
                 </div>
-                <div class="px-3 w-1/4 mb-4">
+                <div class="px-3 w-3/4 md:w-1/4 mb-4">
                   <ValidationProvider name="nohp" rules="required|nohp" v-slot="{ errors }">
                     <input v-model="data.nohp" class="text-field" type="text" v-mask="'#############'" placeholder="No. HP (sebagai username)">
                     <p class="field-message">{{ errors[0] }}</p>              
@@ -53,7 +52,7 @@
                 <div class="px-3 w-1/4 mb-4">
                   Nomor Whatsapp
                 </div>
-                <div class="px-3 w-1/4 mb-4">
+                <div class="px-3 w-3/4 md:w-1/4 mb-4">
                   <ValidationProvider name="nohp" rules="required|nohp" v-slot="{ errors }">
                     <input v-model="data.nohp_wa" class="text-field" type="text" v-mask="'#############'" placeholder="No. Whatsapp">
                     <p class="field-message">{{ errors[0] }}</p>              
@@ -63,7 +62,7 @@
                 <div class="px-3 w-1/4 mb-4">
                   Facebook
                 </div>
-                <div class="px-3 w-1/4 mb-4">
+                <div class="px-3 w-3/4 md:w-1/4 mb-4">
                   <ValidationProvider name="fb" rules="required" v-slot="{ errors }">
                     <input v-model="data.sosmed_fb" class="text-field" type="text" placeholder="Facebook">
                     <p class="field-message">{{ errors[0] }}</p>              
@@ -73,7 +72,7 @@
                 <div class="px-3 w-1/4 mb-4">
                   Instagram
                 </div>
-                <div class="px-3 w-1/4 mb-4">
+                <div class="px-3 w-3/4 md:w-1/4 mb-4">
                   <ValidationProvider name="ig" rules="required" v-slot="{ errors }">
                     <input v-model="data.sosmed_ig" class="text-field" type="text" placeholder="Instagram">
                     <p class="field-message">{{ errors[0] }}</p>              
@@ -147,7 +146,7 @@
                   Tahun Kelulusan
                 </div>
                 <div class="px-3 w-3/4 mb-4">
-                  <div class="w-2/6">
+                  <div class="w-full md:w-2/6">
                     <ValidationProvider name="tahun_lulus" rules="required" v-slot="{ errors }">
                       <Option 
                         v-model="data.tahun_kelulusan"
@@ -196,7 +195,6 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar'
 import FixedNavbar from '@/components/FixedNavbar'
 import Footer from '@/components/Footer'
 import { extend } from 'vee-validate';
@@ -228,7 +226,6 @@ export default {
   components: {
     Footer,
     FixedNavbar,
-    Navbar,
     Option,
     Autocomplete,
     Spinner,

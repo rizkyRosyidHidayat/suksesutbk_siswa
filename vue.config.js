@@ -24,5 +24,8 @@ module.exports = {
     plugins: process.env.NODE_ENV === 'production'
     ? compressionPlugin
     : []
-  }
+  },
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/peserta/'
+    : '/'
 }

@@ -5,6 +5,7 @@ import dataAuth from './auth'
 import dataDashboard from './dashboard'
 import dataPtn from './ptn'
 import dataBiodata from './biodata'
+import dataSoal from './soal'
 
 Vue.use(Vuex)
 
@@ -37,9 +38,10 @@ const store = new Vuex.Store({
     },
     updateLoading(context, payload) {
       context.commit('updateLoading', payload)
-    }
+    },
   },
   modules: {
+    dataSoal: dataSoal,
     dataBiodata: dataBiodata,
     dataPtn: dataPtn,
     dataDashboard: dataDashboard,
