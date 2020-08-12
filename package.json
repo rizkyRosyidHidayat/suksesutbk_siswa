@@ -12,10 +12,12 @@
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
     "idb": "^5.0.4",
+    "moment": "^2.27.0",
     "tailwindcss": "^1.6.0",
     "vee-validate": "^3.3.8",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
+    "vue-shortkey": "^3.1.7",
     "vue-the-mask": "^0.11.1",
     "vuex": "^3.4.0"
   },
@@ -29,7 +31,6 @@
     "compression-webpack-plugin": "^4.0.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
-    "vue-loader": "^15.9.3",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {

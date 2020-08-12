@@ -57,6 +57,7 @@
               text: 'text',
               value: 'value',
             }"
+            :selected-value.sync="kelompok_uji"
             placeholder="Pilih Kelompok Uji"
             v-model="data.kelompok_uji"></Option>
           <p class="field-message">{{ errors[0] }}</p>              
@@ -108,7 +109,8 @@ export default {
     paket: [
       { text: 'SOSHUM', value: 'soshum' },
       { text: 'SAINTEK', value: 'saintek' }
-    ]
+    ],
+    kelompok_uji: ''
   }),
   components: {
     Spinner,

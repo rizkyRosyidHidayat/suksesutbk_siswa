@@ -5,8 +5,8 @@
         <img src="@/assets/icons/pause.svg" alt="icons" width="30">
         <span class="ml-3">11.45</span>
       </div>
-      <h1 class="text-xl font-bold">Penalaran Umum</h1>
-      <div class="text-sm">20 Soal | 40 Menit</div>
+      <h1 class="text-xl font-bold">{{ soal.nama }}</h1>
+      <div class="text-sm">{{ soal.soal.length }} Soal | {{ soal.durasi_ujian }} Menit</div>
     </div>
     <img src="@/assets/img/logo_white.png" alt="logo" class="h-10">
     <div class="py-1 px-6 inline-block bg-gray-800 rounded-full text-lg tracking-wider">
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-
+  props: ['soal']
 }
 </script>
 

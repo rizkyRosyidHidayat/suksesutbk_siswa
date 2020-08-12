@@ -3,11 +3,6 @@ import {
   getDataPtn,
   cekPilihanPtn
 } from "@/config/ptn";
-import {
-  addData,
-  getAllData
-} from '@/indexedDB'
-
 const dataPtn = {
   namespaced: true,
   state: {
@@ -68,6 +63,17 @@ const dataPtn = {
       cekPilihanPtn(payload)
         .then(res => {
           if (res.status == 200) {
+            window.localStorage.setItem('pilihan_ptn', JSON.stringify(res.data.data
+              .map(ptn => {
+                return { 
+                  id_ptn: ptn.kode_ptn, 
+                  id_prodi: ptn.kode_prodi
+                }
+              })))
+            /**
+             * mengupdate data state data pilihan ptn
+             * untuk mentrigger function saat pengecekan data tersebut
+             */
             context.commit('updateDataPilihanPtn', res.data.data)
             context.commit('updateLoading', false)            
           } else {
@@ -75,14 +81,6 @@ const dataPtn = {
           }
         })
         .catch(() => context.commit('updateLoading', false))
-    },
-    addPilihanPtn(context, payload) {
-      addData(payload, 'pilihan_ptn', { autoIncrement: true })
-    },
-    getDataPilihanPtn(context) {
-      getAllData('pilihan_ptn').then(res => {
-        context.commit('updateDataPilihanPtn', res)
-      })
     }
   }
 }

@@ -19,7 +19,8 @@
           <ModalDownloadSoal :data="dataPaketSoal" />          
         </div>
         <div class="card-body">
-          <table class="table-auto w-full divide-y">
+          <div v-if="$store.getters.getLoading" class="animate-pulse h-4 w-full bg-gray-400 rounded mt-4"></div>
+          <table v-else class="table-auto w-full divide-y">
             <thead>
               <tr>
                 <th>No</th>

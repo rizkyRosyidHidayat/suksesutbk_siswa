@@ -45,6 +45,7 @@ export default {
   watch: {
     'data.id_paket_soal': function (val) {
       if (val > 0) {
+        window.localStorage.setItem('id_paket_soal', val)
         this.$store.dispatch('dataPtn/cekPilihanPtn', {
           id_paket_soal: val,
           id_peserta: JSON.parse(window.localStorage.getItem('dataPeserta')).id
@@ -81,8 +82,7 @@ export default {
   },
   methods: {
     onSubmit() {      
-      this.$store.dispatch('dataPtn/addPilihanPtn', this.data.pilihan_ptn)
-      window.localStorage.setItem('id_paket_soal', this.data.id_paket_soal)
+      localStorage.pilihan_ptn = JSON.stringify(this.data.pilihan_ptn)
       this.$router.push({ name: 'paket-soal'})
     }
   }

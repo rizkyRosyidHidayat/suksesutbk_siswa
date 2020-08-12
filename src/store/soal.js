@@ -7,8 +7,7 @@ import store from './index'
 const dataSoal = {
   namespaced: true,
   state: {
-    dataUjian: [],
-    loading: false
+    dataUjian: [],    
   },
   mutations: {
     updateDataUjian(state, payload) {
@@ -21,7 +20,6 @@ const dataSoal = {
       postDataUjian(payload)
         .then(res => {
           if (res.status == 201) {
-            context.commit('updateDataUjian', res.data.data)
             const info_ujian = res.data.data
             getDataSoal({
               id_ujian: info_ujian.id,
@@ -29,6 +27,17 @@ const dataSoal = {
             })
               .then(res => {
                 if (res.status == 200) {
+                  window.localStorage.setItem('soal', JSON.stringify(res.data.submateri))
+                  /**
+                   * memilih data soal pada array submateri
+                   */
+                  window.localStorage.setItem('submateri', 0)
+                  /**
+                   * Membuat penampung data jawaban
+                   */
+                  window.localStorage.setItem('dataJawaban', JSON.stringify(
+                    res.data.submateri.map(() => [])
+                  ))
                   store.dispatch('updateNotif', {
                     status: true,
                     visible: false,

@@ -15,7 +15,7 @@
           v-for="(item, i) in peringkatSaintek" :key="i"
           class="flex px-4 py-2 items-center">
           <div class="w-12 h-12 rounded-full flex justify-center items-center bg-orange-300">
-            {{ i }}
+            {{ i+1 }}
           </div>
           <div class="ml-3">
             <h1>{{ item.nama_peserta }}</h1>

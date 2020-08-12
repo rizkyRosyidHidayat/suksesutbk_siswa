@@ -6,6 +6,7 @@ import { ValidationProvider, ValidationObserver } from 'vee-validate';
 
 Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);
+Vue.use(require('vue-shortkey'))
 
 Vue.config.productionTip = false
 
