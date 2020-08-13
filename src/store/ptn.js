@@ -9,7 +9,8 @@ const dataPtn = {
     dataPtn: [],
     dataPilihanPtn: [],
     dataProdi: [],
-    loading: false
+    loading: false,
+    loadingForm: false,
   },
   mutations: {
     updateDataPtn(state, payload) {
@@ -29,6 +30,9 @@ const dataPtn = {
     },
     updateLoading(state, payload) {
       state.loading = payload
+    },
+    updateLoadingForm(state, payload) {
+      state.loadingForm = payload
     }
   },
   actions: {
@@ -59,7 +63,7 @@ const dataPtn = {
         .catch(() => context.commit('updateLoading', false))
     },
     cekPilihanPtn(context, payload) {
-      context.commit('updateLoading', true)
+      context.commit('updateLoadingForm', true)
       cekPilihanPtn(payload)
         .then(res => {
           if (res.status == 200) {
@@ -75,12 +79,12 @@ const dataPtn = {
              * untuk mentrigger function saat pengecekan data tersebut
              */
             context.commit('updateDataPilihanPtn', res.data.data)
-            context.commit('updateLoading', false)            
+            context.commit('updateLoadingForm', false)            
           } else {
-            context.commit('updateLoading', false)
+            context.commit('updateLoadingForm', false)
           }
         })
-        .catch(() => context.commit('updateLoading', false))
+        .catch(() => context.commit('updateLoadingForm', false))
     }
   }
 }

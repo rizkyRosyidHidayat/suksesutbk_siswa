@@ -1,10 +1,12 @@
 <template>
   <footer>
-    <div v-if="submateri>0" class="btn-primary rounded-none flex items-center">
+    <div @click="$emit('update:submateri', submateri-1)" v-if="submateri>0" class="btn-primary rounded-none flex items-center">
       <img src="@/assets/icons/chevron_left.svg" alt="icon" width="30" class="-ml-3">
       SEBELUMNYA
     </div>
-    <div class="page-number">
+    <div 
+      class="page-number"
+      :class="{'xl:justify-center': submateri==0?true:false}">
       <input type="button" 
         v-for="item in soal.length" :key="item"
         class="btn-page-number"
@@ -14,26 +16,46 @@
         @click="changeNumberClick(item-1)"
         :value="item">
     </div>
-    <div class="btn-primary rounded-none flex items-center bg-orange-500">
-      SELANJUTNYA
-      <img src="@/assets/icons/chevron_right.svg" alt="icon" width="30" class="-mr-3">
-    </div>
+    <ModalNextSubmateri 
+      v-if="dataJawaban.length-1 > submateri"
+      class="flex" 
+      @updateSubmateri="updateSubmateri" 
+      :data-jawaban="dataJawaban[submateri]" />
+    <ModalUploadJawaban 
+      v-else
+      class="flex" 
+      :submateri="submateri"
+      :data-jawaban="dataJawaban" />
   </footer>
 </template>
 
 <script>
+import ModalNextSubmateri from './ModalNextSubmateri'
+import ModalUploadJawaban from './ModalUploadJawaban'
 export default {
-  props: ['soal', 'number', 'submateri', 'data-jawaban'],  
+  props: ['soal', 'number', 'submateri', 'data-jawaban'], 
+  components: {
+    ModalUploadJawaban,
+    ModalNextSubmateri
+  },
   methods: {
     changeNumber(e) {
       let number = this.number
       switch (e.srcKey) {
         case 'left':
+          /**
+           * Number akan berubah selama page
+           * number lebih dari 0
+           */
           if (number > 0) {
             this.$emit('update:number', number-1)
           }
           break;
         case 'right':
+          /**
+           * Number akan berubah selama page
+           * number kurang dari panjang soal
+           */
           if (number < this.soal.length) {
             this.$emit('update:number', number+1)
           }
@@ -47,6 +69,10 @@ export default {
       this.$emit('update:number', number)
     },
     isPageEmpty(number) {
+      /**
+       * Page number aktif ketika data jawaban
+       * tidak kosong dan data number sama dengan data number yang aktif
+       */
       if (this.dataJawaban[this.submateri][number] !== undefined && this.dataJawaban[this.submateri][number] !== null && this.dataJawaban[this.submateri][number] !== '') {
         return true
       } else if (this.number == number) {
@@ -54,6 +80,9 @@ export default {
       } else {
         return false
       }
+    },
+    updateSubmateri(val) {
+      this.$emit('update:submateri', this.submateri+val)
     }
   },
 }

@@ -80,12 +80,25 @@ export default {
     mulai(data) {
 			if (data.completed == 0) {
         this.visible = true
-        this.$store.dispatch('dataSoal/postDataUjian', {
-          ptn: this.pilihan_ptn,
-          subpaket_id: window.localStorage.getItem('id_subpaket'),
-          paketsoal_id: window.localStorage.getItem('id_paket_soal'),
-          materiuji_id: data.id_materi_uji
-        })
+        /**
+         * Jika pernah mendownload soal
+         * maka status true dan bisa langsung
+         * mulai ujian
+         */
+        if (!localStorage.soal) {
+          this.$store.dispatch('dataSoal/postDataUjian', {
+            ptn: this.pilihan_ptn,
+            subpaket_id: window.localStorage.getItem('id_subpaket'),
+            paketsoal_id: window.localStorage.getItem('id_paket_soal'),
+            materiuji_id: data.id_materi_uji
+          })          
+        } else {
+          this.$store.dispatch('updateNotif', {
+            status: true,
+            visible: false,
+            msg: ''
+          })
+        }
       }
     }
   },

@@ -8,7 +8,7 @@
           :value="selectedValue"
           readonly
           :placeholder="placeholder">
-        <div class="text-field-icon border-l-0 rounded-tl-none rounded-bl-none">
+        <div class="text-field-icon border-l-0 rounded-tl-none rounded-bl-none bg-white">
           <img src="@/assets/icons/menu-down.svg" alt="icon" width="25px">
         </div>  
       </div>
@@ -16,6 +16,7 @@
     <ul v-if="visible" class="option-menu z-10">
       <li 
         @click="selected(data)"
+        class="text-gray-800"
         v-for="(data, i) in items" :key="i">
         {{ data[item.text] }}
       </li>

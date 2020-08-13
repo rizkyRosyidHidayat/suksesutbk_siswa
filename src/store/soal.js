@@ -33,11 +33,27 @@ const dataSoal = {
                    */
                   window.localStorage.setItem('submateri', 0)
                   /**
-                   * Membuat penampung data jawaban
+                   * Jika belum pernah menyimpan data jawaban
+                   * maka akan mengeset data jawaban 
                    */
-                  window.localStorage.setItem('dataJawaban', JSON.stringify(
-                    res.data.submateri.map(() => [])
-                  ))
+                  const dataJawaban = window.localStorage.getItem('dataJawaban')
+                  if (dataJawaban === undefined || dataJawaban === null) {
+                    window.localStorage.setItem('dataJawaban', JSON.stringify(
+                      res.data.submateri.map(() => [])
+                    ))
+                  }                  
+                  /**
+                   * Jika belum pernah menyimpan data Durasi
+                   * maka akan mengeset data Durasi 
+                   */
+                  const dataDurasi = window.localStorage.getItem('dataDurasi')
+                  if (dataDurasi === undefined || dataDurasi === null) {
+                    window.localStorage.setItem('dataDurasi', JSON.stringify(
+                      res.data.submateri.map(data => {
+                        return data.durasi_ujian*60
+                      })
+                    ))
+                  }                  
                   store.dispatch('updateNotif', {
                     status: true,
                     visible: false,

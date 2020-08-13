@@ -1,7 +1,7 @@
 <template>
-  <div id="soal" class="flex content-between h-screen flex-wrap">
-    <Navbar :soal="soal" class="w-full flex-shrink-0"/>
-    <div class="w-full flex-shrink-0 body">
+  <div class="flex content-between h-screen flex-wrap">
+    <Navbar :soal="soal" :submateri.sync="submateri" class="w-full flex-shrink-0"/>
+    <div class="w-full flex-shrink-0 body break-all">
       <div class="container">
         <h1 class="font-bold mb-4">Soal Nomor {{ number+1 }}</h1>
         <p v-html="pertanyaan.pertanyaan"></p>
@@ -45,11 +45,6 @@
 import Navbar from '@/components/PengerjaanSoal/Navbar'
 import PageNumber from '@/components/PengerjaanSoal/PageNumber'
 
-// const tes = function () {
-//   document.querySelector('#soal').webkitRequestFullscreen
-//   console.log('ee')
-// }
-
 export default {
   components: {
     PageNumber,
@@ -78,6 +73,8 @@ export default {
   watch: {
     submateri(val) {
       localStorage.submateri = val
+      this.soal = JSON.parse(localStorage.soal)[val]
+      this.selected = this.dataJawaban[val][this.number]
     },
     number(newVal, oldVal) {
       /**
@@ -132,7 +129,7 @@ export default {
   height: calc(100vh - 127px);
   overflow-x: hidden;
   overflow-y: auto;
-  @apply pt-8;
+  @apply py-8;
 }
 .card.active{
   @apply bg-blue-500 text-white border-none;

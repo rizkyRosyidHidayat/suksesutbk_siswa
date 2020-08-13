@@ -2,6 +2,7 @@
   <ValidationObserver v-slot="{ invalid }">
     <form @submit.prevent="onSubmit">
       <PilihPaketSoal v-if="!isSelectPtn" :id_paket_soal.sync="data.id_paket_soal" />
+      <div v-else-if="loadingForm" class="mt-4 animate-pulse w-full h-4 bg-gray-400 rounded"></div>
       <div v-else>
         <div class="mb-2 font-xl font-bold text-gray-700">Pilihan PTN dan Prodi Pertama</div>
         <PilihPtnProdi :pilihan_ptn.sync="data.pilihan_ptn[0]" />
@@ -40,7 +41,7 @@ export default {
   }),
   computed: {
     ...mapState('dataDashboard', ['dataPaketSoal']),
-    ...mapState('dataPtn', ['dataPilihanPtn']),
+    ...mapState('dataPtn', ['dataPilihanPtn', 'loadingForm']),
   },
   watch: {
     'data.id_paket_soal': function (val) {
