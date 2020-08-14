@@ -22,19 +22,34 @@
               <path d="M13 14h-2v-4h2m0 8h-2v-2h2M1 21h22L12 2L1 21z" fill="white"/>
               <rect x="0" y="0" width="24" height="24" fill="rgba(0, 0, 0, 0)" />
             </svg>
-            <p class="text-center text-white mb-4">
-              Durasi atau waktu untuk mengerjakan submateri ini
-              telah HABIS. Silahkan pilih submateri yang lain.
-            </p>
-            <Option 
-              v-model="updateSubmateri"
-              :items="dataSubmateriVisible"
-              :item="{
-                text: 'text',
-                value: 'value',
-              }"
-              :selected-value.sync="namaSubmateri"
-              placeholder="Pilih Submateri"></Option>
+            <div v-if="dataSubmateriVisible.length > 0">
+              <p class="text-center text-white mb-4">
+                Durasi atau waktu untuk mengerjakan submateri ini
+                telah HABIS. Silahkan pilih submateri yang lain.
+              </p>
+              <Option 
+                v-model="updateSubmateri"
+                :items="dataSubmateriVisible"
+                :item="{
+                  text: 'text',
+                  value: 'value',
+                }"
+                :selected-value.sync="namaSubmateri"
+                placeholder="Pilih Submateri"></Option>
+            </div>
+            <div v-else>
+              <p class="text-center text-white mb-4">
+                Durasi atau waktu untuk mengerjakan semua submateri
+                telah HABIS. Silahkan mengakhiri ujian.
+              </p>
+              <center>
+                <ModalUploadJawaban 
+                  :submateri="submateri"
+                  :number="number"
+                  :selected="selected"
+                  :data-jawaban="dataJawaban" />
+              </center>
+            </div>
           </div>
         </div>
       </template>
@@ -46,9 +61,11 @@
 import moment from'moment'
 import Modal from '@/components/Modal'
 import Option from '@/components/Option'
+import ModalUploadJawaban from './ModalUploadJawaban'
 export default {
-  props: ['soal', 'submateri'],
+  props: ['soal', 'submateri', 'data-jawaban', 'number', 'selected'],
   components: {
+    ModalUploadJawaban,
     Option,
     Modal,
   },

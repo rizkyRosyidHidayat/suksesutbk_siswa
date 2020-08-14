@@ -24,6 +24,8 @@
     <ModalUploadJawaban 
       v-else
       class="flex" 
+      :number="number"
+      :selected="selected"
       :submateri="submateri"
       :data-jawaban="dataJawaban" />
   </footer>
@@ -33,7 +35,7 @@
 import ModalNextSubmateri from './ModalNextSubmateri'
 import ModalUploadJawaban from './ModalUploadJawaban'
 export default {
-  props: ['soal', 'number', 'submateri', 'data-jawaban'], 
+  props: ['soal', 'number', 'submateri', 'data-jawaban', 'selected'], 
   components: {
     ModalUploadJawaban,
     ModalNextSubmateri

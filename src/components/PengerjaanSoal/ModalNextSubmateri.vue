@@ -48,6 +48,7 @@ export default {
       if (!isEmpty.length) {
         this.visible = true
       } else {
+        // jika berhasil maka lanjut ke submateri berikutnya
         this.$emit('updateSubmateri', 1)
       }  
     }

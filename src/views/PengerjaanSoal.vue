@@ -1,6 +1,12 @@
 <template>
   <div class="flex content-between h-screen flex-wrap">
-    <Navbar :soal="soal" :submateri.sync="submateri" class="w-full flex-shrink-0"/>
+    <Navbar 
+      :soal="soal" 
+      :submateri.sync="submateri"
+      :number="number"
+      :selected="selected"
+      :data-jawaban="dataJawaban"
+      class="w-full flex-shrink-0"/>
     <div class="w-full flex-shrink-0 body break-all">
       <div class="container">
         <h1 class="font-bold mb-4">Soal Nomor {{ number+1 }}</h1>
@@ -36,6 +42,7 @@
       :soal="soal.soal" 
       :number.sync="number" 
       :submateri.sync="submateri"
+      :selected="selected"
       :data-jawaban="dataJawaban"
       class="w-full flex-shrink-0" />
   </div>
@@ -71,10 +78,24 @@ export default {
     }
   },
   watch: {
-    submateri(val) {
-      localStorage.submateri = val
-      this.soal = JSON.parse(localStorage.soal)[val]
-      this.selected = this.dataJawaban[val][this.number]
+    submateri(newVal, oldVal) {
+      /**
+       * Setiap pindah ke submateri
+       * jawaban disinmpan
+       */
+      this.dataJawaban[oldVal][this.number] = this.selected
+      localStorage.dataJawaban = JSON.stringify(this.dataJawaban)
+      /**
+       * Mengubah data submateri dan soal berdasarkan submateri
+       */
+      localStorage.submateri = newVal
+      this.soal = JSON.parse(localStorage.soal)[newVal]  
+      /**
+       * mengeset number ke awal
+       * dan memberikan nilai selected berdasarkan data jawaban yang tersimpan 
+       */      
+      this.number = 0
+      this.selected = this.dataJawaban[newVal][this.number]
     },
     number(newVal, oldVal) {
       /**
