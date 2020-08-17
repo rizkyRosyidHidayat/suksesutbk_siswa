@@ -1,7 +1,7 @@
 .btn-primary{
   @apply px-4 py-2 transition ease-in-out duration-100 tracking-wider;
   @apply bg-teal-500;
-  @apply font-bold text-white rounded cursor-pointer;
+  @apply font-bold text-white rounded cursor-pointer text-center;
 }
 .btn-primary:hover{
   @apply bg-teal-600;

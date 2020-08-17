@@ -12,7 +12,7 @@
         (Sukses-1, Sukses-2, Sukses-3).Bandingkan nilai 
         akhir kami dengan standar nilai PTN di seluruh Indonesia
       </P>
-      <button class="btn-primary bg-orange-500">
+      <button @click="$router.push({ name: 'simulasi-rasional' })" class="btn-primary bg-orange-500">
         <div class="flex">
           Selengkapnya
         </div>

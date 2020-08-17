@@ -14,7 +14,7 @@
             </div>
           </div>
           <div class="mt-2 flex justify-end">
-            <div @click="pesan" v-if="item.status==0" class="btn-primary text-gray-700 bg-white hover:bg-gray-200 text-sm">
+            <div @click="pesan(item.name)" v-if="item.status==0" class="btn-primary text-gray-700 bg-white hover:bg-gray-200 text-sm">
               <span>PESAN</span>
             </div>
             <Modal v-else-if="item.status==1"/>
@@ -45,12 +45,12 @@ export default {
     Modal,
   },
   methods: {
-    pesan() {
+    pesan(nama) {
       const peserta = JSON.parse(window.localStorage.getItem('dataPeserta'))
       if (peserta.sekolah.tahun_kelulusan === null) {
         this.$router.push({name: 'biodata'})
       } else {
-        this.visible = true
+        this.$router.push({name: 'pesan-paket', params: { nama_paket: nama }})        
       }
     }
   }

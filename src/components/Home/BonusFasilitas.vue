@@ -17,7 +17,7 @@
           :style="{'transform': `translateX(${position}%)`}">
           <div class="card relative" style="max-height: 200px;">
             <!-- <img :src="item.file_gambar" alt="video" class="object-fill"> -->
-            <img src="@/assets/img/banner_mobile.png" alt="video" class="object-fill">
+            <img :src="item.file_gambar" alt="video" class="object-fill">
             <div class="card-body py-2 px-3 flex items-center justify-between">              
               <div class="mr-3">{{ item.nama_fasilitas }}</div>
               <a v-if="item.has_access" :href="item.file_url" target="_blank" class="btn-icon bg-white">

@@ -14,7 +14,7 @@ module.exports = {
     },
   },
   variants: {
-    backgroundColor: ['hover', 'focus', 'active', 'disabled', 'checked'],
+    backgroundColor: ['hover', 'focus', 'active', 'disabled', 'checked', 'odd'],
     cursor: ['disabled'],
     width: ['responsive']
   },

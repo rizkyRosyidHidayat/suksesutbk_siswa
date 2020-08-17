@@ -65,7 +65,7 @@
 import Modal from '@/components/Modal'
 
 export default {
-  props: ['data-jawaban', 'submateri', 'number', 'selected'],
+  props: ['data-jawaban', 'submateri'],
   components: {
     Modal
   },
@@ -92,11 +92,6 @@ export default {
   },
   methods: {    
     uploadJawaban() {
-      /**
-       * Menyimpan data jawaban terakhir
-       */
-      this.dataJawaban[this.submateri][this.number] = this.selected
-      localStorage.dataJawaban = JSON.stringify(this.dataJawaban)
       /**
        * Mengecek data jawaban pada submateri
        * apakah kosong atau tidak

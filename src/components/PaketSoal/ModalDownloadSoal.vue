@@ -8,7 +8,7 @@
     </template>
     <template v-slot:content>
       <div 
-        class="card max-w-full sm:max-w-md mx-4 sm:mx-auto text-white"
+        class="card max-w-full sm:max-w-m sm:mx-auto text-white"
         :class="color">
         <div class="card-body">
           <div class="flex justify-between items-center">
@@ -31,7 +31,7 @@
                 <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2m-2 15l-5-5l1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="white"/>
               </svg>
               <div class="my-4">Proses download soal berhasil, silahkan memulai ujian dengan semangat</div>
-              <div @click="$router.push({ name: 'pengerjaan-soal' })" class="btn-primary bg-white text-green-500 inline-block">Mulai Ujian</div>
+              <div @click="$router.push({ name: 'pengerjaan-soal', params: {id: data.id_materi_uji} })" class="btn-primary bg-white text-green-500 inline-block">Mulai Ujian</div>
             </div>
             <div v-else>
               <svg class="block mx-auto animate-bounce" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="64px" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">

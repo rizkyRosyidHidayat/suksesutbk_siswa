@@ -8,7 +8,7 @@
       <h1 class="text-xl font-bold">{{ soal.nama }}</h1>
       <div class="text-sm">{{ soal.soal.length }} Soal | {{ soal.durasi_ujian }} Menit</div>
     </div>
-    <img src="@/assets/img/logo_white.png" alt="logo" class="h-10">
+    <img src="@/assets/img/logo_white.png" alt="logo" class="h-10 hidden sm:block">
     <Modal :visible="visible">
       <template v-slot:activator>
         <div class="py-1 px-6 inline-block bg-gray-800 rounded-full text-lg tracking-wider">
@@ -16,7 +16,7 @@
         </div>
       </template>
       <template v-slot:content>
-        <div class="card sm:max-w-sm mx-4 sm:mx-auto bg-yellow-500 overflow-visible">
+        <div class="card sm:max-w-sm sm:mx-auto bg-yellow-500 overflow-visible">
           <div class="card-body">
             <svg class="animate-bounce w-16 h-16 block mx-auto" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
               <path d="M13 14h-2v-4h2m0 8h-2v-2h2M1 21h22L12 2L1 21z" fill="white"/>
@@ -45,8 +45,6 @@
               <center>
                 <ModalUploadJawaban 
                   :submateri="submateri"
-                  :number="number"
-                  :selected="selected"
                   :data-jawaban="dataJawaban" />
               </center>
             </div>
@@ -63,7 +61,7 @@ import Modal from '@/components/Modal'
 import Option from '@/components/Option'
 import ModalUploadJawaban from './ModalUploadJawaban'
 export default {
-  props: ['soal', 'submateri', 'data-jawaban', 'number', 'selected'],
+  props: ['soal', 'submateri', 'data-jawaban'],
   components: {
     ModalUploadJawaban,
     Option,
@@ -109,6 +107,7 @@ export default {
   watch: {
     updateSubmateri(val) {
       this.$emit('update:submateri', val)
+      this.visible = false
     }
   },
   methods: {

@@ -7,7 +7,7 @@
       </div>
     </template>
     <template v-slot:content>
-      <div class="card max-w-full sm:max-w-sm mx-4 sm:mx-auto bg-yellow-500">
+      <div class="card max-w-full sm:max-w-sm sm:mx-auto bg-yellow-500">
         <div class="card-body flex justify-end">
           <div @click="visible=false" class="btn-icon">
             <img src="@/assets/icons/close.svg" alt="icons" width="25px">

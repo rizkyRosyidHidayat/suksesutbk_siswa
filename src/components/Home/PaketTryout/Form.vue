@@ -3,7 +3,7 @@
     <form @submit.prevent="onSubmit">
       <PilihPaketSoal v-if="!isSelectPtn" :id_paket_soal.sync="data.id_paket_soal" />
       <div v-else-if="loadingForm" class="mt-4 animate-pulse w-full h-4 bg-gray-400 rounded"></div>
-      <div v-else>
+      <div v-else-if="isSelectPtn">
         <div class="mb-2 font-xl font-bold text-gray-700">Pilihan PTN dan Prodi Pertama</div>
         <PilihPtnProdi :pilihan_ptn.sync="data.pilihan_ptn[0]" />
         <div class="mb-2 font-xl font-bold text-gray-700">Pilihan PTN dan Prodi Kedua</div>
@@ -44,8 +44,13 @@ export default {
     ...mapState('dataPtn', ['dataPilihanPtn', 'loadingForm']),
   },
   watch: {
+    /**
+     * Mengecek apakah pernah memilih ptn dan prodi
+     * setelah memilih paket soal
+     */
     'data.id_paket_soal': function (val) {
       if (val > 0) {
+        this.isSelectPtn = true
         window.localStorage.setItem('id_paket_soal', val)
         this.$store.dispatch('dataPtn/cekPilihanPtn', {
           id_paket_soal: val,
@@ -60,7 +65,7 @@ export default {
        * tapi jika belum maka memilih ptn dan prodi
        */
       if (val.length > 0) {
-        this.$router.push({ name: 'paket-soal' })
+        this.$router.push({ name: 'paket-soal', params: { id: this.data.id_paket_soal } })
       } else {
         this.isSelectPtn = true
       }

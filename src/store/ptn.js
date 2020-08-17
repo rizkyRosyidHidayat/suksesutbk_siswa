@@ -36,6 +36,9 @@ const dataPtn = {
     }
   },
   actions: {
+    updateLoadingForm (context, payload) {
+      context.commit('updateLoadingForm', payload)
+    },
     getDataProdi(context, payload) {
       context.commit('updateLoading', true)
       getDataProdi(payload)
@@ -63,7 +66,7 @@ const dataPtn = {
         .catch(() => context.commit('updateLoading', false))
     },
     cekPilihanPtn(context, payload) {
-      context.commit('updateLoadingForm', true)
+      context.dispatch('updateLoadingForm', true)
       cekPilihanPtn(payload)
         .then(res => {
           if (res.status == 200) {
@@ -79,12 +82,12 @@ const dataPtn = {
              * untuk mentrigger function saat pengecekan data tersebut
              */
             context.commit('updateDataPilihanPtn', res.data.data)
-            context.commit('updateLoadingForm', false)            
+            context.dispatch('updateLoadingForm', false)            
           } else {
-            context.commit('updateLoadingForm', false)
+            context.dispatch('updateLoadingForm', false)
           }
         })
-        .catch(() => context.commit('updateLoadingForm', false))
+        .catch(() => context.dispatch('updateLoadingForm', false))
     }
   }
 }

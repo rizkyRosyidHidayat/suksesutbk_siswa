@@ -3,8 +3,6 @@
     <Navbar 
       :soal="soal" 
       :submateri.sync="submateri"
-      :number="number"
-      :selected="selected"
       :data-jawaban="dataJawaban"
       class="w-full flex-shrink-0"/>
     <div class="w-full flex-shrink-0 body break-all">
@@ -42,7 +40,6 @@
       :soal="soal.soal" 
       :number.sync="number" 
       :submateri.sync="submateri"
-      :selected="selected"
       :data-jawaban="dataJawaban"
       class="w-full flex-shrink-0" />
   </div>
@@ -78,13 +75,7 @@ export default {
     }
   },
   watch: {
-    submateri(newVal, oldVal) {
-      /**
-       * Setiap pindah ke submateri
-       * jawaban disinmpan
-       */
-      this.dataJawaban[oldVal][this.number] = this.selected
-      localStorage.dataJawaban = JSON.stringify(this.dataJawaban)
+    submateri(newVal) {
       /**
        * Mengubah data submateri dan soal berdasarkan submateri
        */
@@ -97,32 +88,22 @@ export default {
       this.number = 0
       this.selected = this.dataJawaban[newVal][this.number]
     },
-    number(newVal, oldVal) {
+    selected(val) {
+      this.dataJawaban[this.submateri][this.number] = val
+      localStorage.dataJawaban = JSON.stringify(this.dataJawaban)
+    },
+    number(newVal) {
       /**
-       * menentukan index berdasarkan 
-       * direction(prev/next) page number
-       */    
-      if (oldVal > newVal) {
-        // jika direction prev
-        this.dataJawaban[this.submateri][oldVal] = this.selected
-        localStorage.dataJawaban = JSON.stringify(this.dataJawaban)
-        this.selected = this.dataJawaban[this.submateri][newVal]        
+       * jika data jawaban soal berikutnya kosong
+       * maka data selected = ''
+       * jika sebaliknya maka 
+       * data selected = data jawaban soal berikutnya
+       */
+      if (this.dataJawaban[this.submateri][newVal] !== '' && this.dataJawaban[this.submateri][newVal] !== null) {
+        this.selected = this.dataJawaban[this.submateri][newVal]           
       } else {
-        // jika direction next
-        this.dataJawaban[this.submateri][oldVal] = this.selected
-        localStorage.dataJawaban = JSON.stringify(this.dataJawaban)
-        /**
-         * jika data jawaban soal berikutnya kosong
-         * maka data selected = ''
-         * jika sebaliknya maka 
-         * data selected = data jawaban soal berikutnya
-         */
-        if (this.dataJawaban[this.submateri][newVal] !== '' && this.dataJawaban[this.submateri][newVal] !== null) {
-          this.selected = this.dataJawaban[this.submateri][newVal]           
-        } else {
-          this.selected = ''
-        }
-      }      
+        this.selected = ''
+      }     
     }
   },
   methods: {
@@ -147,10 +128,15 @@ export default {
 
 <style scoped>
 .body{
-  height: calc(100vh - 127px);
+  height: calc(100vh - 207px);
   overflow-x: hidden;
   overflow-y: auto;
   @apply py-8;
+}
+@screen sm{
+  .body{
+    height: calc(100vh - 127px);
+  }
 }
 .card.active{
   @apply bg-blue-500 text-white border-none;

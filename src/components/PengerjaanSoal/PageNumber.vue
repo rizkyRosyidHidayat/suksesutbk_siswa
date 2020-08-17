@@ -1,11 +1,13 @@
 <template>
   <footer>
-    <div @click="$emit('update:submateri', submateri-1)" v-if="submateri>0" class="btn-primary rounded-none flex items-center">
-      <img src="@/assets/icons/chevron_left.svg" alt="icon" width="30" class="-ml-3">
-      SEBELUMNYA
+    <div class="flex order-2 sm:order-1">
+      <div @click="$emit('update:submateri', submateri-1)" v-if="submateri>0" class="btn-primary rounded-none flex items-center">
+        <img src="@/assets/icons/chevron_left.svg" alt="icon" width="30" class="-ml-3">
+        SEBELUMNYA
+      </div>
     </div>
     <div 
-      class="page-number"
+      class="page-number order-1 sm:order-2"
       :class="{'xl:justify-center': submateri==0?true:false}">
       <input type="button" 
         v-for="item in soal.length" :key="item"
@@ -18,14 +20,12 @@
     </div>
     <ModalNextSubmateri 
       v-if="dataJawaban.length-1 > submateri"
-      class="flex" 
+      class="flex order-3" 
       @updateSubmateri="updateSubmateri" 
       :data-jawaban="dataJawaban[submateri]" />
     <ModalUploadJawaban 
       v-else
-      class="flex" 
-      :number="number"
-      :selected="selected"
+      class="flex order-3"
       :submateri="submateri"
       :data-jawaban="dataJawaban" />
   </footer>
@@ -35,7 +35,7 @@
 import ModalNextSubmateri from './ModalNextSubmateri'
 import ModalUploadJawaban from './ModalUploadJawaban'
 export default {
-  props: ['soal', 'number', 'submateri', 'data-jawaban', 'selected'], 
+  props: ['soal', 'number', 'submateri', 'data-jawaban'], 
   components: {
     ModalUploadJawaban,
     ModalNextSubmateri
@@ -92,10 +92,15 @@ export default {
 
 <style scoped>
 footer{
-  @apply flex overflow-hidden;
+  @apply flex overflow-hidden flex-wrap justify-between;
 }
 .page-number{
-  @apply flex items-center py-2 flex-1 bg-gray-400 px-2 overflow-auto;
+  @apply flex items-center py-2 w-full flex-shrink-0 bg-gray-400 px-2 overflow-auto;
+}
+@screen sm{
+  .page-number{
+    @apply flex-1;
+  }
 }
 .btn-page-number{
   @apply w-8 h-8 mx-2 rounded-full bg-white flex-shrink-0 flex items-center justify-center transition duration-100 cursor-pointer;

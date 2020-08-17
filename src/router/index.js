@@ -17,13 +17,38 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
-    path: '/paket-soal',
+    path: '/skor-soal',
+    name: 'skor-soal',
+    component: () => import('../views/Scoring.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/assessment',
+    name: 'assessment',
+    component: () => import('../views/Assessment.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/simulasi-rasional',
+    name: 'simulasi-rasional',
+    component: () => import('../views/SimulasiRasional.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/pesan-paket/:nama_paket',
+    name: 'pesan-paket',
+    component: () => import('../views/PesanPaket.vue'),
+    meta: { requiresAuth: true },
+    props: true
+  },
+  {
+    path: '/paket-soal/:id',
     name: 'paket-soal',
     component: () => import('../views/PaketSoal.vue'),
     meta: { requiresAuth: true }
   },
   {
-    path: '/pengerjaan-soal',
+    path: '/pengerjaan-soal/:id',
     name: 'pengerjaan-soal',
     component: () => import('../views/PengerjaanSoal.vue'),
     meta: { requiresAuth: true }
