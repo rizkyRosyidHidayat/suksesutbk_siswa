@@ -12,21 +12,24 @@
           </div>
         </div>
         <PaketSoal />
-        <PilihanPtn />
-        <div class="card-body">
-          <div class="grid grid-cols-3 gap-4">
-            <div class="btn-primary btn-outline active">
-              ANALISIS NILAI
-            </div>
-            <div class="btn-primary btn-outline">
-              GRAFIK NILAI
-            </div>
-            <div class="btn-primary btn-outline">
-              PERINGKAT
+        <div v-if="loading" class="block rounded-full h-4 mx-6 bg-gray-500 my-4 animate-pulse"></div>
+        <template v-else>
+          <PilihanPtn />
+          <div class="card-body">
+            <div class="grid grid-cols-3 gap-4">
+              <div
+                v-for="item in tabs" :key="item.text" 
+                @click="component=item.value"
+                class="btn-primary btn-outline"
+                :class="{ 'active': item.value==component?true:false }">
+                {{ item.text }}
+              </div>
             </div>
           </div>
-        </div>
-        <component :is="component"></component>
+          <keep-alive>
+            <component :is="component"></component>
+          </keep-alive>
+        </template>
       </div>
     </div>
     <Footer/>
@@ -39,9 +42,13 @@ import Footer from'@/components/Footer'
 import PaketSoal from'@/components/Assessment/PaketSoal'
 import PilihanPtn from'@/components/Assessment/PilihanPtn'
 import AnalisisNilai from'@/components/Assessment/AnalisisNilai'
+import GrafikNilai from'@/components/Assessment/GrafikNilai'
+import Peringkat from'@/components/Assessment/Peringkat'
 
 export default {
   components: {
+    Peringkat,
+    GrafikNilai,
     AnalisisNilai,
     PilihanPtn,
     PaketSoal,
@@ -49,8 +56,22 @@ export default {
     FixedNavbar
   }, 
   data: () => ({
-    component: 'analisis-nilai'
-  })
+    component: 'analisis-nilai',
+    tabs: [
+      {text: 'Analisis Nilai', value: 'analisis-nilai'},
+      {text: 'Grafik Nilai', value: 'grafik-nilai'},
+      {text: 'Peringkat', value: 'peringkat'}
+    ]
+  }),
+  computed: {
+    loading() {
+      return this.$store.getters.getLoading
+    }
+  },
+  created() {
+    const peserta = JSON.parse(localStorage.dataPeserta)
+    this.$store.dispatch('dataAssessment/getDataAssessment', peserta.id)
+  }
 }
 </script>
 

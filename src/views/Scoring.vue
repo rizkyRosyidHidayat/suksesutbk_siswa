@@ -9,32 +9,34 @@
           <h1 class="text-2xl font-bold text-gray-700 text-center">Selamat Skor Ujian Kamu adalah</h1>
           <div class="mt-8 grid grid-cols-2 items-center">
             <div class="text-center text-6xl font-bold text-yellow-500">
-              500.34
+              {{ skor.score.toFixed(2) }}
             </div>
             <div>
               <ul>
                 <li class="flex items-center">
                   <img src="@/assets/icons/clock.svg" alt="icons" class="w-6">
-                  <span class="ml-3">4 Menit jumlah durasi</span>
+                  <span class="ml-3">{{ durasi }} Menit jumlah durasi</span>
                 </li>
                 <li class="flex items-center">
                   <img src="@/assets/icons/check_circle.svg" alt="icons" class="w-6">
-                  <span class="ml-3">4 Jumlah soal benar</span>
+                  <span class="ml-3">{{ skor.detail.benar }} Jumlah soal benar</span>
                 </li>
                 <li class="flex items-center">
                   <img src="@/assets/icons/close_circle.svg" alt="icons" class="w-6">
-                  <span class="ml-3">4 Jumlah soal salah</span>
+                  <span class="ml-3">{{ skor.detail.salah }} Jumlah soal salah</span>
                 </li>
                 <li class="flex items-center">
                   <img src="@/assets/icons/circle_outline.svg" alt="icons" class="w-6">
-                  <span class="ml-3">4 Jumlah soal kosong</span>
+                  <span class="ml-3">{{ skor.detail.tidak_dijawab }} Jumlah soal kosong</span>
                 </li>
               </ul>
             </div>
           </div>
           <center>
-            <div class="btn-primary inline-block my-4">
-              Lihat Assessment
+            <div @click="assessment" class="btn-primary inline-block my-4">
+              <Spinner>
+                Lihat Assessment
+              </Spinner>
             </div>
           </center>
         </div>
@@ -44,8 +46,40 @@
 </template>
 
 <script>
+import Spinner from '@/components/Spinner'
 export default {
-
+  components: {
+    Spinner
+  },
+  data: () => ({
+    skor: ''
+  }),
+  computed: {
+    durasi() {
+      return parseInt(this.skor.duration.value/60)
+    },
+    status() {
+      return this.$store.getters.getNotif.status
+    }
+  },
+  watch: {
+    status(val) {
+      if (val) {
+        this.$router.push({ name: 'assessment' })
+      }
+    }
+  },
+  created() {
+    this.skor = JSON.parse(localStorage.skor_soal)
+  },
+  methods: {
+    assessment() {
+      this.$store.dispatch('dataSoal/postFinishUjian')
+      window.localStorage.removeItem('soal')
+      window.localStorage.removeItem('dataDurasi')
+      window.localStorage.removeItem('dataJawaban')      
+    }
+  }
 }
 </script>
 

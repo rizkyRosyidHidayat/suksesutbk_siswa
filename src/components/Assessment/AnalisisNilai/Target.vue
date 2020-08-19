@@ -19,14 +19,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>90</td>
-          <td class="text-left">9</td>
-          <td class="text-left">8</td>
-          <td>Lulus</td>
-          <td>9</td>
-          <td>8</td>
-          <td>Lulus</td>
+        <tr v-for="(item, i) in data" :key="i">
+          <td>{{ item.pilihan }}</td>
+          <td class="text-left">{{ item.ptn }}</td>
+          <td class="text-left">{{ item.prodi }}</td>
+          <td>{{ parseFloat(item.progress.nilai_akhir.target).toFixed(2) }}</td>
+          <td>{{ item.progress.nilai_akhir.tercapai }}</td>
+          <td>{{ parseFloat(item.progress.nilai_akhir.persentase.value).toFixed(2) }}%</td>
+          <td>
+            <center>
+              <img src="@/assets/icons/check_circle.svg" width="25px" v-if="item.progress.nilai_akhir.persentase.value >= 100" />
+              <img src="@/assets/icons/close_circle.svg" width="25px" v-else  />
+            </center>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -35,7 +40,7 @@
 
 <script>
 export default {
-
+  props: ['data']
 }
 </script>
 

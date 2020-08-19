@@ -8,7 +8,7 @@
     <div class="w-full flex-shrink-0 body break-all">
       <div class="container">
         <h1 class="font-bold mb-4">Soal Nomor {{ number+1 }}</h1>
-        <div class="show-soal" v-html="pertanyaan.pertanyaan"></div>
+        <p v-html="pertanyaan.pertanyaan"></p>
         <div class="max-w-full sm:max-w-sm mt-6">
           <div 
             v-for="item in pertanyaan.jawaban" :key="item.huruf"
@@ -46,8 +46,8 @@
 </template>
 
 <script>
-import Navbar from '@/components/PengerjaanSoal/Navbar'
-import PageNumber from '@/components/PengerjaanSoal/PageNumber'
+import Navbar from '@/components/ReviewSoal/Navbar'
+import PageNumber from '@/components/ReviewSoal/PageNumber'
 
 export default {
   components: {
@@ -61,51 +61,6 @@ export default {
     selected: '',
     dataJawaban: []
   }),
-  created() {
-    this.submateri = parseInt(localStorage.submateri)
-    this.soal = JSON.parse(localStorage.soal)[this.submateri]
-    if (localStorage.dataJawaban) {
-      this.dataJawaban = JSON.parse(localStorage.dataJawaban)
-      this.selected = this.dataJawaban[this.submateri][this.number]
-    }
-  },
-  computed: {
-    pertanyaan() {
-      return this.soal.soal[this.number]
-    }
-  },
-  watch: {
-    submateri(newVal) {
-      /**
-       * Mengubah data submateri dan soal berdasarkan submateri
-       */
-      localStorage.submateri = newVal
-      this.soal = JSON.parse(localStorage.soal)[newVal]  
-      /**
-       * mengeset number ke awal
-       * dan memberikan nilai selected berdasarkan data jawaban yang tersimpan 
-       */      
-      this.number = 0
-      this.selected = this.dataJawaban[newVal][this.number]
-    },
-    selected(val) {
-      this.dataJawaban[this.submateri][this.number] = val
-      localStorage.dataJawaban = JSON.stringify(this.dataJawaban)
-    },
-    number(newVal) {
-      /**
-       * jika data jawaban soal berikutnya kosong
-       * maka data selected = ''
-       * jika sebaliknya maka 
-       * data selected = data jawaban soal berikutnya
-       */
-      if (this.dataJawaban[this.submateri][newVal] !== '' && this.dataJawaban[this.submateri][newVal] !== null) {
-        this.selected = this.dataJawaban[this.submateri][newVal]           
-      } else {
-        this.selected = ''
-      }     
-    }
-  },
   methods: {
     jawabanTerpilih(huruf) {
       /**
@@ -125,12 +80,6 @@ export default {
   }
 }
 </script>
-
-<style>
-.show-soal img {
-  display: inline-block !important;
-}
-</style>
 
 <style scoped>
 .body{

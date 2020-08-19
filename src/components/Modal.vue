@@ -1,7 +1,7 @@
 <template>
   <div>
     <slot name="activator"></slot>
-    <div v-if="visible" class="modal">
+    <div v-if="visible" class="modal z-50">
       <slot name="content"></slot>
     </div>
   </div>

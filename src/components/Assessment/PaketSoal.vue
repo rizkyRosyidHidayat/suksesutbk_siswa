@@ -5,11 +5,11 @@
         Paket Soal
       </div>
       <Option 
-        v-model="id_paket_soal"
-        :items="data"
+        v-model="id_ujian"
+        :items="dataAssessment"
         :item="{
-          text: 'nama',
-          value: 'id',
+          text: 'paket_soal',
+          value: 'id_ujian',
         }"
         :selected-value.sync="namaPaketSoal"
         placeholder="Pilih Paket Soal"
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import Option from '@/components/Option'
 
 export default {
@@ -26,11 +27,22 @@ export default {
     Option
   },
   data: () => ({
-    id_paket_soal: '',
-    data: [
-      { nama: 'soal 1', id: 1 }
-    ],
+    id_ujian: '',
     namaPaketSoal: ''
-  })
+  }),
+  computed: {
+    ...mapState('dataAssessment', ['dataAssessment'])
+  },
+  watch: {
+    dataAssessment(val) {
+      this.namaPaketSoal = val[0].paket_soal
+    },
+    id_ujian(val) {
+      this.$store.dispatch('dataAssessment/getDetailAssessment', {
+        id_peserta: JSON.parse(localStorage.dataPeserta).id,
+        id_ujian: val
+      })
+    }
+  }
 }
 </script>

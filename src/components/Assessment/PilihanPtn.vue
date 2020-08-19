@@ -14,23 +14,15 @@
           </tr>
         </thead>
         <tbody class="divide-y">
-          <tr>
-            <td class="text-left">Universitas AMIKOM</td>
-            <td>Informatika</td>
-            <td>SAINTEK</td>
-            <td>80</td>
-            <td>80</td>
-            <td>12%</td>
-            <td>Memenuhi</td>
-          </tr>
-          <tr>
-            <td class="text-left">Universitas AMIKOM</td>
-            <td>Informatika</td>
-            <td>SAINTEK</td>
-            <td>80</td>
-            <td>80</td>
-            <td>12%</td>
-            <td>Memenuhi</td>
+          <tr v-for="(item, i) in detailAssessment.ptn_pilihan" :key="i">
+            <td class="text-left">{{ item.nama }}</td>
+            <td>{{ item.prodi }}</td>
+            <td>{{ item.kelompok }}</td>
+            <td>{{ item.nilai_min }}</td>
+            <td>{{ item.daya_tampung }}</td>
+            <td>{{ item.indeks_keketatan.value }}%</td>
+            <td v-if="item.memenuhi">Memenuhi</td>
+            <td v-else>Belum Memenuhi</td>
           </tr>
         </tbody>
       </table>
@@ -39,8 +31,11 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
-
+  computed: {
+    ...mapState('dataAssessment', ['detailAssessment'])
+  }
 }
 </script>
 

@@ -8,6 +8,7 @@ import dataBiodata from './biodata'
 import dataSoal from './soal'
 import dataSimulasi from './simulasi'
 import dataPaket from './paket'
+import dataAssessment from './assessment'
 
 Vue.use(Vuex)
 
@@ -43,6 +44,7 @@ const store = new Vuex.Store({
     },
   },
   modules: {
+    dataAssessment: dataAssessment,
     dataPaket: dataPaket,
     dataSimulasi: dataSimulasi,
     dataSoal: dataSoal,

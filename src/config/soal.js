@@ -11,3 +11,7 @@ export function getDataSoal(data) {
 export function postDataJawaban(data) {
 	return http2.post('ujian/submit', data)
 }
+
+export function postFinishUjian(data) {
+	return http2.post('ujian/finish', data)
+}

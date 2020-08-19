@@ -24,7 +24,7 @@
             <div v-else-if="item.status==3" class="btn-primary text-gray-700 bg-white hover:bg-gray-200 text-sm">              
               <span>MENUNGGU AKTIVASI</span>
             </div>
-            <div v-else-if="item.status==4" class="btn-primary text-gray-700 bg-white hover:bg-gray-200 text-sm">              
+            <div @click="$router.push({ name: 'assessment' })" v-else-if="item.status==4" class="btn-primary text-gray-700 bg-white hover:bg-gray-200 text-sm">              
               <span>CEK HASIL</span>
             </div>
           </div>

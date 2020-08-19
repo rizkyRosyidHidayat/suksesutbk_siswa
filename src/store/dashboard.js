@@ -14,14 +14,14 @@ var dataDashboard = {
       const result = subpaket
         .paket_soal
         .map((soal) => {
-          return soal.materi_uji.findIndex(materi => materi.complete == false)
+          return soal.materi_uji.findIndex(materi => materi.completed == false)
         })
-        .findIndex(materi => materi == -1)
+				.findIndex(materi => materi == -1)
       /**
        * Jika hasil pengecekan tersebut tidak ada yang bernilai false
        * maka pengerjaan paket soal sudah selesai
        */
-      if (result == -1) {
+      if (result > -1) {
         return 'selesai'
       } else {
         return 'belum'

@@ -1,0 +1,73 @@
+import { getDataAssessment, getDetailAssessment, getDataPeringkat } from "@/config/assessment";
+import store from './index'
+
+const dataAssessment = {
+  namespaced: true,
+  state: {
+    dataAssessment: [],
+    detailAssessment: [],
+    dataPeringkat: [],
+    loading: false
+  },
+  mutations: {
+    updateDataAssessment(state, payload) {
+      state.dataAssessment = payload
+    },
+    updateDataPeringkat(state, payload) {
+      state.dataPeringkat = payload
+    },
+    updateDetailAssessment(state, payload) {
+      state.detailAssessment = payload
+    },
+    updateLoading(state, payload) {
+      state.loading = payload
+    }
+  },
+  actions: {
+    getDataAssessment(context, payload) {
+      store.dispatch('updateLoading', true)            
+      getDataAssessment(payload)
+        .then(res => {
+          if (res.status == 200) {            
+            const data = res.data
+            context.commit('updateDataAssessment', data)
+            context.dispatch('getDetailAssessment', {
+              id_peserta: payload,
+              id_ujian: data[0].id_ujian
+            })          
+          } else {
+            store.dispatch('updateLoading', false)
+          }
+        })
+        .catch(() => store.dispatch('updateLoading', false))
+    },
+    getDetailAssessment(context, payload) {
+      store.dispatch('updateLoading', true)            
+      getDetailAssessment(payload)
+        .then(res => {
+          if (res.status == 200) {
+            context.commit('updateDetailAssessment', res.data.data)
+            store.dispatch('updateLoading', false)            
+          } else {
+            store.dispatch('updateLoading', false)
+          }
+        })
+        .catch(() => store.dispatch('updateLoading', false))
+    },
+    getDataPeringkat(context, payload) {
+      context.commit('updateLoading', true)            
+      getDataPeringkat(payload)
+        .then(res => {
+          if (res.status == 200) {
+            context.commit('updateDataPeringkat', res.data.data)
+            context.commit('updateLoading', false)            
+          } else {
+            context.commit('updateLoading', false)
+          }
+        })
+        .catch(() => context.commit('updateLoading', false))
+    }
+  }
+}
+
+export default dataAssessment

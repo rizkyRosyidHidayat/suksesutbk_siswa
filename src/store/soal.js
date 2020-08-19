@@ -1,7 +1,8 @@
 import { 
   postDataUjian,
   getDataSoal,
-  postDataJawaban
+  postDataJawaban,
+  postFinishUjian
 } from "@/config/soal";
 import store from './index'
 
@@ -107,8 +108,42 @@ const dataSoal = {
 			dataJawaban.append("submisi", JSON.stringify(payload))
       postDataJawaban(dataJawaban)   
         .then(res => {
-          console.log(res)
           if (res.status == 201) {
+            window.localStorage.setItem('skor_soal', JSON.stringify(res.data.data))
+            store.dispatch('updateNotif', {
+              status: true,
+              visible: false,
+              msg: ''
+            })
+            store.dispatch('updateLoading', false)
+          } else {
+            store.dispatch('updateNotif', {
+              status: false,
+              visible: false,
+              msg: ''
+            })
+            store.dispatch('updateLoading', false)
+          }
+        })  
+        .catch(() => {
+          store.dispatch('updateNotif', {
+            status: false,
+            visible: false,
+            msg: ''
+          })
+          store.dispatch('updateLoading', false)
+        }) 
+    },
+    postFinishUjian() {
+      store.dispatch('updateLoading', true)
+      const info_ujian = JSON.parse(window.localStorage.getItem('info_ujian'))
+
+			const dataJawaban = new FormData()
+			dataJawaban.append("ujian_id", info_ujian.id)
+			dataJawaban.append("detail_id", info_ujian.detail_id)
+      postFinishUjian(dataJawaban)   
+        .then(res => {
+          if (res.status == 200) {
             store.dispatch('updateNotif', {
               status: true,
               visible: false,

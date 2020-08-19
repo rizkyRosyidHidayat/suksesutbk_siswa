@@ -17,7 +17,7 @@
           </center>
         </td>
         <td>
-          <button class="btn-primary px-2 py-1">
+          <button @click="$router.push({ name: 'assessment' })" class="btn-primary px-2 py-1">
             Result
           </button>
         </td>

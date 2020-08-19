@@ -15,13 +15,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="text-left">Universitas AMIKOM</td>
-          <td class="text-left">Informatika</td>
-          <td>90</td>
-          <td>9</td>
-          <td>8</td>
-          <td>Lulus</td>
+        <tr v-for="item in data" :key="item.ptn">
+          <td>{{ item.nama }}</td>
+          <td class="text-left">{{ item.prodi }}</td>
+          <td>{{ item.daya_tampung }}</td>
+          <td>{{ item.peringkat_ujian.sekolah }}</td>
+          <td>{{ item.peringkat_ujian.nasional }}</td>
+          <td v-if="item.memenuhi">Memenuhi</td>
+          <td v-else>Belum Memenuhi</td>
         </tr>
       </tbody>
     </table>
@@ -30,7 +31,7 @@
 
 <script>
 export default {
-
+ props: ['data']
 }
 </script>
 

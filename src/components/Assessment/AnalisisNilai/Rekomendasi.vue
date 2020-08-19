@@ -1,7 +1,7 @@
 <template>
   <div class="border rounded px-4 py-3 mt-8">
-    <h1 class="text-2xl font-bold text-gray-700">
-      Rekomendasi Prodi
+    <h1 class="text-xl font-bold text-gray-700">
+      Rekomendasi Prodi {{ data.origin.prodi }} <br> ({{ data.origin.ptn }})
     </h1>
     <table class="table-auto w-full mt-4">
       <thead class="bg-gray-200">
@@ -13,15 +13,22 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>90</td>
-          <td>9</td>
-          <td>8</td>
-          <td>Lulus</td>
+        <tr v-if="data.alternative.length == 0">
+          <td colspan="4">
+            <div class="rounded p-3 bg-blue-600 text-white -mx-2">
+              Untuk saat ini data belum tersedia
+            </div>
+          </td>
+        </tr>
+        <tr v-else v-for="(item, i) in data.alternative" :key="item.id_prodi">
+          <td>{{ i+1 }}</td>
+          <td class="text-left">{{ item.ptn }}</td>
+          <td>{{ item.prodi }}</td>
+          <td>{{ item.kelompok }}</td>
         </tr>
       </tbody>
     </table>
-    <div class="flex justify-center mt-8">
+    <div class="justify-center mt-8 hidden">
       <div class="btn-primary py-1 px-3 btn-outline active mr-3">
         1
       </div>
@@ -34,7 +41,7 @@
 
 <script>
 export default {
-
+  props: ['data']
 }
 </script>
 

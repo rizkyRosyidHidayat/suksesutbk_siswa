@@ -8,7 +8,7 @@
     </template>
     <template v-slot:content>
       <div 
-        class="card max-w-full sm:max-w-m sm:mx-auto text-white"
+        class="card max-w-full sm:max-w-md mx-auto text-white"
         :class="color">
         <div class="card-body">
           <div class="flex justify-between items-center">

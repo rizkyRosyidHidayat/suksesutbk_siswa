@@ -2,7 +2,7 @@
   <div class="paket overflow-hidden">
     <FixedNavbar/>
     <div class="mt-32 mb-24 px-4 w-full md:w-2/3 block mx-auto">
-      <div class="grid grid-cols-2 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div
           v-for="(item, i) in dataPaket" :key="item.id_paket" 
           class="card">

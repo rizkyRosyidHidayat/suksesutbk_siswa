@@ -2,9 +2,9 @@
   <div class="grid grid-cols-12 gap-4">
     <div class="col-span-4">
       <div class="text-center text-6xl font-bold text-yellow-400">
-        500.34
+				{{parseFloat(data.ceeb.skor).toFixed(2)}}        
       </div>
-      <div class="text-md text-center capitalize">total perolehan nilai tes potensi skolastik (TPS)</div>
+      <div class="text-md text-center capitalize">total perolehan nilai {{data.materi_uji}}</div>
     </div>
     <div class="col-span-8">
       <table class="table-auto w-full">
@@ -18,19 +18,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="text-left">Penalaran Umum</td>
-            <td>20</td>
-            <td>10</td>
-            <td>5</td>
-            <td>500.54</td>
+          <tr v-for="(val, i) in data.detail" :key="i">
+            <td class="text-left">{{ val.submateri }}</td>
+            <td>{{ val.benar }}</td>
+            <td>{{ val.salah }}</td>
+            <td>{{ val.kosong }}</td>
+            <td>{{ parseFloat(val.skor).toFixed(2) }}</td>
           </tr>
           <tr>
-            <td class="text-left">Penalaran Umum</td>
-            <td>20</td>
-            <td>10</td>
-            <td>5</td>
-            <td>500.54</td>
+            <td class="font-bold text-left">Nilai CEEB</td>
+            <td class="font-bold">{{ data.ceeb.benar }}</td>
+            <td class="font-bold">{{ data.ceeb.salah }}</td>
+            <td class="font-bold">{{ data.ceeb.kosong }}</td>
+            <td class="font-bold">
+              {{ parseFloat(data.ceeb.skor).toFixed(2) }}
+            </td>
           </tr>
         </tbody>
       </table>
@@ -40,7 +42,7 @@
 
 <script>
 export default {
-
+  props: ['data']
 }
 </script>
 
