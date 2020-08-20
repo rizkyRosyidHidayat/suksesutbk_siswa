@@ -5,10 +5,10 @@
       :submateri.sync="submateri"
       :data-jawaban="dataJawaban"
       class="w-full flex-shrink-0"/>
-    <div class="w-full flex-shrink-0 body break-all">
+    <div class="w-full flex-shrink-0 body">
       <div class="container">
         <h1 class="font-bold mb-4">Soal Nomor {{ number+1 }}</h1>
-        <div class="show-soal" v-html="pertanyaan.pertanyaan"></div>
+        <div class="show-soal break-words" v-html="pertanyaan.pertanyaan"></div>
         <div class="max-w-full sm:max-w-sm mt-6">
           <div 
             v-for="item in pertanyaan.jawaban" :key="item.huruf"
@@ -28,7 +28,7 @@
                 :class="{'active': jawabanTerpilih(item.huruf)}">
                 <div class="card-body py-2 px-3 flex">
                   <div class="mr-1">{{ item.huruf }}.</div>
-                  <div v-html="item.teks"></div>
+                  <div class="break-words show-soal" v-html="item.teks"></div>
                 </div>
               </div>
             </label>

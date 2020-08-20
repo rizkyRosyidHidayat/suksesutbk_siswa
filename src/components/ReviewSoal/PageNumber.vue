@@ -1,14 +1,12 @@
 <template>
   <footer>
-    <div class="flex order-2 sm:order-1">
-      <div @click="$emit('update:submateri', submateri-1)" v-if="submateri>0" class="btn-primary rounded-none flex items-center">
-        <img src="@/assets/icons/chevron_left.svg" alt="icon" width="30" class="-ml-3">
-        SEBELUMNYA
-      </div>
+    <div @click="$emit('update:number', number-1)" v-if="number>0" class="btn-primary rounded-none flex items-center order-2 sm:order-1">
+      <img src="@/assets/icons/chevron_left.svg" alt="icon" width="30" class="-ml-3">
+      SEBELUMNYA
     </div>
     <div 
       class="page-number order-1 sm:order-2"
-      :class="{'xl:justify-center': submateri==0?true:false}">
+      :class="{'xl:justify-center': soal.length<=20?true:false}">
       <input type="button" 
         v-for="item in soal.length" :key="item"
         class="btn-page-number"
@@ -18,28 +16,16 @@
         @click="changeNumberClick(item-1)"
         :value="item">
     </div>
-    <ModalNextSubmateri 
-      v-if="dataJawaban.length-1 > submateri"
-      class="flex order-3" 
-      @updateSubmateri="updateSubmateri" 
-      :data-jawaban="dataJawaban[submateri]" />
-    <ModalUploadJawaban 
-      v-else
-      class="flex order-3"
-      :submateri="submateri"
-      :data-jawaban="dataJawaban" />
+    <div @click="$emit('update:number', number+1)" v-if="number<soal.length-1" class="order-3 btn-primary rounded-none flex items-center bg-orange-500">
+      SELANJUTNYA
+      <img src="@/assets/icons/chevron_right.svg" alt="icon" width="30" class="-mr-3">
+    </div>
   </footer>
 </template>
 
 <script>
-import ModalNextSubmateri from './ModalNextSubmateri'
-import ModalUploadJawaban from './ModalUploadJawaban'
 export default {
-  props: ['soal', 'number', 'submateri', 'data-jawaban'], 
-  components: {
-    ModalUploadJawaban,
-    ModalNextSubmateri
-  },
+  props: ['soal', 'number'],
   methods: {
     changeNumber(e) {
       let number = this.number
@@ -58,7 +44,7 @@ export default {
            * Number akan berubah selama page
            * number kurang dari panjang soal
            */
-          if (number < this.soal.length) {
+          if (number < this.soal.length-1) {
             this.$emit('update:number', number+1)
           }
           break;
@@ -75,7 +61,7 @@ export default {
        * Page number aktif ketika data jawaban
        * tidak kosong dan data number sama dengan data number yang aktif
        */
-      if (this.dataJawaban[this.submateri][number] !== undefined && this.dataJawaban[this.submateri][number] !== null && this.dataJawaban[this.submateri][number] !== '') {
+      if (this.soal[number].jawaban_peserta !== undefined && this.soal[number].jawaban_peserta !== null && this.soal[number].jawaban_peserta !== '') {
         return true
       } else if (this.number == number) {
         return true
@@ -83,9 +69,6 @@ export default {
         return false
       }
     },
-    updateSubmateri(val) {
-      this.$emit('update:submateri', this.submateri+val)
-    }
   },
 }
 </script>

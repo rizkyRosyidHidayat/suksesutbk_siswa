@@ -5,6 +5,7 @@ import {
   postFinishUjian
 } from "@/config/soal";
 import store from './index'
+import router from '@/router/index'
 
 const dataSoal = {
   namespaced: true,
@@ -150,6 +151,10 @@ const dataSoal = {
               msg: ''
             })
             store.dispatch('updateLoading', false)
+            window.localStorage.removeItem('soal')
+            window.localStorage.removeItem('dataDurasi')
+            window.localStorage.removeItem('dataJawaban') 
+            router.push({ name: 'assessment' })
           } else {
             store.dispatch('updateNotif', {
               status: false,

@@ -38,6 +38,9 @@ export default {
       this.namaPaketSoal = val[0].paket_soal
     },
     id_ujian(val) {
+      // digunakan untuk menampilkan data pembahasan
+      localStorage.id_ujian = val
+      
       this.$store.dispatch('dataAssessment/getDetailAssessment', {
         id_peserta: JSON.parse(localStorage.dataPeserta).id,
         id_ujian: val

@@ -18,7 +18,7 @@
         </div>        
       </div>
       <!--  -->
-      <HasilRasionalisasi/>
+      <HasilRasionalisasi v-if="$store.getters['dataSimulasi/getVisible']"/>
     </div>
     <Footer/>
   </div>
@@ -44,7 +44,8 @@ export default {
   }),
   created() {
     const peserta = JSON.parse(localStorage.dataPeserta)    
-    this.$store.dispatch('dataSimulasi/getDataForm', peserta.id)
+    // this.$store.dispatch('dataSimulasi/getDataForm', peserta.id)
+    this.$store.dispatch('dataSimulasi/getDataHistory', peserta.id)
   }
 }
 </script>

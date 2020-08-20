@@ -5,7 +5,7 @@
         <div class="col-span-3 text-center">
           <span>NILAI UTBK ANDA</span>
           <h1 class="text-6xl font-bold text-yellow-500 -mt-4">
-            700.89
+            {{ dataSimulasi.nilai_utbk.skor_akhir.toFixed(2) }}
           </h1>
         </div>
         <div class="col-span-3">
@@ -17,22 +17,22 @@
         </div>
         <div class="col-span-4">
           <ul>
-            <li>Universitas Amikom</li>
-            <li>Informatika</li>
-            <li>SAINTEK</li>
+            <li>{{ dataSimulasi.ptn.nama }}</li>
+            <li>{{ dataSimulasi.ptn.prodi }}</li>
+            <li>{{ dataSimulasi.nilai_utbk.kelompok }}</li>
           </ul>
         </div>
       </div>
       <!--  -->
       <div class="mt-8">
         <h1 class="text-lg font-bold text-gray-700">
-          Rekomendasi Prodi
+          {{ dataSimulasi.analisis.materi_uji }}
         </h1>
         <table class="table-fixed w-1/2 mt-4">
           <tbody>
-            <tr class="odd:bg-gray-200">
-              <td class="w-4/5">Penalaran Umum</td>
-              <td class="w-1/5 text-right font-bold">900</td>
+            <tr v-for="item in dataSimulasi.analisis.submateri" :key="item.submateri" class="odd:bg-gray-200">
+              <td class="w-4/5">{{ item.submateri }}</td>
+              <td class="w-1/5 text-right font-bold">{{ item.skor }}</td>
             </tr>
           </tbody>
         </table>
@@ -40,20 +40,20 @@
       <!--  -->
       <div class="mt-16">
         <p class="text-center gap-4text-lg font-bold text-gray-700">
-          Program Studi INFORMATIKA di UNIVERSITAS AMIKOM, Memiliki
+          Program Studi {{ dataSimulasi.ptn.prodi }} di {{ dataSimulasi.ptn.nama }}, Memiliki
         </p>
         <div class="w-2/3 grid grid-cols-3 gap-4 mx-auto mt-8">
           <div class="text-center">
             <span>Daya Tampung</span>
-            <h1 class="text-3xl font-bold text-gray-700">56</h1>
+            <h1 class="text-3xl font-bold text-gray-700">{{ dataSimulasi.ptn.stats.daya_tampung }}</h1>
           </div>
           <div class="text-center">
             <span>Peminat</span>
-            <h1 class="text-3xl font-bold text-gray-700">56</h1>
+            <h1 class="text-3xl font-bold text-gray-700">{{ dataSimulasi.ptn.stats.peminat }}</h1>
           </div>
           <div class="text-center">
             <span>Indeks Ketetapan</span>
-            <h1 class="text-3xl font-bold text-gray-700">0.07%</h1>
+            <h1 class="text-3xl font-bold text-gray-700">{{ dataSimulasi.ptn.stats.indeks_keketatan.value.toFixed(2) }}%</h1>
           </div>
         </div>
       </div>
@@ -63,21 +63,43 @@
           Peringkatmu
         </p>
         <div>
-          <span class="dot"></span> Peringkat 1 dari 1, yang memilih <b>kelompok uji</b> yang sama
+          <span class="dot"></span> 
+          Peringkat 
+          {{ dataSimulasi.peringkat.peringkat.kelompok_uji.self }}
+          dari {{ dataSimulasi.peringkat.peringkat.kelompok_uji.all }},
+          yang memilih 
+          <b class="mx-1"> kelompok uji </b>
+          yang sama
         </div>
         <div>
-          <span class="dot"></span> Peringkat 1 dari 1, yang memilih <b>kelompok uji dan PTN</b> yang sama
+          <span class="dot"></span> 
+          Peringkat 
+          {{ dataSimulasi.peringkat.peringkat.ptn.self }}
+          dari {{ dataSimulasi.peringkat.peringkat.ptn.all }},
+          yang memilih 
+          <b class="mx-1"> kelompok uji dan PTN </b>
+          yang sama
         </div>
         <div>
-          <span class="dot"></span> Peringkat 1 dari 1, yang memilih <b>kelompok uji, PTN, dan program studi</b> yang sama
+          <span class="dot"></span> 
+          Peringkat 
+          {{ dataSimulasi.peringkat.peringkat.ptn_prodi.self }}
+          dari {{ dataSimulasi.peringkat.peringkat.ptn_prodi.all }},
+          yang memilih 
+          <b class="mx-1"> kelompok uji, PTN, dan program studi </b>
+          yang sama
         </div>
       </div>
       <!--  -->
       <div class="mt-16 text-center">
         <b>Status Pilihan</b>
-        <div>
+        <div v-if="dataSimulasi.ptn.memenuhi">
           <h1 class="text-6xl font-bold text-green-500">LULUS</h1>
           <p>Selamat kamu dinyatakan lulus dalam simulasi tes UTBK</p>
+        </div>
+        <div v-else>
+          <h1 class="text-4xl font-bold text-red-500">TIDAK LULUS</h1>
+          <p>Ayo berjuang lebih keras untuk bisa masuk PTN</p>
         </div>
       </div>
     </div>
@@ -85,8 +107,11 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
-
+  computed: {
+    ...mapState('dataSimulasi', ['dataSimulasi'])
+  }
 }
 </script>
 

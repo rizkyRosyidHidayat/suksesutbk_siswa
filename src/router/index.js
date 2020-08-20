@@ -35,6 +35,12 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path: '/review-soal',
+    name: 'review-soal',
+    component: () => import('../views/ReviewSoal.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/pesan-paket/:nama_paket',
     name: 'pesan-paket',
     component: () => import('../views/PesanPaket.vue'),

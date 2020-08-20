@@ -58,26 +58,13 @@ export default {
     durasi() {
       return parseInt(this.skor.duration.value/60)
     },
-    status() {
-      return this.$store.getters.getNotif.status
-    }
-  },
-  watch: {
-    status(val) {
-      if (val) {
-        this.$router.push({ name: 'assessment' })
-      }
-    }
   },
   created() {
     this.skor = JSON.parse(localStorage.skor_soal)
   },
   methods: {
     assessment() {
-      this.$store.dispatch('dataSoal/postFinishUjian')
-      window.localStorage.removeItem('soal')
-      window.localStorage.removeItem('dataDurasi')
-      window.localStorage.removeItem('dataJawaban')      
+      this.$store.dispatch('dataSoal/postFinishUjian')          
     }
   }
 }

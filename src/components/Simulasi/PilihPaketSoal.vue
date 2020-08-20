@@ -2,11 +2,11 @@
   <div class="mb-4">
     <ValidationProvider name="paket_soal" rules="required" v-slot="{ errors }">
       <Option 
-        v-model="id_paket_soal"
+        v-model="id_ujian"
         :items="dataPaketSoal"
         :item="{
-          text: 'nama',
-          value: 'id',
+          text: 'paket_soal',
+          value: 'id_ujian',
         }"
         :selected-value.sync="namaPaketSoal"
         placeholder="Pilih Paket Soal"></Option>
@@ -31,12 +31,12 @@ export default {
     Option
   },
   data: () => ({
-    id_paket_soal: '',
+    id_ujian: '',
     namaPaketSoal: ''
   }),
   watch: {
-    id_paket_soal(val) {
-      this.$emit('update:id_paket_soal', val)
+    id_ujian(val) {
+      this.$emit('update:id_ujian', val)
     }
   },
   computed: {

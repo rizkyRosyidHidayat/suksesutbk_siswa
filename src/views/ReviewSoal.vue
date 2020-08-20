@@ -1,46 +1,36 @@
 <template>
   <div class="flex content-between h-screen flex-wrap">
     <Navbar 
-      :soal="soal" 
-      :submateri.sync="submateri"
-      :data-jawaban="dataJawaban"
+      :submateri="submateri"
       class="w-full flex-shrink-0"/>
-    <div class="w-full flex-shrink-0 body break-all">
+    <div class="w-full flex-shrink-0 body">
       <div class="container">
         <h1 class="font-bold mb-4">Soal Nomor {{ number+1 }}</h1>
-        <p v-html="pertanyaan.pertanyaan"></p>
+        <div class="break-words show-soal" v-html="soal[number].pertanyaan"></div>
         <div class="max-w-full sm:max-w-sm mt-6">
           <div 
-            v-for="item in pertanyaan.jawaban" :key="item.huruf"
+            v-for="item in soal[number].jawaban" :key="item.huruf"
             class="mb-4">
-            <input 
-              type="radio" 
-              name="jawaban" 
-              :id="item.huruf" 
-              v-model="selected"
-              :value="item.huruf"
-              v-shortkey="[item.huruf.toLowerCase()]"
-              @shortkey="selectedValue(item.huruf)"
-              class="hidden">
             <label :for="item.huruf">
               <div 
                 class="card border shadow cursor-pointer transition duration-100"
                 :class="{'active': jawabanTerpilih(item.huruf)}">
                 <div class="card-body py-2 px-3 flex">
                   <div class="mr-1">{{ item.huruf }}.</div>
-                  <div v-html="item.teks"></div>
+                  <div class="break-words show-soal" v-html="item.teks"></div>
                 </div>
               </div>
             </label>
           </div>
         </div>
+        <!--  -->
+        <h1 class="font-bold my-4">Kunci Jawaban {{ kunciJawaban(soal[number].jawaban) }}</h1>
+        <div class="break-words show-soal" v-html="soal[number].pembahasan"></div>
       </div>
     </div>
     <PageNumber 
-      :soal="soal.soal" 
-      :number.sync="number" 
-      :submateri.sync="submateri"
-      :data-jawaban="dataJawaban"
+      :soal="soal" 
+      :number.sync="number"
       class="w-full flex-shrink-0" />
   </div>
 </template>
@@ -57,9 +47,7 @@ export default {
   data: () => ({
     soal: {},
     submateri: '',
-    number: 0,
-    selected: '',
-    dataJawaban: []
+    number: 0
   }),
   methods: {
     jawabanTerpilih(huruf) {
@@ -68,15 +56,19 @@ export default {
        * berdasarkan data selected 
        * atau data yang ada di local storage
        */
-      if (this.selected == huruf || this.dataJawaban[this.submateri][this.number] == huruf) {
+      if (this.soal[this.number].jawaban_peserta == huruf) {
         return true
       } else {
         return false
       }      
     },
-    selectedValue(huruf) {
-      this.selected = huruf
+    kunciJawaban(jawaban) {
+      return jawaban.filter(data => data.kunci)[0].huruf
     }
+  },
+  created() {
+    this.soal = JSON.parse(localStorage.pembahasan_soal).soal
+    this.submateri = JSON.parse(localStorage.pembahasan_soal).submateri
   }
 }
 </script>

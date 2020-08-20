@@ -58,7 +58,7 @@ export default {
            * Number akan berubah selama page
            * number kurang dari panjang soal
            */
-          if (number < this.soal.length) {
+          if (number < this.soal.length-1) {
             this.$emit('update:number', number+1)
           }
           break;

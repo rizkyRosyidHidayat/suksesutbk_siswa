@@ -72,10 +72,8 @@ export default {
       })       
     },
     prodi(val) {
-      this.$emit('update:pilihan_ptn', {
-        id_ptn: val.kode_ptn,
-        id_prodi: val.kode_prodi
-      })
+      this.$emit('update:id_ptn', val.kode_ptn)
+      this.$emit('update:id_prodi', val.kode_prodi)
     }
   },
 }

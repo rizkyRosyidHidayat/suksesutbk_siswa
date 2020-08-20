@@ -1,12 +1,15 @@
 <template>
   <ValidationObserver v-slot="{ invalid }">
     <form @submit.prevent="onSubmit">
-      <PilihPaketSoal :id_paket_soal.sync="data.id_paket_soal" />
+      <PilihPaketSoal :id_ujian.sync="data.id_ujian" />
       <div class="mb-2 font-xl text-gray-700">Ubah target program studimu</div>
-      <PilihPtnProdi :pilihan_ptn.sync="data.pilihan_ptn" />
-      <button :disabled="invalid" class="btn-primary">
-        Simpan
+      <PilihPtnProdi :id_ptn.sync="data.id_ptn" :id_prodi.sync="data.id_prodi" />
+      <button :disabled="invalid" class="btn-primary mb-4">
+        <Spinner>
+          Simpan
+        </Spinner>
       </button>
+      <Notif />
     </form>
   </ValidationObserver>
 </template>
@@ -14,22 +17,26 @@
 <script>
 import PilihPaketSoal from './PilihPaketSoal'
 import PilihPtnProdi from './PilihPtnProdi'
+import Spinner from '@/components/Spinner'
+import Notif from '@/components/Notif'
 
 export default {
   components: {
+    Notif,
+    Spinner,
     PilihPtnProdi,
     PilihPaketSoal
   },
   data: () => ({
     data: {
-      id_paket_soal: '',
-      pilihan_ptn: []
+      id_ujian: '',
+      id_ptn: '',
+      id_prodi: ''
     }
   }),
   methods: {
     onSubmit() {      
-      localStorage.pilihan_ptn = JSON.stringify(this.data.pilihan_ptn)
-      this.$router.push({ name: 'paket-soal'})
+      this.$store.dispatch('dataSimulasi/postDataSimulasi', this.data)
     }
   }
 }
