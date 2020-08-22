@@ -1,14 +1,14 @@
 <template>
   <footer>
     <div class="flex order-2 sm:order-1">
-      <div @click="$emit('update:submateri', submateri-1)" v-if="submateri>0" class="btn-primary rounded-none flex items-center">
+      <div @click="changeSubmateri('left')" v-if="submateri>0 || number>0" class="btn-primary rounded-none flex items-center">
         <img src="@/assets/icons/chevron_left.svg" alt="icon" width="30" class="-ml-3">
         SEBELUMNYA
       </div>
     </div>
     <div 
       class="page-number order-1 sm:order-2"
-      :class="{'xl:justify-center': submateri==0?true:false}">
+      :class="{'xl:justify-center': soal.length<=20?true:false}">
       <input type="button" 
         v-for="item in soal.length" :key="item"
         class="btn-page-number"
@@ -21,8 +21,8 @@
     <ModalNextSubmateri 
       v-if="dataJawaban.length-1 > submateri"
       class="flex order-3" 
-      @updateSubmateri="updateSubmateri" 
-      :data-jawaban="dataJawaban[submateri]" />
+      :visible.sync="visible"
+      @updateSubmateri="updateSubmateri" />
     <ModalUploadJawaban 
       v-else
       class="flex order-3"
@@ -39,7 +39,10 @@ export default {
   components: {
     ModalUploadJawaban,
     ModalNextSubmateri
-  },
+  },  
+  data: () => ({
+    visible: false,
+  }),
   methods: {
     changeNumber(e) {
       let number = this.number
@@ -84,7 +87,37 @@ export default {
       }
     },
     updateSubmateri(val) {
-      this.$emit('update:submateri', this.submateri+val)
+      /**
+       * Menghitung jumlah jawaban dengan mengabaikan
+       * data jawaban yang kosong dan undefined
+       */
+      const isEmpty = this.dataJawaban[this.submateri].filter(jawaban => jawaban !== null && jawaban !== undefined)
+      /**
+       * Number akan berubah selama page
+       * number kurang dari panjang soal
+       */
+      if (this.number < this.soal.length-1) {
+        this.$emit('update:number', this.number+val)         
+      } else {
+        if( !isEmpty.length) {
+           this.visible = true
+         } else {
+           this.$emit('update:submateri', this.submateri+val)
+         }
+      }
+    },
+    changeSubmateri(direction) {
+      if (direction == 'left') {
+        /**
+         * Number akan berubah selama page
+         * number lebih dari 0
+         */
+        if (this.number > 0) {
+          this.$emit('update:number', this.number-1)
+        } else {
+          this.$emit('update:submateri', this.submateri-1)
+        }
+      }
     }
   },
 }

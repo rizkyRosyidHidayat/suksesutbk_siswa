@@ -1,10 +1,10 @@
 <template>
   <nav>
+    <img src="@/assets/img/logo_white.png" alt="logo" class="h-10 hidden sm:block"> 
     <div>
       <h1 class="text-xl font-bold">{{ submateri }}</h1>
       <!-- <div class="text-sm">{{ soal.soal.length }} Soal | {{ soal.durasi_ujian }} Menit</div> -->
     </div>
-    <img src="@/assets/img/logo_white.png" alt="logo" class="h-10 hidden sm:block"> 
     <div @click="$router.go(-1)" class="btn-icon">
       <img src="@/assets/icons/close.svg" alt="icons" width="30px">
     </div>   

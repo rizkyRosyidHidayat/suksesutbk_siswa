@@ -114,9 +114,10 @@ export default {
         this.dataDurasi = JSON.parse(localStorage.dataDurasi)
         const submisi = this.soal.map((submateri, i) => ({
           kategori_id: submateri.id_kategori_submateri,
-          durasi_ujian: this.dataDurasi[i],
+          durasi_ujian: (submateri.durasi_ujian*60)-this.dataDurasi[i],
           jawaban: dataJawaban[i]
         }))
+        // console.log(submisi)
         this.visible = true  
         this.isEmpty = false   
         this.$store.dispatch('dataSoal/postDataJawaban', submisi)  

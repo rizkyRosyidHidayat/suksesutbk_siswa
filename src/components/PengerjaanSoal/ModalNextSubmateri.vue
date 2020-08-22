@@ -1,7 +1,7 @@
 <template>
   <Modal :visible="visible">
     <template v-slot:activator>
-      <div @click="checkJawaban(dataJawaban)" class="btn-primary rounded-none flex items-center bg-orange-500">
+      <div @click="$emit('updateSubmateri', 1)" class="btn-primary rounded-none flex items-center bg-orange-500">
         SELANJUTNYA
         <img src="@/assets/icons/chevron_right.svg" alt="icon" width="30" class="-mr-3">
       </div>
@@ -9,7 +9,7 @@
     <template v-slot:content>
       <div class="card max-w-full sm:max-w-sm sm:mx-auto bg-yellow-500">
         <div class="card-body flex justify-end">
-          <div @click="visible=false" class="btn-icon">
+          <div @click="$emit('update:visible', false)" class="btn-icon">
             <img src="@/assets/icons/close.svg" alt="icons" width="25px">
           </div>
         </div>
@@ -31,27 +31,9 @@
 import Modal from '@/components/Modal'
 
 export default {
-  props: ['data-jawaban'],
+  props: ['visible'],
   components: {
     Modal
-  },
-  data: () => ({
-    visible: false,
-  }),
-  methods: {    
-    checkJawaban(jawaban) {
-      /**
-       * Menghitung jumlah jawaban dengan mengabaikan
-       * data jawaban yang kosong dan undefined
-       */
-      const isEmpty = jawaban.filter(jawaban => jawaban !== null && jawaban !== undefined)
-      if (!isEmpty.length) {
-        this.visible = true
-      } else {
-        // jika berhasil maka lanjut ke submateri berikutnya
-        this.$emit('updateSubmateri', 1)
-      }  
-    }
   }
 }
 </script>
