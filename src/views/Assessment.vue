@@ -6,7 +6,7 @@
         <div class="card-body">
           <div class="flex justify-between items-center">
             <h1 class="text-2xl font-bold text-gray-700">Assessment Report</h1>
-            <div class="btn-primary bg-blue-500">
+            <div class="btn-primary bg-blue-500 hidden md:block">
               Export ke PDF
             </div>
           </div>
@@ -16,7 +16,7 @@
         <template v-else>
           <PilihanPtn />
           <div class="card-body">
-            <div class="grid grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div
                 v-for="item in tabs" :key="item.text" 
                 @click="component=item.value"

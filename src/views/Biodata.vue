@@ -2,14 +2,11 @@
   <div class="biodata overflow-hidden">
     <!-- navbar -->
     <FixedNavbar id="fixedHeader"/>
-    <!-- banner -->
-    <div class="w-1/2 block mx-auto mb-12">
-      <p class="mt-24 text-white font-bold text-4xl tracking-widest">
-        Biodata Siswa
-      </p>
-    </div>
     <!-- form -->
     <section class="px-4 w-full md:w-1/2 block mx-auto mb-24">
+    <p class="mt-24 text-white font-bold text-4xl tracking-widest mb-16">
+        Biodata Siswa
+      </p>
       <div class="card overflow-visible">
         <div class="card-body">
           <ValidationObserver v-slot="{ invalid }">
@@ -19,60 +16,60 @@
                   Data Pribadi
                 </div>
                 <!--  -->
-                <div class="px-3 w-1/4 mb-4">
+                <div class="px-3 w-full md:w-1/4 mb-4">
                   Nama Lengkap
                 </div>
-                <div class="px-3 w-3/4 mb-4">
+                <div class="px-3 w-full md:w-3/4 mb-4">
                   <ValidationProvider name="nama" rules="required" v-slot="{ errors }">
                     <input v-model="data.nama_lengkap" class="text-field" type="text" placeholder="Nama Lengkap">
                     <p class="field-message">{{ errors[0] }}</p>              
                   </ValidationProvider>   
                 </div>
                 <!--  -->
-                <div class="px-3 w-1/4 mb-4">
+                <div class="px-3 w-full md:w-1/4 mb-4">
                   E-mail
                 </div>
-                <div class="px-3 w-3/4 mb-4">
+                <div class="px-3 w-full md:w-3/4 mb-4">
                   <ValidationProvider name="email" rules="required|email" v-slot="{ errors }">
                     <input v-model="data.email" class="text-field" type="text" placeholder="E-mail">
                     <p class="field-message">{{ errors[0] }}</p>              
                   </ValidationProvider>  
                 </div>
                 <!--  -->
-                <div class="px-3 w-1/4 mb-4">
+                <div class="px-3 w-full md:w-1/4 mb-4">
                   Nomor Handphone
                 </div>
-                <div class="px-3 w-3/4 md:w-1/4 mb-4">
+                <div class="px-3 w-full sm:w-3/4 md:w-1/4 mb-4">
                   <ValidationProvider name="nohp" rules="required|nohp" v-slot="{ errors }">
                     <input v-model="data.nohp" class="text-field" type="text" v-mask="'#############'" placeholder="No. HP (sebagai username)">
                     <p class="field-message">{{ errors[0] }}</p>              
                   </ValidationProvider>  
                 </div>
                 <!--  -->
-                <div class="px-3 w-1/4 mb-4">
+                <div class="px-3 w-full md:w-1/4 mb-4">
                   Nomor Whatsapp
                 </div>
-                <div class="px-3 w-3/4 md:w-1/4 mb-4">
+                <div class="px-3 w-full sm:w-3/4 md:w-1/4 mb-4">
                   <ValidationProvider name="nohp" rules="required|nohp" v-slot="{ errors }">
                     <input v-model="data.nohp_wa" class="text-field" type="text" v-mask="'#############'" placeholder="No. Whatsapp">
                     <p class="field-message">{{ errors[0] }}</p>              
                   </ValidationProvider>  
                 </div>
                 <!--  -->
-                <div class="px-3 w-1/4 mb-4">
+                <div class="px-3 w-full md:w-1/4 mb-4">
                   Facebook
                 </div>
-                <div class="px-3 w-3/4 md:w-1/4 mb-4">
+                <div class="px-3 w-full sm:w-3/4 md:w-1/4 mb-4">
                   <ValidationProvider name="fb" rules="required" v-slot="{ errors }">
                     <input v-model="data.sosmed_fb" class="text-field" type="text" placeholder="Facebook">
                     <p class="field-message">{{ errors[0] }}</p>              
                   </ValidationProvider>  
                 </div>
                 <!--  -->
-                <div class="px-3 w-1/4 mb-4">
+                <div class="px-3 w-full md:w-1/4 mb-4">
                   Instagram
                 </div>
-                <div class="px-3 w-3/4 md:w-1/4 mb-4">
+                <div class="px-3 w-full sm:w-3/4 md:w-1/4 mb-4">
                   <ValidationProvider name="ig" rules="required" v-slot="{ errors }">
                     <input v-model="data.sosmed_ig" class="text-field" type="text" placeholder="Instagram">
                     <p class="field-message">{{ errors[0] }}</p>              
@@ -85,10 +82,10 @@
                   Data Asal Sekolah
                 </div>
                 <!--  -->
-                <div class="px-3 w-1/4 mb-4">
+                <div class="px-3 w-full md:w-1/4 mb-4">
                   Provinsi
                 </div>
-                <div class="px-3 w-3/4 mb-4">
+                <div class="px-3 w-full md:w-3/4 mb-4">
                   <Autocomplete 
                     v-model="provinsi"
                     :items="dataProv" 
@@ -103,10 +100,10 @@
                   </Autocomplete>
                 </div>
                 <!--  -->
-                <div class="px-3 w-1/4 mb-4">
+                <div class="px-3 w-full md:w-1/4 mb-4">
                   Kabupaten
                 </div>
-                <div class="px-3 w-3/4 mb-4">
+                <div class="px-3 w-full md:w-3/4 mb-4">
                   <Autocomplete 
                     v-model="kabupaten"
                     :items="dataKab" 
@@ -121,10 +118,10 @@
                   </Autocomplete>
                 </div>
                 <!--  -->
-                <div class="px-3 w-1/4 mb-4">
+                <div class="px-3 w-full md:w-1/4 mb-4">
                   Sekolah
                 </div>
-                <div class="px-3 w-3/4 mb-4">
+                <div class="px-3 w-full md:w-3/4 mb-4">
                   <ValidationProvider name="sekolah" rules="required" v-slot="{ errors }">
                     <Autocomplete 
                       v-model="data.id_sekolah"
@@ -142,10 +139,10 @@
                   </ValidationProvider>   
                 </div>
                 <!--  -->
-                <div class="px-3 w-1/4 mb-4">
+                <div class="px-3 w-full md:w-1/4 mb-4">
                   Tahun Kelulusan
                 </div>
-                <div class="px-3 w-3/4 mb-4">
+                <div class="px-3 w-full md:w-3/4 mb-4">
                   <div class="w-full md:w-2/6">
                     <ValidationProvider name="tahun_lulus" rules="required" v-slot="{ errors }">
                       <Option 
@@ -162,8 +159,8 @@
                   </div> 
                 </div>
                 <!--  -->
-                <div class="px-3 w-1/4 mb-4"></div>
-                <div class="px-3 w-3/4 mb-4">
+                <div class="px-3 hidden md:block w-1/4 mb-4"></div>
+                <div class="px-3 w-full md:w-3/4 mb-4">
                   <ValidationProvider name="checkbox" :rules="{ required: { allowFalse: false } }" v-slot="{ errors }">
                     <div class="flex">
                       <input type="checkbox" v-model="checkbox" class="mr-3 mt-1"> 

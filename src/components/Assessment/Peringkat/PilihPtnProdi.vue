@@ -1,5 +1,5 @@
 <template>
-  <div class="col-span-6 grid grid-cols-2 gap-4">
+  <div class="md:col-span-6 grid grid-cols-1 md:grid-cols-2 gap-4">
     <div>
       <ValidationProvider name="ptn" rules="required" v-slot="{ errors }">
         <Autocomplete

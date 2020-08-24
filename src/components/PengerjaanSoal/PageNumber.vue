@@ -1,8 +1,8 @@
 <template>
   <footer>
-    <div class="flex order-2 sm:order-1">
+    <div class="sm:flex w-1/2 sm:w-auto order-2 sm:order-1">
       <div @click="changeSubmateri('left')" v-if="submateri>0 || number>0" class="btn-primary rounded-none flex items-center">
-        <img src="@/assets/icons/chevron_left.svg" alt="icon" width="30" class="-ml-3">
+        <img src="@/assets/icons/chevron_left.svg" alt="icon" width="30" class="-ml-3 hidden sm:block">
         SEBELUMNYA
       </div>
     </div>
@@ -20,12 +20,12 @@
     </div>
     <ModalNextSubmateri 
       v-if="dataJawaban.length-1 > submateri"
-      class="flex order-3" 
+      class="sm:flex w-1/2 sm:w-auto order-3" 
       :visible.sync="visible"
       @updateSubmateri="updateSubmateri" />
     <ModalUploadJawaban 
       v-else
-      class="flex order-3"
+      class="sm:flex w-1/2 sm:w-auto order-3"
       :submateri="submateri"
       :data-jawaban="dataJawaban" />
   </footer>

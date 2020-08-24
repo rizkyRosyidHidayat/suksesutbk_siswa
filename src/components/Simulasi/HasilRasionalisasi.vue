@@ -1,21 +1,21 @@
 <template>
   <div class="card mt-16">
     <div class="card-body pb-8">
-      <div class="grid grid-cols-10 gap-4">
-        <div class="col-span-3 text-center">
+      <div class="grid grid-cols-1 md:grid-cols-10 gap-4">
+        <div class="md:col-span-3 text-center">
           <span>NILAI UTBK ANDA</span>
           <h1 class="text-6xl font-bold text-yellow-500 -mt-4">
             {{ dataSimulasi.nilai_utbk.skor_akhir.toFixed(2) }}
           </h1>
         </div>
-        <div class="col-span-3">
+        <div class="md:col-span-3 hidden md:block">
           <ul>
             <li>Perguruan Tinggi</li>
             <li>Program Studi</li>
             <li>Kelompok Uji</li>
           </ul>
         </div>
-        <div class="col-span-4">
+        <div class="md:col-span-4">
           <ul>
             <li>{{ dataSimulasi.ptn.nama }}</li>
             <li>{{ dataSimulasi.ptn.prodi }}</li>
@@ -28,7 +28,7 @@
         <h1 class="text-lg font-bold text-gray-700">
           {{ dataSimulasi.analisis.materi_uji }}
         </h1>
-        <table class="table-fixed w-1/2 mt-4">
+        <table class="table-fixed w-full md:w-1/2 mt-4">
           <tbody>
             <tr v-for="item in dataSimulasi.analisis.submateri" :key="item.submateri" class="odd:bg-gray-200">
               <td class="w-4/5">{{ item.submateri }}</td>
@@ -42,7 +42,7 @@
         <p class="text-center gap-4text-lg font-bold text-gray-700">
           Program Studi {{ dataSimulasi.ptn.prodi }} di {{ dataSimulasi.ptn.nama }}, Memiliki
         </p>
-        <div class="w-2/3 grid grid-cols-3 gap-4 mx-auto mt-8">
+        <div class="w-2/3 grid grid-cols-1 md:grid-cols-3 gap-4 mx-auto mt-8">
           <div class="text-center">
             <span>Daya Tampung</span>
             <h1 class="text-3xl font-bold text-gray-700">{{ dataSimulasi.ptn.stats.daya_tampung }}</h1>
@@ -68,7 +68,7 @@
           {{ dataSimulasi.peringkat.peringkat.kelompok_uji.self }}
           dari {{ dataSimulasi.peringkat.peringkat.kelompok_uji.all }},
           yang memilih 
-          <b class="mx-1"> kelompok uji </b>
+          kelompok uji
           yang sama
         </div>
         <div>
@@ -77,7 +77,7 @@
           {{ dataSimulasi.peringkat.peringkat.ptn.self }}
           dari {{ dataSimulasi.peringkat.peringkat.ptn.all }},
           yang memilih 
-          <b class="mx-1"> kelompok uji dan PTN </b>
+          kelompok uji dan PTN
           yang sama
         </div>
         <div>
@@ -86,7 +86,7 @@
           {{ dataSimulasi.peringkat.peringkat.ptn_prodi.self }}
           dari {{ dataSimulasi.peringkat.peringkat.ptn_prodi.all }},
           yang memilih 
-          <b class="mx-1"> kelompok uji, PTN, dan program studi </b>
+          kelompok uji, PTN, dan program studi
           yang sama
         </div>
       </div>
@@ -126,6 +126,6 @@ td{
   @apply flex items-center mb-1;
 }
 .dot{
-  @apply w-4 h-4 rounded-full bg-yellow-500 mr-3 inline-block;
+  @apply w-4 h-4 rounded-full bg-yellow-500 mr-3 inline-block flex-shrink-0;
 }
 </style>

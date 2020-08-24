@@ -1,12 +1,12 @@
 <template>
   <ValidationObserver v-slot="{ invalid }">
-    <form @submit.prevent="onSubmit" class="mt-4 mb-8 grid grid-cols-10 gap-4">
+    <form @submit.prevent="onSubmit" class="mt-4 mb-8 grid grid-cols-1 md:grid-cols-10 gap-4">
       <PilihKelompokUji :kelompok.sync="data.kelompok" />
       <PilihPtnProdi 
         :id_ptn.sync="data.id_ptn" 
         :id_prodi.sync="data.id_prodi" 
         :kelompok-uji="data.kelompok" />
-      <button :disabled="invalid" class="btn-primary py-1 col-span-1">
+      <button :disabled="invalid" class="btn-primary py-1 md:col-span-1">
         Cari
       </button>
     </form>

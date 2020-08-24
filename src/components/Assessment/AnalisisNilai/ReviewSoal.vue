@@ -6,9 +6,9 @@
     <ul class="mt-4">
       <li
         v-for="(val, i) in data.detail" :key="i" 
-        class="grid grid-cols-2 gap-4 items-center">
-        <div class="border rounded p-3 flex items-center justify-between">
-          <div>
+        class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+        <div class="border rounded p-3 block md:flex items-center justify-between">
+          <div  class="mb-4 md:mb-0">
             <h1 class="text-lg font-bold text-gray-700">
               {{val.submateri}}
             </h1>
@@ -17,7 +17,7 @@
 							{{ waktu(val.durasi_pengerjaan.value) }}
             </div>
           </div>
-          <div @click="pembahasan(val)" class="btn-primary px-2 py-1 ml-4">
+          <div @click="pembahasan(val)" class="btn-primary px-2 py-1 ml-0 md:ml-4">
             <svg 
               v-if="loading"
               class="animate-spin text-white" style="width: 24px;height: 24px;" xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -27,7 +27,7 @@
             <span v-else>Review</span>
           </div>
         </div>
-        <div>
+        <div class="mb-4 md:mb-0">
           <div class="mb-2">
             {{val.benar}} benar / {{val.total_soal}} Soal            
           </div>

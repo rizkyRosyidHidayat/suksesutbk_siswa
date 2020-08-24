@@ -1,5 +1,5 @@
 <template>
-  <div class="col-span-3">
+  <div class="md:col-span-3">
     <ValidationProvider name="paket_soal" rules="required" v-slot="{ errors }">
       <Option 
         v-model="kelompok_uji"

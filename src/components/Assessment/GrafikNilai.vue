@@ -1,9 +1,11 @@
 <template>
-  <div class="card-body">
+  <div class="card-body overflow-auto">
     <h1 class="text-2xl font-bold text-gray-700 text-center mb-8">
       Tes Potensi Skolastik (TPS)
     </h1>
-    <canvas id="grafik-1"></canvas>
+    <div class="container-chart relative">
+      <canvas id="grafik-1"></canvas>
+    </div>
   </div>
 </template>
 
@@ -14,6 +16,7 @@ import Chart from 'chart.js'
 const dataChart = {
   type: 'bar',		
   options: {
+    maintainAspectRatio: false,
     responsive: true,
     scales: {
       yAxes: [
@@ -92,6 +95,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.container-chart{
+  width: 800px;
+  height: 400px;
+  margin: auto;
+}
 </style>

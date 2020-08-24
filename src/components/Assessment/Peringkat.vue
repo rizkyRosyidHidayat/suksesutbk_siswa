@@ -1,10 +1,10 @@
 <template>
-  <div class="card-body">
+  <div class="card-body overflow-auto">
     <h1 class="text-2xl font-bold text-gray-700">
       Peringkat Berdasarkan
     </h1>
     <Form :page="page" />
-    <table class="table-auto w-full mt-4">
+    <table class="table-auto w-full mt-4 -mx-6 md:mx-0">
       <thead class="bg-gray-200">
         <tr>
           <th>Ranking</th>

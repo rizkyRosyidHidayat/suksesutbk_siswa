@@ -9,7 +9,7 @@
           </h1>       
         </div>
         <div class="card-body">
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Profil/>
             <div>
               <Form/>

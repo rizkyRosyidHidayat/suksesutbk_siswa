@@ -1,7 +1,7 @@
 <template>
   <div class="card-body">
-    <div class="bg-blue-200 rounded p-4">
-      <table class="w-full">
+    <div class="bg-blue-200 rounded p-4 overflow-auto">
+      <table class="table-auto w-full -mx-4 md:mx-0">
         <thead class="bg-white">
           <tr>
             <th class="text-left">Pilihan PTN</th>

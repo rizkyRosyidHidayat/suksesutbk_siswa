@@ -1,13 +1,13 @@
 <template>
   <Modal :visible="visible">
     <template v-slot:activator>
-      <div @click="uploadJawaban" class="btn-primary rounded-none flex items-center justify-center bg-green-500">
+      <div @click="uploadJawaban" class="btn-primary rounded-none flex items-center justify-end sm:justify-center text-right bg-green-500">
         SELESAI
       </div>
     </template>
     <template v-slot:content>
       <div 
-        class="card max-w-full sm:max-w-sm mx-4 sm:mx-auto"
+        class="card max-w-full sm:max-w-sm mx-auto"
         :class="color">
         <div class="card-body flex justify-between items-center">
           <div class="text-xl font-bold tracking-wider text-white">Proses Upload Jawaban</div>
@@ -93,7 +93,7 @@ export default {
   methods: {    
     uploadJawaban() {
       /**
-       * Mengecek data jawaban pada submateri
+       * Mengecek data jawaban pada submateri terakhir
        * apakah kosong atau tidak
        */
       const isNotEmpty = this.dataJawaban[this.submateri].filter(jawaban => jawaban !== null && jawaban !== undefined)
@@ -105,11 +105,11 @@ export default {
          */
         const dataJawaban = this.dataJawaban
           .map((data, submateri) => {
-            const clean = data.filter(data => data !== null)
-            return clean.map((jawaban, soal) => ({
+            return data.map((jawaban, soal) => ({
               id_soal: this.soal[submateri].soal[soal].id,
               pilihan: jawaban
             }))
+            .filter(data => data.pilihan !== null && data.pilihan !== "")
           })
         this.dataDurasi = JSON.parse(localStorage.dataDurasi)
         const submisi = this.soal.map((submateri, i) => ({
@@ -117,7 +117,6 @@ export default {
           durasi_ujian: (submateri.durasi_ujian*60)-this.dataDurasi[i],
           jawaban: dataJawaban[i]
         }))
-        // console.log(submisi)
         this.visible = true  
         this.isEmpty = false   
         this.$store.dispatch('dataSoal/postDataJawaban', submisi)  

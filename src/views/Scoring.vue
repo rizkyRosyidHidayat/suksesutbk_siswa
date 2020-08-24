@@ -7,7 +7,7 @@
       <div class="w-full sm:w-1/2 card">
         <div class="card-body">
           <h1 class="text-2xl font-bold text-gray-700 text-center">Selamat Skor Ujian Kamu adalah</h1>
-          <div class="mt-8 grid grid-cols-2 items-center">
+          <div class="mt-8 grid grid-cols-1 md:grid-cols-2 items-center">
             <div class="text-center text-6xl font-bold text-yellow-500">
               {{ skor.score.toFixed(2) }}
             </div>

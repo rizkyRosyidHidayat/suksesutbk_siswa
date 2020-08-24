@@ -1,9 +1,9 @@
 <template>
-  <div class="border rounded px-4 py-3 mt-8">
+  <div class="border rounded px-4 py-3 mt-8 overflow-auto">
     <h1 class="text-xl font-bold text-gray-700">
       Rekomendasi Prodi {{ data.origin.prodi }} <br> ({{ data.origin.ptn }})
     </h1>
-    <table class="table-auto w-full mt-4">
+    <table class="table-auto w-full mt-4 -mx-4 md:mx-0">
       <thead class="bg-gray-200">
         <tr>
           <th>No</th>

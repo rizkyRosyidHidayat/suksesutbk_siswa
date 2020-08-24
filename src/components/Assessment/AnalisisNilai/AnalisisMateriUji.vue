@@ -1,12 +1,12 @@
 <template>
-  <div class="grid grid-cols-12 gap-4">
-    <div class="col-span-4">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+    <div class="md:col-span-4">
       <div class="text-center text-6xl font-bold text-yellow-400">
 				{{parseFloat(data.ceeb.skor).toFixed(2)}}        
       </div>
       <div class="text-md text-center capitalize">total perolehan nilai {{data.materi_uji}}</div>
     </div>
-    <div class="col-span-8">
+    <div class="md:col-span-8 overflow-auto">
       <table class="table-auto w-full">
         <thead class="bg-gray-200">
           <tr>
