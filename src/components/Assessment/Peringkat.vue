@@ -1,5 +1,5 @@
 <template>
-  <div class="card-body overflow-auto">
+  <div class="card-body overflow-auto md:overflow-visible">
     <h1 class="text-2xl font-bold text-gray-700">
       Peringkat Berdasarkan
     </h1>

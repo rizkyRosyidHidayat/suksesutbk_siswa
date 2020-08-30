@@ -109,7 +109,7 @@ export default {
               id_soal: this.soal[submateri].soal[soal].id,
               pilihan: jawaban
             }))
-            .filter(data => data.pilihan !== null && data.pilihan !== "")
+            .filter(data => data.pilihan !== null)
           })
         this.dataDurasi = JSON.parse(localStorage.dataDurasi)
         const submisi = this.soal.map((submateri, i) => ({

@@ -68,6 +68,24 @@ export default {
        * Mengambil data peringkat siswa
        * berdasarkan kelompok uji
        */
+      
+      await getDataPeringkat({
+        nama: '',
+        kelompok: 'soshum',
+        id_ptn: 0,
+        id_prodi: 0,
+        page: 1
+      })
+        .then(res => {
+          if (res.status == 200) {
+            let index = 0
+            for (const key in res.data.data) {
+              this.peringkatSoshum[index] = res.data.data[key];   
+              index++             
+            }
+          }
+        })
+        .catch(err => err)
       await getDataPeringkat({
         nama: '',
         kelompok: 'saintek',
@@ -78,19 +96,6 @@ export default {
         .then(res => {
           if (res.status == 200) {
             this.peringkatSaintek = res.data.data
-          }
-        })
-        .catch(err => err)
-      await getDataPeringkat({
-        nama: '',
-        kelompok: 'soshum',
-        id_ptn: 0,
-        id_prodi: 0,
-        page: 1
-      })
-        .then(res => {
-          if (res.status == 200) {
-            this.peringkatSoshum = res.data.data
           }
         })
         .catch(err => err)

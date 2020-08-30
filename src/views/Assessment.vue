@@ -2,7 +2,7 @@
   <div class="assessment overflow-hidden">
     <FixedNavbar/>
     <div class="mt-32 mb-24 px-4 w-full md:w-4/5 block mx-auto">
-      <div class="card">
+      <div class="card overflow-visible">
         <div class="card-body">
           <div class="flex justify-between items-center">
             <h1 class="text-2xl font-bold text-gray-700">Assessment Report</h1>

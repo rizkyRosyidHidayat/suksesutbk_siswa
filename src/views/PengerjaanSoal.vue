@@ -102,7 +102,7 @@ export default {
       if (this.dataJawaban[this.submateri][newVal] !== '' && this.dataJawaban[this.submateri][newVal] !== null) {
         this.selected = this.dataJawaban[this.submateri][newVal]           
       } else {
-        this.selected = ''
+        this.selected = null
       }     
     }
   },

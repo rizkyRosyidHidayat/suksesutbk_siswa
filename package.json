@@ -13,6 +13,7 @@
     "chart.js": "^2.9.3",
     "core-js": "^3.6.5",
     "idb": "^5.0.4",
+    "midtrans-client": "^1.2.0",
     "moment": "^2.27.0",
     "tailwindcss": "^1.6.0",
     "vee-validate": "^3.3.8",

@@ -93,7 +93,6 @@ var dataBiodata = {
 			const peserta = JSON.parse(window.localStorage.getItem('dataPeserta'))
 			postDataBiodata (peserta.id, payload)
 				.then(res => {
-					console.log(res)
 					if (res.status === 200) {
 						context.commit('updateDataBiodata', res.data.data)
 						window.localStorage.setItem('dataPeserta', JSON.stringify(res.data.data))
