@@ -27,6 +27,7 @@
 import Modal from '@/components/Modal'
 import Form from './Form'
 export default {
+  props: ['id'],
   data: () => ({
     visible: false,
   }),
@@ -36,6 +37,7 @@ export default {
   },
   methods: {
     mulai() {
+			window.localStorage.setItem('id_subpaket', this.id)
       const peserta = JSON.parse(window.localStorage.getItem('dataPeserta'))
       if (peserta.sekolah.tahun_kelulusan === null) {
         this.$router.push({name: 'biodata'})

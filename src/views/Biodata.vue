@@ -50,7 +50,7 @@
                   Nomor Whatsapp
                 </div>
                 <div class="px-3 w-full sm:w-3/4 md:w-1/4 mb-4">
-                  <ValidationProvider name="nohp" rules="required|nohp" v-slot="{ errors }">
+                  <ValidationProvider name="nohp" rules="nohp" v-slot="{ errors }">
                     <input v-model="data.nohp_wa" class="text-field" type="text" v-mask="'#############'" placeholder="No. Whatsapp">
                     <p class="field-message">{{ errors[0] }}</p>              
                   </ValidationProvider>  
@@ -60,7 +60,7 @@
                   Facebook
                 </div>
                 <div class="px-3 w-full sm:w-3/4 md:w-1/4 mb-4">
-                  <ValidationProvider name="fb" rules="required" v-slot="{ errors }">
+                  <ValidationProvider name="fb" v-slot="{ errors }">
                     <input v-model="data.sosmed_fb" class="text-field" type="text" placeholder="Facebook">
                     <p class="field-message">{{ errors[0] }}</p>              
                   </ValidationProvider>  
@@ -70,7 +70,7 @@
                   Instagram
                 </div>
                 <div class="px-3 w-full sm:w-3/4 md:w-1/4 mb-4">
-                  <ValidationProvider name="ig" rules="required" v-slot="{ errors }">
+                  <ValidationProvider name="ig" v-slot="{ errors }">
                     <input v-model="data.sosmed_ig" class="text-field" type="text" placeholder="Instagram">
                     <p class="field-message">{{ errors[0] }}</p>              
                   </ValidationProvider>  
@@ -274,6 +274,7 @@ export default {
     tahunLulus() {
       const now = new Date().getUTCFullYear()
       return [
+        { text: now+1, value: now+1 },
         { text: now, value: now },
         { text: now-1, value: now-1 },
         { text: now-2, value: now-2 }

@@ -57,7 +57,8 @@ const dataSoal = {
                         return data.durasi_ujian*60
                       })
                     ))
-                  }                  
+                  }
+                  router.push({ name: 'pengerjaan-soal', params: {id: payload.materiuji_id} })                  
                   store.dispatch('updateNotif', {
                     status: true,
                     visible: false,
@@ -110,13 +111,17 @@ const dataSoal = {
       postDataJawaban(dataJawaban)   
         .then(res => {
           if (res.status == 201) {
-            window.localStorage.setItem('skor_soal', JSON.stringify(res.data.data))
+            window.localStorage.setItem('skor_soal', JSON.stringify(res.data.data))            
+            window.localStorage.removeItem('soal')
+            window.localStorage.removeItem('dataDurasi')
+            window.localStorage.removeItem('dataJawaban') 
             store.dispatch('updateNotif', {
               status: true,
               visible: false,
               msg: ''
             })
             store.dispatch('updateLoading', false)
+            router.push({ name: 'skor-soal' })
           } else {
             store.dispatch('updateNotif', {
               status: false,

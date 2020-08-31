@@ -5,7 +5,12 @@ var dataDashboard = {
 	namespaced: true,
 	state: {
 		dataProgressPaket: [],
-		dataPaket: [],		
+		dataPaket: [
+			{ name: 'FREE', status: 0, img: '1@3x.png' },
+			{ name: 'SUKSES-1', status: 0, img: '3@3x.png' },
+			{ name: 'SUKSES-2', status: 0, img: '2@3x.png' },
+			{ name: 'SUKSES-3', status: 0, img: '4@3x.png' }
+		],		
 		cekPengerjaanPaketSoal (subpaket) {
       /**
        * Mengecek nilai complete pada setiap materi uji
@@ -52,12 +57,11 @@ var dataDashboard = {
 			* Menentukan status setiap paket berdasarkan nama
 			* paket yang ada di data dashboard
 			*/
-			state.dataPaket = payload
-			.paket.map(paket => {
-				return paketView.map((data) => {
+			state.dataPaket = paketView.map(data => {
+				payload.paket.map(paket => {
+					data.id = paket.subpaket.id
 					const namaPaket = paket.nama_paket==data.name?true:false
-					if (namaPaket && paket.status === true && paket.is_activated === true && paket.is_paid === true) {						
-						window.localStorage.setItem('id_subpaket', paket.subpaket.id)
+						if (namaPaket && paket.status === true && paket.is_activated === true && paket.is_paid === true) {						
 						/**
 							* Jika hasil cek pengerjaan paket soal selesai 
 							* maka status 4 (cek hasil) jika tidak maka
@@ -69,14 +73,39 @@ var dataDashboard = {
 						} else {
 							data.status = 1                                
 						}
-					} else if (namaPaket && paket.status === false && paket.is_activated === false && paket.is_paid === false) {
+					} else if (namaPaket && paket.status === false && paket.is_activated === true && paket.is_paid === false) {
 						data.status = 2
 					} else if (namaPaket && paket.status === false && paket.is_activated === false && paket.is_paid === true) {
 						data.status = 3
 					}
-					return data
-				})
-			}).flat()
+				}).flat()
+				return data
+			})
+			// state.dataPaket = payload
+			// .paket.map(paket => {
+			// 	return paketView.map((data) => {
+			// 		const namaPaket = paket.nama_paket==data.name?true:false
+			// 		if (namaPaket && paket.status === true && paket.is_activated === true && paket.is_paid === true) {						
+			// 			window.localStorage.setItem('id_subpaket', paket.subpaket.id)
+			// 			/**
+			// 				* Jika hasil cek pengerjaan paket soal selesai 
+			// 				* maka status 4 (cek hasil) jika tidak maka
+			// 				* status 1 (mulai)
+			// 				*/
+			// 			const hasilCek = state.cekPengerjaanPaketSoal(payload.progress_tryout.detail[0].subpaket)
+			// 			if (hasilCek == 'selesai') {
+			// 				data.status = 4                
+			// 			} else {
+			// 				data.status = 1                                
+			// 			}
+			// 		} else if (namaPaket && paket.status === false && paket.is_activated === false && paket.is_paid === false) {
+			// 			data.status = 2
+			// 		} else if (namaPaket && paket.status === false && paket.is_activated === false && paket.is_paid === true) {
+			// 			data.status = 3
+			// 		}
+			// 		return data
+			// 	})
+			// }).flat()
 		},
 		updateDataProgressPaket (state, payload) {
 			/**

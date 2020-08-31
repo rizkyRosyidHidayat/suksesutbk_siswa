@@ -32,16 +32,16 @@
 <script>
 import { mapState } from "vuex";
 import { postDataPayment } from "@/config/payment";
-import midtransClient from 'midtrans-client'
+// import midtransClient from 'midtrans-client'
 import FixedNavbar from'@/components/FixedNavbar'
 import Footer from'@/components/Footer'
 import Notif from'@/components/Notif'
 import Spinner from'@/components/Spinner'
 
-let snap = new midtransClient.Snap({
-  isProduction: false,
-  clientKey: 'SB-Mid-client-A0033fXlAFSXlTtL'
-})
+// let snap = new midtransClient.Snap({
+//   isProduction: false,
+//   clientKey: 'SB-Mid-client-A0033fXlAFSXlTtL'
+// })
 
 export default {
   props: ['nama_paket'],
@@ -111,39 +111,39 @@ export default {
         item_id: item_id
       })
         .then(res => {
-
           if (res.status == 200) {
-            const data = res.data.payload
-            let param = {
-              "transaction_details": data.transaction_details,
-              "credit_card": true,
-              "customer_details": data.customer_details
-            }
-            snap.createTransaction(param)
-              .then(res => {
-                if (res.status == 201) {
-                  this.$store.dispatch('updateLoading', false)
-                  window.open(
-                    res.redirect_url,
-                    '_blank'
-                  )
-                } else {
-                  this.$store.dispatch('updateNotif', {
-                    visible: true,
-                    status: false,
-                    msg: 'Transaksi gagal'
-                  })
-                  this.$store.dispatch('updateLoading', false)
-                }
-              })
-              .catch(() => {
-                this.$store.dispatch('updateNotif', {
-                  visible: true,
-                  status: false,
-                  msg: 'Transaksi gagal'
-                })
-                this.$store.dispatch('updateLoading', false)
-              })
+            const token = res.data.token
+            // let param = {
+            //   "transaction_details": data.transaction_details,
+            //   "credit_card": true,
+            //   "customer_details": data.customer_details
+            // }
+            window.location.href = process.env.VUE_APP_HOSTNAME+'payment.html?token='+token
+            // snap.createTransaction(param)
+              // .then(res => {
+              //   if (res.status == 201) {
+              //     this.$store.dispatch('updateLoading', false)
+              //     window.open(
+              //       res.redirect_url,
+              //       '_blank'
+              //     )
+              //   } else {
+              //     this.$store.dispatch('updateNotif', {
+              //       visible: true,
+              //       status: false,
+              //       msg: 'Transaksi gagal'
+              //     })
+              //     this.$store.dispatch('updateLoading', false)
+              //   }
+              // })
+              // .catch(() => {
+              //   this.$store.dispatch('updateNotif', {
+              //     visible: true,
+              //     status: false,
+              //     msg: 'Transaksi gagal'
+              //   })
+              //   this.$store.dispatch('updateLoading', false)
+              // })
           } else {
             this.$store.dispatch('updateNotif', {
               visible: true,

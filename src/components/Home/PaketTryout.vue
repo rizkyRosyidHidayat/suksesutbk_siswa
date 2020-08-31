@@ -17,7 +17,7 @@
             <div @click="pesan(item.name)" v-if="item.status==0" class="btn-primary text-gray-700 bg-white hover:bg-gray-200 text-sm">
               <span>PESAN</span>
             </div>
-            <Modal v-else-if="item.status==1"/>
+            <Modal :id="item.id" v-else-if="item.status==1"/>
             <div v-else-if="item.status==2" class="btn-primary text-gray-700 bg-white hover:bg-gray-200 text-sm">              
               <span>MENUNGGU PEMBAYARAN</span>
             </div>

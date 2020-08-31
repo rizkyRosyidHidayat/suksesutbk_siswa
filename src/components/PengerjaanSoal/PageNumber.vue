@@ -19,7 +19,7 @@
         :value="item">
     </div>
     <ModalNextSubmateri 
-      v-if="dataJawaban.length-1 > submateri"
+      v-if="dataJawaban.length-1 > submateri || number < soal.length-1"
       class="sm:flex w-1/2 sm:w-auto order-3" 
       :visible.sync="visible"
       @updateSubmateri="updateSubmateri" />
