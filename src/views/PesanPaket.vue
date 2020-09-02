@@ -113,37 +113,8 @@ export default {
         .then(res => {
           if (res.status == 200) {
             const token = res.data.token
-            // let param = {
-            //   "transaction_details": data.transaction_details,
-            //   "credit_card": true,
-            //   "customer_details": data.customer_details
-            // }
-            window.location.href = process.env.VUE_APP_HOSTNAME+'payment.html?token='+token
-            // snap.createTransaction(param)
-              // .then(res => {
-              //   if (res.status == 201) {
-              //     this.$store.dispatch('updateLoading', false)
-              //     window.open(
-              //       res.redirect_url,
-              //       '_blank'
-              //     )
-              //   } else {
-              //     this.$store.dispatch('updateNotif', {
-              //       visible: true,
-              //       status: false,
-              //       msg: 'Transaksi gagal'
-              //     })
-              //     this.$store.dispatch('updateLoading', false)
-              //   }
-              // })
-              // .catch(() => {
-              //   this.$store.dispatch('updateNotif', {
-              //     visible: true,
-              //     status: false,
-              //     msg: 'Transaksi gagal'
-              //   })
-              //   this.$store.dispatch('updateLoading', false)
-              // })
+            window.open('https://app.midtrans.com/snap/v2/vtweb/'+token, '_self')
+            this.$store.dispatch('updateLoading', false)
           } else {
             this.$store.dispatch('updateNotif', {
               visible: true,

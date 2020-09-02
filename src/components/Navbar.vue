@@ -11,12 +11,12 @@
           <img src="@/assets/icons/bell.svg" alt="icon" width="25px">
         </div>
         <div class="items-center hidden sm:flex">
-          <a 
+          <div
             v-for="item in nav" :key="item.text"
-            :href="item.link"
-            class="capitalize ml-5 text-gray-700 font-bold">
+            @click="$router.push({ name: item.link })"
+            class="capitalize ml-5 text-gray-700 font-bold cursor-pointer">
             {{ item.text }}
-          </a>
+          </div>
           <div @click="logout" class="btn-primary bg-red-500 ml-5 font-normal hover:bg-red-600">
             Logout
           </div>
@@ -33,10 +33,10 @@ import Sidenav from './Sidenav'
 export default {
   data: () => ({
     nav: [
-      { text: 'Beranda', link: '' },
+      { text: 'Beranda', link: 'home' },
       { text: 'Fitur', link: '' },
       { text: 'Cara Pemakaian', link: '' },
-      { text: 'riwayat transaksi', link: '' }
+      { text: 'riwayat transaksi', link: 'riwayat' }
     ],
     active: false
   }),

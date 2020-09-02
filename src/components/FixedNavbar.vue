@@ -41,7 +41,7 @@ export default {
       { text: 'Beranda', link: 'home' },
       { text: 'Fitur', link: '' },
       { text: 'Cara Pemakaian', link: '' },
-      { text: 'riwayat transaksi', link: '' }
+      { text: 'riwayat transaksi', link: 'riwayat' }
     ],
     active: false
   }),

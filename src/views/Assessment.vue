@@ -12,7 +12,9 @@
           </div>
         </div>
         <PaketSoal />
-        <div v-if="loading" class="block rounded-full h-4 mx-6 bg-gray-500 my-4 animate-pulse"></div>
+        <div v-if="loading" class="card-body">
+          <div class="block rounded-full h-4 bg-gray-500 animate-pulse"></div>
+        </div>
         <template v-else>
           <PilihanPtn />
           <div class="card-body">

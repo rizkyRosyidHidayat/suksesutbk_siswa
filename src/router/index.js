@@ -17,6 +17,12 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path: '/riwayat',
+    name: 'riwayat',
+    component: () => import('../views/Riwayat.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/skor-soal',
     name: 'skor-soal',
     component: () => import('../views/Scoring.vue'),
@@ -64,6 +70,11 @@ const routes = [
     name: 'auth',
     component: () => import('../views/Auth.vue'),
     props: true
+  },
+  {
+    name: 'payment',
+    path: '/payment',
+    meta: { requiresAuth: true }
   }
 ]
 
