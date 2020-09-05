@@ -4,7 +4,14 @@
     <NilaiCeeb :data="detailAssessment.analisis_nilai.tabel[0]" />
     <ReviewSoal :data="detailAssessment.analisis_nilai.analisis_butir_soal[0]" />
     <Peringkat :data="detailAssessment.ptn_pilihan" />
-    <Rekomendasi v-for="(item, i) in detailAssessment.rekomendasi_ptn" :key="i" :data="item" />
+    <template v-if="userPremium">
+      <Rekomendasi v-for="(item, i) in detailAssessment.rekomendasi_ptn" :key="i" :data="item" />
+    </template>
+    <div v-else class="mt-6">
+      <div class="block text-center p-3 bg-yellow-500 text-white rounded">
+        Fitur <b>REKOMENDASI PRODI</b> hanya tersedia untuk paket berbayar
+      </div>
+    </div>
     <Target :data="detailAssessment.pencapaian" />
   </div>
 </template>
@@ -27,8 +34,21 @@ export default {
     NilaiCeeb,
     AnalisiMateriuji
   },
+  data: () => ({
+    userPremium: null
+  }),
   computed: {
-    ...mapState('dataAssessment', ['detailAssessment'])
+    ...mapState('dataAssessment', ['detailAssessment']),
+    ...mapState('dataDashboard', ['cekPaketBerbayar'])
+  },
+  created() {
+    const peserta = JSON.parse(localStorage.dataPeserta)
+    this.$store.dispatch('dataDashboard/getCekPaketBerbayar', peserta.id)
+      .then(res => {
+        if (res.status == 200) {
+          this.userPremium = this.cekPaketBerbayar(res.data.paket)
+        }
+      })
   }
 }
 </script>

@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import Modal from '@/components/Modal'
 import Form from './Form'
 export default {
@@ -35,9 +36,21 @@ export default {
     Form,
     Modal
   },
+  computed: {
+    ...mapState('dataDashboard', ['dataSubpaket'])
+  },
   methods: {
     mulai() {
-			window.localStorage.setItem('id_subpaket', this.id)
+      /**
+       * Menyimpan id subpaket ketika klik tombol MULAI
+       */
+      window.localStorage.setItem('id_subpaket', this.id)
+      /**
+       * Mengeset data paket soal berdasarkan id subpaket
+       */
+      this.$store.commit('dataDashboard/updateDataPaketSoal', 
+        this.dataSubpaket.filter(sub => sub.id == this.id)[0].paket_soal
+      )
       const peserta = JSON.parse(window.localStorage.getItem('dataPeserta'))
       if (peserta.sekolah.tahun_kelulusan === null) {
         this.$router.push({name: 'biodata'})

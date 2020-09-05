@@ -14,8 +14,12 @@
             </div>
           </div>
           <div class="mt-2 flex justify-end">
-            <div @click="pesan(item.name)" v-if="item.status==0" class="btn-primary text-gray-700 bg-white hover:bg-gray-200 text-sm">
-              <span>PESAN</span>
+            <div 
+              @click="pesan(item.name)" 
+              v-if="item.status==0" 
+              class="btn-primary text-gray-700 hover:bg-gray-200 text-sm"
+              :class="{'bg-white': !$store.getters.getLoading}">
+              <Spinner>PESAN</Spinner>
             </div>
             <Modal :id="item.id" v-else-if="item.status==1"/>
             <div v-else-if="item.status==2" class="btn-primary text-gray-700 bg-white hover:bg-gray-200 text-sm">              
@@ -37,12 +41,14 @@
 <script>
 import { mapState } from "vuex";
 import Modal from '@/components/Home/PaketTryout/Modal'
+import Spinner from '@/components/Spinner'
 export default {
   computed: {
     ...mapState('dataDashboard', ['dataPaket'])
   },
   components: {
     Modal,
+    Spinner
   },
   methods: {
     pesan(nama) {

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ModalCekPaketBerbayar :visible.sync="visible" />
     <h1 class="text-2xl font-bold text-gray-700 mt-8">
       {{ data.materi_uji }}
     </h1>
@@ -43,11 +44,21 @@
 <script>
 import moment from 'moment'
 import { mapState } from "vuex";
+import ModalCekPaketBerbayar from '@/components/ModalCekPaketBerbayar'
 
 export default {
   props: ['data'],
+  data: () => ({
+    visible: false,
+    userPremium: null,
+    materi_uji: null
+  }),
+  components: {
+    ModalCekPaketBerbayar
+  },
   computed: {
-    ...mapState('dataAssessment', ['loading'])
+    ...mapState('dataAssessment', ['loading']),
+    ...mapState('dataDashboard', ['cekPaketBerbayar'])
   },
   methods: {
     waktu (time) {
@@ -58,13 +69,31 @@ export default {
       return (benar*100)/total
     },
     pembahasan(val) {
-      const data = {
+      this.materi_uji = {
         id_sub: this.data.id_sub,
         id_ujian: localStorage.id_ujian,
         id_kategori_submateri: val.id_kategori_submateri,
         submateri: val.submateri
       }
-      this.$store.dispatch('dataAssessment/getDataPembahasan', data)
+      this.$store.commit('dataAssessment/updateLoading', true)            
+      const peserta = JSON.parse(localStorage.dataPeserta)
+      this.$store.dispatch('dataDashboard/getCekPaketBerbayar', peserta.id)
+        .then(res => {
+          if (res.status == 200) {
+            this.userPremium = this.cekPaketBerbayar(res.data.paket)
+          }
+          this.$store.commit('dataAssessment/updateLoading', false)
+        })
+        .catch(() => this.$store.commit('dataAssessment/updateLoading', false))
+    }
+  },
+  watch: {
+    userPremium(val) {
+      if (val) {        
+        this.$store.dispatch('dataAssessment/getDataPembahasan', this.materi_uji)    
+      } else {
+        this.visible = true
+      }
     }
   }
 }

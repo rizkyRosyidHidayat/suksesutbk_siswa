@@ -42,6 +42,7 @@ export default {
   computed: {
     ...mapState('dataDashboard', ['dataPaketSoal']),
     ...mapState('dataPtn', ['dataPilihanPtn', 'loadingForm']),
+
   },
   watch: {
     /**
@@ -89,7 +90,7 @@ export default {
   methods: {
     onSubmit() {      
       localStorage.pilihan_ptn = JSON.stringify(this.data.pilihan_ptn)
-      this.$router.push({ name: 'paket-soal'})
+      this.$router.push({ name: 'paket-soal', params: { id: this.data.id_paket_soal }})
     }
   }
 }

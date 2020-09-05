@@ -14,11 +14,12 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import PilihKelompokUji from './PilihKelompokUji'
 import PilihPtnProdi from './PilihPtnProdi'
 
 export default {
-  props: ['page'],
+  props: ['page', 'visible'],
   components: {
     PilihPtnProdi,
     PilihKelompokUji
@@ -28,8 +29,13 @@ export default {
       kelompok: '',
       id_ptn: 0,
       id_prodi: 0
-    }
+    },
+    userPremium: null
   }),
+  computed: {
+    ...mapState('dataDashboard', ['cekPaketBerbayar']),
+    ...mapState('dataAssessment', ['loading'])
+  },
   watch: {
     'data.kelompok': function (val) {
       this.$store.dispatch('dataPtn/getDataPtn', val)
@@ -38,13 +44,34 @@ export default {
       this.data.id_paket_soal = localStorage.id_paket_soal    
       this.data.page = val   
       this.$store.dispatch('dataAssessment/getDataPeringkat', this.data)
+    },
+    userPremium(val) {
+      if (val) {
+        this.data.id_paket_soal = localStorage.id_paket_soal    
+        this.data.page = this.page    
+        this.$store.dispatch('dataAssessment/getDataPeringkat', this.data) 
+      } else if (val == false) {
+        this.$emit('update:visible', true)
+      }
+      this.$store.commit('dataAssessment/updateLoading', false)
+    },
+    loading(val) {
+      if (!val) {
+        this.userPremium = null
+      }
     }
   },
   methods: {
     onSubmit() {      
-      this.data.id_paket_soal = localStorage.id_paket_soal    
-      this.data.page = this.page    
-      this.$store.dispatch('dataAssessment/getDataPeringkat', this.data)
+      this.$store.commit('dataAssessment/updateLoading', true)
+      const peserta = JSON.parse(localStorage.dataPeserta)
+      this.$store.dispatch('dataDashboard/getCekPaketBerbayar', peserta.id)
+        .then(res => {
+          if (res.status == 200) {
+            this.userPremium = this.cekPaketBerbayar(res.data.paket)
+          }
+        })
+        .catch(() => this.$store.commit('dataAssessment/updateLoading', false))
     }
   }
 }

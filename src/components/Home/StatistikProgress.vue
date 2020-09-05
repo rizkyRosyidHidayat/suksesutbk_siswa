@@ -8,7 +8,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item in dataProgressPaket" :key="item.nama">
+      <tr v-for="(item, i) in dataProgressPaket" :key="i">
         <td>{{ item.nama }}</td>
         <td>
           <center>

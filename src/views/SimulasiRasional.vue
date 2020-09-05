@@ -12,7 +12,7 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Profil/>
             <div>
-              <Form/>
+              <Form :visible.sync="visible" />
             </div>
           </div>
         </div>        
@@ -20,6 +20,8 @@
       <!--  -->
       <HasilRasionalisasi v-if="$store.getters['dataSimulasi/getVisible']"/>
     </div>
+
+    <ModalCekPaketBerbayar :visible.sync="visible" />
     <Footer/>
   </div>
 </template>
@@ -27,6 +29,7 @@
 <script>
 import FixedNavbar from'@/components/FixedNavbar'
 import Footer from'@/components/Footer'
+import ModalCekPaketBerbayar from'@/components/ModalCekPaketBerbayar'
 import Form from'@/components/Simulasi/Form'
 import Profil from'@/components/Simulasi/Profil'
 import HasilRasionalisasi from'@/components/Simulasi/HasilRasionalisasi'
@@ -36,15 +39,16 @@ export default {
     HasilRasionalisasi,
     Profil,
     Form,
+    ModalCekPaketBerbayar,
     Footer,
     FixedNavbar
   },
   data: () => ({
-    isSubmit: false
+    isSubmit: false,
+    visible: false
   }),
   created() {
-    const peserta = JSON.parse(localStorage.dataPeserta)    
-    // this.$store.dispatch('dataSimulasi/getDataForm', peserta.id)
+    const peserta = JSON.parse(localStorage.dataPeserta)
     this.$store.dispatch('dataSimulasi/getDataHistory', peserta.id)
   }
 }
