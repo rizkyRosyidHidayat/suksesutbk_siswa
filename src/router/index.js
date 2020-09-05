@@ -86,7 +86,14 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {  
   const requiresAuth = to.matched.some(route => route.meta.requiresAuth)
-  const isLoggedIn = window.localStorage.getItem('dataPeserta')  
+  const isLoggedIn = window.localStorage.getItem('dataPeserta') 
+  /**
+   * Mengeset nilai modal bayar di session storage
+   */ 
+  const hasData = window.sessionStorage.getItem('modalBayar')
+  if (hasData == null) {
+    window.sessionStorage.setItem('modalBayar', 1)
+  }
 
   if (requiresAuth && !isLoggedIn){ 
     next({ name: 'auth', params: { form: 'login' } })

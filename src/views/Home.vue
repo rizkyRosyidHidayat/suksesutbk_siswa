@@ -87,6 +87,8 @@
         </div>
       </section>
       <!--  -->
+      <ModalBayarPaket />
+      <!--  -->
       <Footer/>
     </div>
   </div>
@@ -104,9 +106,11 @@ import Video from '@/components/Home/Video'
 import BonusFasilitas from '@/components/Home/BonusFasilitas'
 import Peringkat from '@/components/Home/Peringkat'
 import Footer from '@/components/Footer'
+import ModalBayarPaket from '@/components/ModalBayarPaket'
 
 export default {
   components: {
+    ModalBayarPaket,
     Footer,
     Peringkat,
     BonusFasilitas,

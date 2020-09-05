@@ -6,7 +6,7 @@
         <div class="card-body">
           <div class="flex justify-between items-center">
             <h1 class="text-2xl font-bold text-gray-700">Assessment Report</h1>
-            <div class="btn-primary bg-blue-500 hidden md:block">
+            <div class="btn-primary bg-blue-500 hidden">
               Export ke PDF
             </div>
           </div>

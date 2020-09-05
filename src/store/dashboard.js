@@ -1,4 +1,5 @@
 import { getDataDashboard, getDataPaketSoal } from '@/config/dashboard'
+import { postDataRiwayat } from "@/config/payment";
 import store from './index'
 
 var dataDashboard = {
@@ -36,6 +37,7 @@ var dataDashboard = {
 		dataPeringkat: [],
 		dataPaketSoal: [],
 		dataSubpaket: [],
+		modalBayar: false,
 		cekPaketBerbayar(payload) {
 			/**
 			 * Mengecek paket yang berbayar apakah sudah lunas atau belum
@@ -113,7 +115,13 @@ var dataDashboard = {
 		},
 		updateDataSubpaket(state, payload) {
 			state.dataSubpaket = payload.map(paket => paket.subpaket)
-		}		
+		},
+		updateModalBayar(state, payload) {
+			state.modalBayar = payload
+		}
+	},
+	getters: {
+		getModalBayar: state => state.modalBayar
 	},
 	actions: {
 		getDataDashboard (context, payload) {
@@ -125,6 +133,25 @@ var dataDashboard = {
 						context.commit('updateDataProgressPaket', res.data.progress_tryout)
 						context.commit('updateDataBonusFasilitas', res.data.bonus_fasilitas)
 						context.commit('updateDataSubpaket', res.data.paket)
+
+						if (window.sessionStorage.getItem('modalBayar') == 1) {
+							postDataRiwayat({
+								peserta_id: payload
+							})
+								.then(res => {
+									if (res.status == 200) {
+										const menunggu = res.data.data.filter(x => x.status == 0)
+										if (menunggu.length > 0) {
+											context.commit('updateModalBayar', true)
+											/**
+											 * Reset nilai modal bayar supaya 
+											 * setiap masuk ke halaman home tidak mengeluarkan modal
+											 */
+											window.sessionStorage.setItem('modalBayar', 0)
+										}
+									}
+								})							
+						}
             store.dispatch('updateLoading', false)
 					} else {
             store.dispatch('updateLoading', false)
