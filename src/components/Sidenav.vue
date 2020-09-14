@@ -35,6 +35,16 @@ export default {
         window.localStorage.removeItem('dataPeserta')
         this.$router.replace({ name: 'auth', params: { form: 'login' } })      
     }
+  },
+  computed: {
+    route() {
+      return this.$route.name
+    }
+  },
+  watch: {
+    route() {
+      this.$emit('update:active', false)
+    }
   }
 }
 </script>
