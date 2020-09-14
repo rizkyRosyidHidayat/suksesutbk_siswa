@@ -11,7 +11,7 @@
           <p class="text-center mb-6 text-lg">
             Segera selesaikan proses transaksi anda sebelum kehabisan waktu
           </p>
-          <div @click="$router.push({ name: 'riwayat' })" class="btn-primary bg-white text-blue-500">
+          <div @click="bayar" class="btn-primary bg-white text-blue-500">
             Selesaikan
           </div>
         </div>
@@ -27,6 +27,12 @@ export default {
   props: ['visible'],
   components: {
     Modal
+  },
+  methods: {
+    bayar() {
+      this.$router.push({ name: 'riwayat' })
+      this.$store.commit('dataDashboard/updateModalBayar', false)
+    }
   }
 }
 </script>
