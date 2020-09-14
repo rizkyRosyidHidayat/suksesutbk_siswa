@@ -12,7 +12,7 @@
         :class="color">
         <div class="card-body">
           <div class="flex justify-end items-center">
-            <div @click="visible=false" class="btn-icon">
+            <div v-show="!status" @click="visible=false" class="btn-icon">
               <img src="@/assets/icons/close.svg" alt="icons" width="25px">
             </div>
           </div>
@@ -47,7 +47,7 @@ export default {
   props: ['data'],
   data: () => ({
     visible: false,
-    color: 'bg-white',
+    color: 'bg-transparant',
     pilihan_ptn: []
   }),
   computed: {
