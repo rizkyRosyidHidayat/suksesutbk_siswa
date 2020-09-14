@@ -31,15 +31,17 @@
             </div>
           </td>
         </tr>        
-        <tr v-else>
-          <td>1</td>
-          <td>Ocid</td>
-          <td>SMK</td>
-          <td>Jateng</td>
-          <td>SAINTEK</td>
-          <td>AMIKOM</td>
-          <td>Informatika</td>
-          <td>90</td>
+        <tr 
+          v-else
+          v-for="(item, i) in dataPeringkat" :key="i">
+          <td>{{ i }}</td>
+          <td>{{ item.nama_peserta }}</td>
+          <td>{{ item.sekolah.nama }}</td>
+          <td>{{ item.sekolah.provinsi }}</td>
+          <td>{{ item.ptn.kelompok_ujian }}</td>
+          <td>{{ item.ptn.nama }}</td>
+          <td>{{ item.ptn.prodi }}</td>
+          <td>{{ parseFloat(item.nilai_akhir).toFixed(2) }}</td>
         </tr>
       </tbody>
     </table>

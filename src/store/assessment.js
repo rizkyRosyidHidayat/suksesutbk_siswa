@@ -21,13 +21,13 @@ const dataAssessment = {
     },
     updateDataPeringkat(state, payload) {
       let index = 0
-      if (payload.length > 0) {
+      if (payload.length == 0) {
+        state.dataPeringkat = payload
+      } else {
         for (const key in payload) {
           state.dataPeringkat[index] = payload[key];   
           index++             
         }
-      } else {
-        state.dataPeringkat = payload
       }
     },
     updateDetailAssessment(state, payload) {
