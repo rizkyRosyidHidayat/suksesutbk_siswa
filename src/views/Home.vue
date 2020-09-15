@@ -52,7 +52,7 @@
       <section class="mt-12">
         <div class="container">
           <div class="text-gray-700 text-2xl font-bold uppercase mb-6">video favorit</div>          
-          <Video/>
+          <VideoSlider/>
         </div>
       </section>
       <!--  -->
@@ -102,7 +102,7 @@ import Profil from '@/components/Home/Profil'
 import Performance from '@/components/Home/Performance'
 import StatistikProgress from '@/components/Home/StatistikProgress'
 import Simulasi from '@/components/Home/Simulasi'
-import Video from '@/components/Home/Video'
+import VideoSlider from '@/components/Home/VideoSlider'
 import BonusFasilitas from '@/components/Home/BonusFasilitas'
 import Peringkat from '@/components/Home/Peringkat'
 import Footer from '@/components/Footer'
@@ -114,7 +114,7 @@ export default {
     Footer,
     Peringkat,
     BonusFasilitas,
-    Video,
+    VideoSlider,
     Simulasi,
     StatistikProgress,
     Performance,
