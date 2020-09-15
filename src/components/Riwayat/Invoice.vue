@@ -55,13 +55,19 @@
               </div> -->
               <!--  -->
               <div class="grid grid-cols-2 px-6 py-3 items-center">
-                <div>Intruksi pembayaran</div>
-                <div>
-                  <a :href="item.pdf_url" target="new_tab">
-                    <button class="btn-primary">
-                      Lihat Intruksi
-                    </button>
-                  </a>
+                <div>Seesaikan pembayaran</div>
+                <div v-if="item.status == 1">
+                  <button class="btn-primary bg-green-500">
+                    Transaksi Berhasil
+                  </button>
+                </div>
+                <div v-else>
+                  <button v-if="expired" class="btn-primary bg-red-500">
+                    Waktu Habis
+                  </button>
+                  <button v-else @click="pesan(item.snap_token)" class="btn-primary">
+                    Bayar Paket
+                  </button>
                 </div>
               </div>
             </div>
@@ -98,6 +104,7 @@ export default {
       m: 0,
       s: 0
     },
+    expired: false
   }),
   computed: {
     formatDurasi() {
@@ -128,6 +135,8 @@ export default {
         this.time.h = duration.hours() < 10 ? '0'+duration.hours() : duration.hours()
         this.time.m = duration.minutes() < 10 ? '0'+duration.minutes() : duration.minutes()
         this.time.s = duration.seconds() < 10 ? '0'+duration.seconds() : duration.seconds()        
+      } else {
+        this.expired = true
       }
     },
     addOneSecondToActualTimeEverySecond () {
@@ -144,6 +153,9 @@ export default {
         component.addOneSecondToActualTimeEverySecond()
       }, 1000);
     },
+    pesan(token) {
+      window.open('https://app.sandbox.midtrans.com/snap/v2/vtweb/'+token, '_blank')      
+    }  
   },
   mounted () {
     this.compute()
