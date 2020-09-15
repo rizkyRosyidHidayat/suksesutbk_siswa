@@ -113,7 +113,7 @@ export default {
         .then(res => {
           if (res.status == 200) {
             const token = res.data.token
-            window.open('https://app.sandbox.midtrans.com/snap/v2/vtweb/'+token, '_self')
+            window.open('https://app.midtrans.com/snap/v2/vtweb/'+token, '_self')
             this.$store.dispatch('updateLoading', false)
           } else {
             this.$store.dispatch('updateNotif', {
