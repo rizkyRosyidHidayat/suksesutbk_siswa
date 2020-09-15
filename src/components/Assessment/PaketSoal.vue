@@ -36,10 +36,14 @@ export default {
   watch: {
     dataAssessment(val) {
       this.namaPaketSoal = val[0].paket_soal
+      localStorage.id_paket_soal = val[0].id_paket_soal
     },
     id_ujian(val) {
       // digunakan untuk menampilkan data pembahasan
       localStorage.id_ujian = val
+      // menyimpan id paket soal
+      const data = this.dataAssessment.find(x => x.id_ujian == val)
+      localStorage.id_paket_soal = data.id_paket_soal
       
       this.$store.dispatch('dataAssessment/getDetailAssessment', {
         id_peserta: JSON.parse(localStorage.dataPeserta).id,

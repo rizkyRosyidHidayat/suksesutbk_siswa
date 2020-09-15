@@ -13,7 +13,8 @@ const dataAssessment = {
     dataAssessment: [],
     detailAssessment: [],
     dataPeringkat: [],
-    loading: false
+    loading: false,
+    lastPage: 0
   },
   mutations: {
     updateDataAssessment(state, payload) {
@@ -35,9 +36,15 @@ const dataAssessment = {
     },
     updateLoading(state, payload) {
       state.loading = payload
+    },
+    updateLastPage(state, payload) {
+      state.lastPage = payload
     }
   },
   actions: {
+    updateDataPeringkat(context, payload) {
+      context.commit('updateDataPeringkat', payload)      
+    },
     getDataAssessment(context, payload) {
       store.dispatch('updateLoading', true)            
       getDataAssessment(payload)
@@ -75,7 +82,8 @@ const dataAssessment = {
       getDataPeringkat(payload)
         .then(res => {
           if (res.status == 200) {
-            context.commit('updateDataPeringkat', res.data.data)
+            context.dispatch('updateDataPeringkat', res.data.data)
+            context.commit('updateLastPage', res.data.last_page)
             context.commit('updateLoading', false)            
           } else {
             context.commit('updateLoading', false)

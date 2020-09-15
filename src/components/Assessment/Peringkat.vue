@@ -24,15 +24,8 @@
             <div class="rounded-full block h-4 bg-gray-500 animate-pulse"></div>
           </td>
         </tr>
-        <tr v-else-if="dataPeringkat.length == 0">
-          <td colspan="8">
-            <div class="rounded p-3 bg-blue-600 text-white">
-              Silahkan mengisi form untuk mencari data peringkat
-            </div>
-          </td>
-        </tr>        
         <tr 
-          v-else
+          v-else-if="dataPeringkat.length > 0"
           v-for="(item, i) in dataPeringkat" :key="i">
           <td>{{ i }}</td>
           <td>{{ item.nama_peserta }}</td>
@@ -43,12 +36,19 @@
           <td>{{ item.ptn.prodi }}</td>
           <td>{{ parseFloat(item.nilai_akhir).toFixed(2) }}</td>
         </tr>
+        <tr v-else>
+          <td colspan="8">
+            <div class="rounded p-3 bg-blue-600 text-white">
+              Silahkan mengisi form untuk mencari data peringkat
+            </div>
+          </td>
+        </tr>
       </tbody>
     </table>
     <div class="flex justify-center mt-8">
       <div 
         v-show="dataPeringkat.length > 0"
-        v-for="item in 2" :key="item"
+        v-for="item in lastPage" :key="item"
         @click="page=item"
         class="btn-primary py-1 px-3 btn-outline mr-3"
         :class="{'active': item==page?true:false}">
@@ -73,7 +73,7 @@ export default {
     visible: false
   }),
   computed: {
-    ...mapState('dataAssessment', ['dataPeringkat', 'loading'])
+    ...mapState('dataAssessment', ['dataPeringkat', 'loading', 'lastPage'])
   }
 }
 </script>
