@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="-mx-3">
     <carousel 
       :scrollPerPage="true" 
       :perPageCustom="[[300, 1], [768, 2], [1024, 3]]"

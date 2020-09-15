@@ -59,11 +59,11 @@
       <section class="mt-12">
         <div class="container">
           <div class="text-gray-700 text-2xl font-bold uppercase">bonus dan fasilitas</div>
-          <BonusFasilitas/>
+          <BonusFasilitasSlider/>
         </div>
       </section>
       <!--  -->
-      <section class="mt-12">
+      <section class="mt-20">
         <div class="container">
           <Peringkat/>
         </div>
@@ -103,7 +103,7 @@ import Performance from '@/components/Home/Performance'
 import StatistikProgress from '@/components/Home/StatistikProgress'
 import Simulasi from '@/components/Home/Simulasi'
 import VideoSlider from '@/components/Home/VideoSlider'
-import BonusFasilitas from '@/components/Home/BonusFasilitas'
+import BonusFasilitasSlider from '@/components/Home/BonusFasilitasSlider'
 import Peringkat from '@/components/Home/Peringkat'
 import Footer from '@/components/Footer'
 import ModalBayarPaket from '@/components/ModalBayarPaket'
@@ -113,7 +113,7 @@ export default {
     ModalBayarPaket,
     Footer,
     Peringkat,
-    BonusFasilitas,
+    BonusFasilitasSlider,
     VideoSlider,
     Simulasi,
     StatistikProgress,
