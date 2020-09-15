@@ -4,7 +4,7 @@
     <FixedNavbar id="fixedHeader"/>
     <!-- form -->
     <section class="px-4 w-full md:w-1/2 block mx-auto mb-24">
-    <p class="mt-24 text-white font-bold text-4xl tracking-widest mb-16">
+      <p class="mt-24 text-white font-bold text-4xl tracking-widest mb-16">
         Biodata Siswa
       </p>
       <div class="card overflow-visible">

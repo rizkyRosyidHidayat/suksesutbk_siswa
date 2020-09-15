@@ -34,7 +34,7 @@ export default {
   data: () => ({
     nav: [
       { text: 'Beranda', link: 'home' },
-      { text: 'Fitur', link: '' },
+      { text: 'Fitur', link: 'fitur' },
       { text: 'Cara Pemakaian', link: '' },
       { text: 'riwayat transaksi', link: 'riwayat' }
     ],

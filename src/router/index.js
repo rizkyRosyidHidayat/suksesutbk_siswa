@@ -23,6 +23,12 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path: '/fitur',
+    name: 'fitur',
+    component: () => import('../views/Fitur.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/skor-soal',
     name: 'skor-soal',
     component: () => import('../views/Scoring.vue'),
