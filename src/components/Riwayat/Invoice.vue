@@ -55,7 +55,7 @@
               </div> -->
               <!--  -->
               <div class="grid grid-cols-2 px-6 py-3 items-center">
-                <div>Seesaikan pembayaran</div>
+                <div>Selesaikan pembayaran</div>
                 <div v-if="item.status == 1">
                   <button class="btn-primary bg-green-500">
                     Transaksi Berhasil
