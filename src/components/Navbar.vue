@@ -35,7 +35,7 @@ export default {
     nav: [
       { text: 'Beranda', link: 'home' },
       { text: 'Fitur', link: 'fitur' },
-      { text: 'Cara Pemakaian', link: '' },
+      { text: 'Cara Pemakaian', link: 'cara-pemakaian' },
       { text: 'riwayat transaksi', link: 'riwayat' }
     ],
     active: false

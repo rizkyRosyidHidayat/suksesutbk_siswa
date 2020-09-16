@@ -29,6 +29,12 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path: '/cara-pemakaian',
+    name: 'cara-pemakaian',
+    component: () => import('../views/CaraPemakaian.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/skor-soal',
     name: 'skor-soal',
     component: () => import('../views/Scoring.vue'),
