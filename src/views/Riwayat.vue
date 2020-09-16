@@ -1,7 +1,10 @@
 <template>
   <div class="riwayat overflow-hidden">
     <FixedNavbar/>
-    <div class="mt-40 mb-24 container">
+    <div class="mt-32 mb-24 container">
+      <p class="text-white font-bold text-4xl tracking-widest mb-16">
+        Riwayat Transaksi
+      </p>
       <div v-if="$store.getters.getLoading" class="animate-pulse h-4 w-full bg-gray-400 rounded"></div>
       <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-4">        
         <div class="md:col-span-1">
