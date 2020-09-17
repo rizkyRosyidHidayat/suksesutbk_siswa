@@ -54,9 +54,11 @@ import FixedNavbar from'@/components/FixedNavbar'
 import Footer from'@/components/Footer'
 import Option from'@/components/Option'
 import PesanPaket from '@/components/CaraPemakaian/PesanPaket'
+import PengerjaanSoal from '@/components/CaraPemakaian/PengerjaanSoal'
 
 export default {
   components: {
+    PengerjaanSoal,
     PesanPaket,
     Option,
     Footer,
