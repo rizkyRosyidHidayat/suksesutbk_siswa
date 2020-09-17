@@ -130,11 +130,14 @@ export default {
 .show-soal img {
   display: inline-block !important;
 }
+.show-soal table{
+  width: 100% !important;
+}
 </style>
 
 <style scoped>
 .body{
-  height: calc(100vh - 207px);
+  height: calc(100vh - 220px);
   overflow-x: hidden;
   overflow-y: auto;
   @apply py-8;

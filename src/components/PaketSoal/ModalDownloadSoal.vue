@@ -12,7 +12,7 @@
         :class="color">
         <div class="card-body">
           <div class="flex justify-end items-center">
-            <div v-show="!status" @click="visible=false" class="btn-icon">
+            <div v-show="status==false" @click="visible=false" class="btn-icon">
               <img src="@/assets/icons/close.svg" alt="icons" width="25px">
             </div>
           </div>
