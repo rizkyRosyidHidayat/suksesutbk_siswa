@@ -5,8 +5,8 @@
         <div class="btn-icon block sm:hidden" @click="active=true">
           <img src="@/assets/icons/menu.svg" alt="icon" width="25px">
         </div>
-        <img src="@/assets/img/logo_white.png" alt="logo" class="h-10 hidden sm:block" />
-        <img src="@/assets/img/logo.png" alt="logo" class="h-10 sm:hidden" />
+        <img  @click="$router.push({ name: 'home' })" src="@/assets/img/logo_white.png" alt="logo" class="h-10 hidden sm:block" />
+        <img  @click="$router.push({ name: 'home' })" src="@/assets/img/logo.png" alt="logo" class="h-10 sm:hidden" />
         <div class="btn-icon block sm:hidden">
           <img src="@/assets/icons/bell.svg" alt="icon" width="25px">
         </div>
