@@ -7,9 +7,9 @@
     <ul class="mt-4">
       <li
         v-for="(val, i) in data.detail" :key="i" 
-        class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+        class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center mb-3">
         <div class="border rounded p-3 block md:flex items-center justify-between">
-          <div  class="mb-4 md:mb-0">
+          <div class="mb-4 md:mb-0">
             <h1 class="text-lg font-bold text-gray-700">
               {{val.submateri}}
             </h1>
