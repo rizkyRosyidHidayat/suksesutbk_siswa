@@ -55,9 +55,17 @@ import Footer from'@/components/Footer'
 import Option from'@/components/Option'
 import PesanPaket from '@/components/CaraPemakaian/PesanPaket'
 import PengerjaanSoal from '@/components/CaraPemakaian/PengerjaanSoal'
+import Assessment from '@/components/CaraPemakaian/Assessment'
+import Simulasi from '@/components/CaraPemakaian/Simulasi'
+import Target from '@/components/CaraPemakaian/Target'
+import Pembahasan from '@/components/CaraPemakaian/Pembahasan'
 
 export default {
   components: {
+    Pembahasan,
+    Target,
+    Simulasi,
+    Assessment,
     PengerjaanSoal,
     PesanPaket,
     Option,
