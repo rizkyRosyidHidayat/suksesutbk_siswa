@@ -1,7 +1,7 @@
 <template>
   <Modal :visible="visible">
     <template v-slot:activator>
-      <div @click="uploadJawaban" class="btn-primary rounded-none flex items-center justify-end sm:justify-center text-right bg-green-500">
+      <div @click="uploadJawaban" class="btn-primary rounded-none flex items-center justify-end sm:justify-center text-right bg-green-500 text-xs sm:text-base">
         SELESAI
       </div>
     </template>

@@ -1,7 +1,7 @@
 <template>
   <footer>
     <div class="sm:flex w-1/2 sm:w-auto order-2 sm:order-1">
-      <div @click="changeSubmateri('left')" v-if="submateri>0 || number>0" class="btn-primary rounded-none flex items-center">
+      <div @click="changeSubmateri('left')" v-if="submateri>0 || number>0" class="btn-primary rounded-none flex items-center text-xs sm:text-base">
         <img src="@/assets/icons/chevron_left.svg" alt="icon" width="30" class="-ml-3 hidden sm:block">
         SEBELUMNYA
       </div>

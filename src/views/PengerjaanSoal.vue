@@ -1,48 +1,55 @@
 <template>
-  <div class="flex content-between h-screen flex-wrap">
-    <Navbar 
-      :soal="soal" 
-      :submateri.sync="submateri"
-      :data-jawaban="dataJawaban"
-      class="w-full flex-shrink-0"/>
-    <div class="w-full flex-shrink-0 body">
-      <div class="container">
-        <h1 class="font-bold mb-4">Soal Nomor {{ number+1 }}</h1>
-        <div class="show-soal break-words" v-html="pertanyaan.pertanyaan"></div>
-        <div class="max-w-full sm:max-w-sm mt-6">
-          <div 
-            v-for="item in pertanyaan.jawaban" :key="item.huruf"
-            class="mb-4">
-            <input 
-              type="radio" 
-              name="jawaban" 
-              :id="item.huruf" 
-              v-model="selected"
-              :value="item.huruf"
-              v-shortkey="[item.huruf.toLowerCase()]"
-              @shortkey="selectedValue(item.huruf)"
-              class="hidden">
-            <label :for="item.huruf">
-              <div 
-                class="card border shadow cursor-pointer transition duration-100"
-                :class="{'active': jawabanTerpilih(item.huruf)}">
-                <div class="card-body py-2 px-3 flex">
-                  <div class="mr-1">{{ item.huruf }}.</div>
-                  <div class="break-words show-soal" v-html="item.teks"></div>
+  <fullscreen ref="fullscreen" @change="fullscreenChange">
+    <div class="flex content-between h-screen flex-wrap">
+      <Navbar 
+        :soal="soal" 
+        :submateri.sync="submateri"
+        :data-jawaban="dataJawaban"
+        class="w-full flex-shrink-0">
+        <button class="btn-icon mr-3 mt-2 sm:mt-0" @click="toggle">
+          <img v-if="fullscreen" src="@/assets/icons/fullscreen_exit.svg" alt="icon" width="25px"/>
+          <img v-else src="@/assets/icons/fullscreen.svg" alt="icon" width="25px"/>
+        </button>
+      </Navbar>
+      <div class="w-full flex-shrink-0 body">
+        <div class="container">
+          <h1 class="font-bold mb-4">Soal Nomor {{ number+1 }}</h1>
+          <div class="show-soal break-words" v-html="pertanyaan.pertanyaan"></div>
+          <div class="max-w-full sm:max-w-sm mt-6">
+            <div 
+              v-for="item in pertanyaan.jawaban" :key="item.huruf"
+              class="mb-4">
+              <input 
+                type="radio" 
+                name="jawaban" 
+                :id="item.huruf" 
+                v-model="selected"
+                :value="item.huruf"
+                v-shortkey="[item.huruf.toLowerCase()]"
+                @shortkey="selectedValue(item.huruf)"
+                class="hidden">
+              <label :for="item.huruf">
+                <div 
+                  class="card border shadow cursor-pointer transition duration-100"
+                  :class="{'active': jawabanTerpilih(item.huruf)}">
+                  <div class="card-body py-2 px-3 flex">
+                    <div class="mr-1">{{ item.huruf }}.</div>
+                    <div class="break-words show-soal" v-html="item.teks"></div>
+                  </div>
                 </div>
-              </div>
-            </label>
+              </label>
+            </div>
           </div>
         </div>
       </div>
+      <PageNumber 
+        :soal="soal.soal" 
+        :number.sync="number" 
+        :submateri.sync="submateri"
+        :data-jawaban="dataJawaban"
+        class="w-full flex-shrink-0" />
     </div>
-    <PageNumber 
-      :soal="soal.soal" 
-      :number.sync="number" 
-      :submateri.sync="submateri"
-      :data-jawaban="dataJawaban"
-      class="w-full flex-shrink-0" />
-  </div>
+  </fullscreen>
 </template>
 
 <script>
@@ -59,7 +66,8 @@ export default {
     submateri: '',
     number: 0,
     selected: '',
-    dataJawaban: []
+    dataJawaban: [],
+    fullscreen: false
   }),
   created() {
     this.submateri = parseInt(localStorage.submateri)
@@ -107,6 +115,12 @@ export default {
     }
   },
   methods: {
+    toggle () {
+      this.$refs['fullscreen'].toggle() // recommended
+    },
+    fullscreenChange (fullscreen) {
+      this.fullscreen = fullscreen
+    },
     jawabanTerpilih(huruf) {
       /**
        * Menentukan jawaban yang terpilih
@@ -137,14 +151,14 @@ export default {
 
 <style scoped>
 .body{
-  height: calc(100vh - 220px);
+  height: calc(100vh - 207px);
   overflow-x: hidden;
   overflow-y: auto;
-  @apply py-8;
+  @apply py-8 bg-white;
 }
 @screen sm{
   .body{
-    height: calc(100vh - 127px);
+    height: calc(100vh - 115px);
   }
 }
 .card.active{

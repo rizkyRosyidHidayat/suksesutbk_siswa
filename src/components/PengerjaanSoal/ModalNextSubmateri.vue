@@ -1,7 +1,7 @@
 <template>
   <Modal :visible="visible">
     <template v-slot:activator>
-      <div @click="$emit('updateSubmateri', 1)" class="btn-primary rounded-none flex items-center justify-end sm:justify-center bg-orange-500">
+      <div @click="$emit('updateSubmateri', 1)" class="btn-primary rounded-none flex items-center justify-end sm:justify-center bg-orange-500 text-xs sm:text-base">
         SELANJUTNYA
         <img src="@/assets/icons/chevron_right.svg" alt="icon" width="30" class="-mr-3 hidden sm:block">
       </div>

@@ -8,50 +8,55 @@
       <h1 class="text-xl font-bold">{{ soal.nama }}</h1>
       <div class="text-sm">{{ soal.soal.length }} Soal | {{ soal.durasi_ujian }} Menit</div>
     </div>
+    <!--  -->
     <img src="@/assets/img/logo_white.png" alt="logo" class="h-10 hidden sm:block">
-    <Modal :visible="visible">
-      <template v-slot:activator>
-        <div class="py-1 px-6 inline-block bg-gray-800 rounded-full text-lg tracking-wider">
-          {{ time.h }}:{{ time.m }}:{{ time.s }}
-        </div>
-      </template>
-      <template v-slot:content>
-        <div class="card sm:max-w-sm sm:mx-auto bg-yellow-500 overflow-visible">
-          <div class="card-body">
-            <svg class="animate-bounce w-16 h-16 block mx-auto" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-              <path d="M13 14h-2v-4h2m0 8h-2v-2h2M1 21h22L12 2L1 21z" fill="white"/>
-              <rect x="0" y="0" width="24" height="24" fill="rgba(0, 0, 0, 0)" />
-            </svg>
-            <div v-if="dataSubmateriVisible.length > 0">
-              <p class="text-center text-white mb-4">
-                Durasi atau waktu untuk mengerjakan submateri ini
-                telah HABIS. Silahkan pilih submateri yang lain.
-              </p>
-              <Option 
-                v-model="updateSubmateri"
-                :items="dataSubmateriVisible"
-                :item="{
-                  text: 'text',
-                  value: 'value',
-                }"
-                :selected-value.sync="namaSubmateri"
-                placeholder="Pilih Submateri"></Option>
-            </div>
-            <div v-else>
-              <p class="text-center text-white mb-4">
-                Durasi atau waktu untuk mengerjakan semua submateri
-                telah HABIS. Silahkan mengakhiri ujian.
-              </p>
-              <center>
-                <ModalUploadJawaban 
-                  :submateri="submateri"
-                  :data-jawaban="dataJawaban" />
-              </center>
+    <!--  -->
+    <div class="sm:flex items-center text-right">
+      <Modal :visible="visible">
+        <template v-slot:activator>
+          <div class="py-1 px-6 inline-block bg-gray-800 rounded-full text-lg tracking-wider">
+            {{ time.h }}:{{ time.m }}:{{ time.s }}
+          </div>
+        </template>
+        <template v-slot:content>
+          <div class="card sm:max-w-sm sm:mx-auto bg-yellow-500 overflow-visible">
+            <div class="card-body">
+              <svg class="animate-bounce w-16 h-16 block mx-auto" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                <path d="M13 14h-2v-4h2m0 8h-2v-2h2M1 21h22L12 2L1 21z" fill="white"/>
+                <rect x="0" y="0" width="24" height="24" fill="rgba(0, 0, 0, 0)" />
+              </svg>
+              <div v-if="dataSubmateriVisible.length > 0">
+                <p class="text-center text-white mb-4">
+                  Durasi atau waktu untuk mengerjakan submateri ini
+                  telah HABIS. Silahkan pilih submateri yang lain.
+                </p>
+                <Option 
+                  v-model="updateSubmateri"
+                  :items="dataSubmateriVisible"
+                  :item="{
+                    text: 'text',
+                    value: 'value',
+                  }"
+                  :selected-value.sync="namaSubmateri"
+                  placeholder="Pilih Submateri"></Option>
+              </div>
+              <div v-else>
+                <p class="text-center text-white mb-4">
+                  Durasi atau waktu untuk mengerjakan semua submateri
+                  telah HABIS. Silahkan mengakhiri ujian.
+                </p>
+                <center>
+                  <ModalUploadJawaban 
+                    :submateri="submateri"
+                    :data-jawaban="dataJawaban" />
+                </center>
+              </div>
             </div>
           </div>
-        </div>
-      </template>
-    </Modal>
+        </template>
+      </Modal>
+      <slot></slot>
+    </div>
   </nav>
 </template>
 
