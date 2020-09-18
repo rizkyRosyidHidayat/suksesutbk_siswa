@@ -103,8 +103,7 @@ export default {
           jawaban: dataJawaban[i]
         }))
         this.visible = true  
-        this.isEmpty = false   
-        console.log(submisi)
+        this.isEmpty = false
         this.$store.dispatch('dataSoal/postDataJawaban', submisi)  
       } else {
         this.isEmpty = true
