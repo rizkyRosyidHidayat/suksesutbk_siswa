@@ -27,7 +27,7 @@
         <div v-else class="card-body pt-0 text-white text-center">
           <div v-if="$store.getters.getLoading">
             <center>
-              <img src="@/assets/img/logo.png" alt="logo" class="h-16 animate-bounce mb-6">
+              <img src="@/assets/img/edu.png" alt="logo" class="h-16 animate-ping mb-6">
             </center>
           </div>
           <div v-else>
