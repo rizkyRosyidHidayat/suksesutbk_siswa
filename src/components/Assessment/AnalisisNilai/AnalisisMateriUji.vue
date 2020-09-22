@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mb-6">
     <div class="md:col-span-4">
       <div class="text-center text-6xl font-bold text-yellow-400">
 				{{parseFloat(data.ceeb.skor).toFixed(2)}}        

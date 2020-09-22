@@ -13,10 +13,10 @@
           </button>
         </div>
       </div>
-      <div class="card">
+      <div v-for="paketSoal in dataPaketSoal" :key="paketSoal.id_materi_uji" class="card mb-6">
         <div class="card-body flex justify-between items-center bg-orange-300">
-          <div class="text-lg font-bold text-gray-700">{{ dataPaketSoal.materi_uji }}</div>
-          <ModalDownloadSoal :data="dataPaketSoal" />          
+          <div class="text-lg font-bold text-gray-700">{{ paketSoal.materi_uji }}</div>
+          <ModalDownloadSoal :data="paketSoal" />          
         </div>
         <div class="card-body">
           <div v-if="$store.getters.getLoading" class="animate-pulse h-4 w-full bg-gray-400 rounded mt-4"></div>
@@ -29,7 +29,7 @@
               </tr>
             </thead>
             <tbody class="divide-y">
-              <tr v-for="(item, i) in dataPaketSoal.submateri" :key="item.nama">
+              <tr v-for="(item, i) in paketSoal.submateri" :key="item.nama">
                 <td class="text-center">{{ i+1 }}</td>
                 <td>{{ item.nama }}</td>
                 <td class="text-center">{{ item.butir_soal }}</td>
@@ -60,8 +60,13 @@ export default {
   },
   methods: {
     lihat() {
-      if (this.dataPaketSoal.completed == 1) {
-        this.$router.push({ name: 'assessment-report' })
+      /**
+       * Mengecek apakah masih ada data completed = 0
+       * jika tidak ditemukan maka bisa melihat assessment report
+       */
+      const completed = this.dataPaketSoal.findIndex(x => x.completed == 0 )
+      if (completed == -1) {
+        this.$router.push({ name: 'assessment' })
       }
     }
   },

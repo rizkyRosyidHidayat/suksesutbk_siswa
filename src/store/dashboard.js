@@ -108,7 +108,7 @@ var dataDashboard = {
 					return {
 						id_paket_soal: paket.id,
 						nama: paket.nama,
-						selesai: paket.materi_uji[0].completed
+						materi_uji: paket.materi_uji.sort((a, b) => a.id - b.id)
 					}          
 				})
 			}).flat()		
@@ -166,7 +166,7 @@ var dataDashboard = {
       getDataPaketSoal (payload)
 				.then(res => {
 					if (res.status === 200) {
-						context.commit('updateDataPaketSoal', res.data[0])
+						context.commit('updateDataPaketSoal', res.data)
             store.dispatch('updateLoading', false)
 					} else {
             store.dispatch('updateLoading', false)

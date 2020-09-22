@@ -1,10 +1,12 @@
 <template>
   <div class="card-body overflow-auto">
-    <h1 class="text-2xl font-bold text-gray-700 text-center mb-8">
-      Tes Potensi Skolastik (TPS)
-    </h1>
-    <div class="container-chart relative">
-      <canvas id="grafik-1"></canvas>
+    <div v-for="(item, i) in detailAssessment.analisis_nilai.tabel" :key="item.materi_uji">
+      <h1 class="text-2xl font-bold text-gray-700 text-center mb-8">
+        {{item.materi_uji}}
+      </h1>
+      <div class="container-chart relative">
+        <canvas :id="`grafik-${i+1}`"></canvas>
+      </div>
     </div>
   </div>
 </template>

@@ -12,7 +12,7 @@
         :class="color">
         <div class="card-body">
           <div class="flex justify-end items-center">
-            <div v-show="status==false" @click="visible=false" class="btn-icon">
+            <div v-show="status==false" @click="visible=false;resetNotif" class="btn-icon">
               <img src="@/assets/icons/close.svg" alt="icons" width="25px">
             </div>
           </div>
@@ -57,8 +57,10 @@ export default {
   },
   watch: {
     status(val) {
-      if (!val) {
+      if (val == false) {
         this.color = 'bg-red-500'        
+      } else if (val == null) {
+        this.color = 'bg-transparent'
       }
     }
   },
@@ -66,8 +68,17 @@ export default {
     Modal
   },
   methods: {
+    resetNotif() {
+      this.$store.dispatch('updateNotif', {
+        visible: false,
+        status: null,
+        msg: ''
+      })
+    },
     mulai(data) {
 			if (data.completed == 0) {
+        // reset nilai data notif
+        this.resetNotif()
         /**
          * Jika pernah mendownload soal
          * maka status true dan bisa langsung
