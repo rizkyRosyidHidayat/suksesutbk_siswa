@@ -19,3 +19,7 @@ export function getDetailAssessment(data) {
 export function getDataPembahasan(data) {
 	return http.get('ujian/submateri/pembahasan/?id_ujian='+data.id_ujian+'&id_sub='+data.id_sub+'&id_kategori_submateri='+data.id_kategori_submateri)
 }
+
+export function postDataScoreAll(data) {
+	return http.post('ujian/finalize-all', data)
+}

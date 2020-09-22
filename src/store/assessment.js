@@ -2,7 +2,8 @@ import {
   getDataAssessment, 
   getDetailAssessment, 
   getDataPeringkat,
-  getDataPembahasan
+  getDataPembahasan,
+  postDataScoreAll
 } from "@/config/assessment";
 import store from './index'
 import router from '@/router/index'
@@ -13,6 +14,7 @@ const dataAssessment = {
     dataAssessment: [],
     detailAssessment: [],
     dataPeringkat: [],
+    dataNilaiAkhir: {},
     loading: false,
     lastPage: 0
   },
@@ -39,6 +41,9 @@ const dataAssessment = {
     },
     updateLastPage(state, payload) {
       state.lastPage = payload
+    },
+    updateDataNilaiAkhir(state, payload) {
+      state.dataNilaiAkhir = payload
     }
   },
   actions: {
@@ -56,6 +61,9 @@ const dataAssessment = {
               id_peserta: payload,
               id_ujian: data[0].id_ujian
             })
+            // get data score
+            postDataScoreAll({id_ujian: data[0].id_ujian})
+              .then(res => context.commit('updateDataNilaiAkhir', res.data))
             // digunakan untuk menampilkan data pembahasan
             window.localStorage.setItem('id_ujian', data[0].id_ujian)       
           } else {

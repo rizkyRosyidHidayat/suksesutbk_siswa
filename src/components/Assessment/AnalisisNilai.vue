@@ -1,7 +1,7 @@
 <template>
   <div class="card-body">
     <AnalisiMateriuji v-for="item in detailAssessment.analisis_nilai.tabel" :key="item.id_sub" :data="item" />
-    <NilaiCeeb v-for="item in detailAssessment.analisis_nilai.tabel" :key="item.materi_uji" :data="item" />
+    <NilaiCeeb :data="detailAssessment.analisis_nilai" />
     <ReviewSoal v-for="(item, i) in detailAssessment.analisis_nilai.analisis_butir_soal" :key="i+2" :data="item" />
     <Peringkat :data="detailAssessment.ptn_pilihan" />
     <template v-if="userPremium">
