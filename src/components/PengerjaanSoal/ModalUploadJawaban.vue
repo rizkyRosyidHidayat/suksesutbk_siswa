@@ -10,7 +10,7 @@
         class="card max-w-full sm:max-w-sm mx-auto"
         :class="color">
         <div class="card-body flex justify-end items-center">
-          <div v-show="status==false" @click="visible=false" class="btn-icon">
+          <div v-show="status==false" @click="visible=false;resetNotif" class="btn-icon">
             <img src="@/assets/icons/close.svg" alt="icons" width="25px">
           </div>
         </div>
@@ -70,13 +70,24 @@ export default {
   },
   watch: {
     status(val) {
-      if (!val) {
+      if (val == false) {
         this.color = 'bg-red-500'        
+      } else if (val == null) {
+        this.color = 'bg-transparent'
       }
     }
   },
-  methods: {    
+  methods: {  
+    resetNotif() {
+      this.$store.dispatch('updateNotif', {
+        visible: false,
+        status: null,
+        msg: ''
+      })
+    },  
     uploadJawaban() {
+      // reset nilai store notif
+      this.resetNotif()
       /**
        * Mengecek data jawaban pada submateri terakhir
        * apakah kosong atau tidak
