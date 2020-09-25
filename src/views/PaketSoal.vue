@@ -56,7 +56,7 @@ export default {
     ModalDownloadSoal
   },
   computed: {
-    ...mapState('dataDashboard', ['dataPaketSoal']),
+    ...mapState('dataDashboard', ['dataPaketSoal'])
   },
   methods: {
     lihat() {
@@ -68,7 +68,7 @@ export default {
       if (completed == -1) {
         this.$router.push({ name: 'assessment' })
       }
-    }
+    },
   },
   created() {
     this.$store.dispatch('dataDashboard/getDataPaketSoal', {

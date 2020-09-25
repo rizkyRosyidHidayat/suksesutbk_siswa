@@ -19,7 +19,9 @@ const store = new Vuex.Store({
       status: null,
       msg: ''
     },
-    loading: false
+    loading: false,
+    fullscreen: false,
+    fullscreenRef: ''
   },
   mutations: {
     updateNotif(state, payload) {
@@ -29,11 +31,17 @@ const store = new Vuex.Store({
     },
     updateLoading(state, payload) {
       state.loading = payload
+    },
+    updateFullscreen(state, payload) {
+      state.fullscreen = payload
+    },
+    updateFullscreenRef(state, payload) {
+      state.fullscreenRef = payload
     }
   },
   getters: {
     getNotif: state => state.notif,
-    getLoading: state => state.loading,
+    getLoading: state => state.loading
   },
   actions: {
     updateNotif(context, payload) {
@@ -42,6 +50,12 @@ const store = new Vuex.Store({
     updateLoading(context, payload) {
       context.commit('updateLoading', payload)
     },
+    updateFullscreen(context, payload) {
+      context.commit('updateFullscreen', payload)
+    },
+    updateFullscreenRef(context, payload) {
+      context.commit('updateFullscreenRef', payload)
+    }
   },
   modules: {
     dataAssessment: dataAssessment,

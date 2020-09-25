@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import Modal from '@/components/Modal'
 export default {
   props: ['data'],
@@ -53,12 +54,13 @@ export default {
   computed: {
     status() {
       return this.$store.getters.getNotif.status
-    }
+    },
+    ...mapState(['fullscreenRef'])
   },
   watch: {
     status(val) {
       if (val == false) {
-        this.color = 'bg-red-500'        
+        this.color = 'bg-red-500'       
       } else if (val == null) {
         this.color = 'bg-transparent'
       }
@@ -74,6 +76,9 @@ export default {
         status: null,
         msg: ''
       })
+    },
+    toggle () {
+      this.fullscreenRef.toggle() // recommended
     },
     mulai(data) {
 			if (data.completed == 0) {
@@ -95,6 +100,7 @@ export default {
         } else {
           this.$router.push({ name: 'pengerjaan-soal', params: {id: data.id_materi_uji} })
         }
+        this.toggle()
       }
     }
   },

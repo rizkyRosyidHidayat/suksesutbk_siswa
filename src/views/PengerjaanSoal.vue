@@ -1,58 +1,57 @@
 <template>
-  <fullscreen ref="fullscreen" @change="fullscreenChange">
-    <div class="flex content-between h-screen flex-wrap">
-      <Navbar 
-        :soal="soal" 
-        :submateri.sync="submateri"
-        :data-jawaban="dataJawaban"
-        class="w-full flex-shrink-0">
-        <button class="btn-icon ml-3 mt-2 sm:mt-0" @click="toggle">
-          <img v-if="fullscreen" src="@/assets/icons/fullscreen_exit.svg" alt="icon" width="25px"/>
-          <img v-else src="@/assets/icons/fullscreen.svg" alt="icon" width="25px"/>
-        </button>
-      </Navbar>
-      <div class="w-full flex-shrink-0 body">
-        <div class="container">
-          <h1 class="font-bold mb-4">Soal Nomor {{ number+1 }}</h1>
-          <div class="show-soal break-words" v-html="pertanyaan.pertanyaan"></div>
-          <div class="max-w-full sm:max-w-sm mt-6">
-            <div 
-              v-for="item in pertanyaan.jawaban" :key="item.huruf"
-              class="mb-4">
-              <input 
-                type="radio" 
-                name="jawaban" 
-                :id="item.huruf" 
-                v-model="selected"
-                :value="item.huruf"
-                v-shortkey="[item.huruf.toLowerCase()]"
-                @shortkey="selectedValue(item.huruf)"
-                class="hidden">
-              <label :for="item.huruf">
-                <div 
-                  class="card border shadow cursor-pointer transition duration-100"
-                  :class="{'active': jawabanTerpilih(item.huruf)}">
-                  <div class="card-body py-2 px-3 flex">
-                    <div class="mr-1">{{ item.huruf }}.</div>
-                    <div class="break-words show-soal" v-html="item.teks"></div>
-                  </div>
+  <div class="flex content-between h-screen flex-wrap">
+    <Navbar 
+      :soal="soal" 
+      :submateri.sync="submateri"
+      :data-jawaban="dataJawaban"
+      class="w-full flex-shrink-0">
+      <button class="btn-icon ml-3 mt-2 sm:mt-0" @click="toggle">
+        <img v-if="fullscreen" src="@/assets/icons/fullscreen_exit.svg" alt="icon" width="25px"/>
+        <img v-else src="@/assets/icons/fullscreen.svg" alt="icon" width="25px"/>
+      </button>
+    </Navbar>
+    <div class="w-full flex-shrink-0 body">
+      <div class="container">
+        <h1 class="font-bold mb-4">Soal Nomor {{ number+1 }}</h1>
+        <div class="show-soal break-words" v-html="pertanyaan.pertanyaan"></div>
+        <div class="max-w-full sm:max-w-sm mt-6">
+          <div 
+            v-for="item in pertanyaan.jawaban" :key="item.huruf"
+            class="mb-4">
+            <input 
+              type="radio" 
+              name="jawaban" 
+              :id="item.huruf" 
+              v-model="selected"
+              :value="item.huruf"
+              v-shortkey="[item.huruf.toLowerCase()]"
+              @shortkey="selectedValue(item.huruf)"
+              class="hidden">
+            <label :for="item.huruf">
+              <div 
+                class="card border shadow cursor-pointer transition duration-100"
+                :class="{'active': jawabanTerpilih(item.huruf)}">
+                <div class="card-body py-2 px-3 flex">
+                  <div class="mr-1">{{ item.huruf }}.</div>
+                  <div class="break-words show-soal" v-html="item.teks"></div>
                 </div>
-              </label>
-            </div>
+              </div>
+            </label>
           </div>
         </div>
       </div>
-      <PageNumber 
-        :soal="soal.soal" 
-        :number.sync="number" 
-        :submateri.sync="submateri"
-        :data-jawaban="dataJawaban"
-        class="w-full flex-shrink-0" />
     </div>
-  </fullscreen>
+    <PageNumber 
+      :soal="soal.soal" 
+      :number.sync="number" 
+      :submateri.sync="submateri"
+      :data-jawaban="dataJawaban"
+      class="w-full flex-shrink-0" />
+  </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import Navbar from '@/components/PengerjaanSoal/Navbar'
 import PageNumber from '@/components/PengerjaanSoal/PageNumber'
 
@@ -66,8 +65,7 @@ export default {
     submateri: '',
     number: 0,
     selected: '',
-    dataJawaban: [],
-    fullscreen: false
+    dataJawaban: []
   }),
   created() {
     this.submateri = parseInt(localStorage.submateri)
@@ -80,7 +78,8 @@ export default {
   computed: {
     pertanyaan() {
       return this.soal.soal[this.number]
-    }
+    },
+    ...mapState(['fullscreen', 'fullscreenRef'])
   },
   watch: {
     submateri(newVal) {
@@ -116,10 +115,10 @@ export default {
   },
   methods: {
     toggle () {
-      this.$refs['fullscreen'].toggle() // recommended
+      this.fullscreenRef.toggle() // recommended
     },
     fullscreenChange (fullscreen) {
-      this.fullscreen = fullscreen
+      this.$store.dispatch('updateFullscreen', fullscreen)
     },
     jawabanTerpilih(huruf) {
       /**
