@@ -7,7 +7,7 @@
         <div class="mb-2 font-xl font-bold text-gray-700">Pilihan PTN dan Prodi Pertama</div>
         <PilihPtnProdi :pilihan_ptn.sync="data.pilihan_ptn[0]" />
         <div class="mb-2 font-xl font-bold text-gray-700">Pilihan PTN dan Prodi Kedua</div>
-        <PilihPtnProdi :pilihan_ptn.sync="data.pilihan_ptn[1]" />
+        <PilihPtnProdi2 :key="data.pilihan_ptn[0].id_prodi" :id_prodi="data.pilihan_ptn[0].id_prodi" :pilihan_ptn.sync="data.pilihan_ptn[1]" />
         <div class="text-right"> 
           <button @click="isSelectPtn=false;data.id_paket_soal=0" class="btn-primary bg-white text-teal-500">
             Kembali
@@ -25,9 +25,11 @@
 import { mapState } from "vuex";
 import PilihPaketSoal from './PilihPaketSoal'
 import PilihPtnProdi from './PilihPtnProdi'
+import PilihPtnProdi2 from './PilihPtnProdi2'
 
 export default {
   components: {
+    PilihPtnProdi2,
     PilihPtnProdi,
     PilihPaketSoal
   },
@@ -35,7 +37,10 @@ export default {
     selectedKelompokUji: '',
     data: {
       id_paket_soal: '',
-      pilihan_ptn: []
+      pilihan_ptn: [{
+        id_ptn: 0,
+        id_prodi: 0
+      }]
     },
     isSelectPtn: false
   }),

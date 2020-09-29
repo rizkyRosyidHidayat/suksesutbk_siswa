@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-white">
     <nav>
       <img src="@/assets/img/logo_white.png" alt="logo" class="h-10">
     </nav>

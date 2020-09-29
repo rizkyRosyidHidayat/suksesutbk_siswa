@@ -5,9 +5,8 @@
       :submateri.sync="submateri"
       :data-jawaban="dataJawaban"
       class="w-full flex-shrink-0">
-      <button class="btn-icon ml-3 mt-2 sm:mt-0" @click="toggle">
-        <img v-if="fullscreen" src="@/assets/icons/fullscreen_exit.svg" alt="icon" width="25px"/>
-        <img v-else src="@/assets/icons/fullscreen.svg" alt="icon" width="25px"/>
+      <button v-show="fullscreen==false" class="btn-icon ml-3 mt-2 sm:mt-0" @click="toggle">
+        <img src="@/assets/icons/fullscreen.svg" alt="icon" width="25px"/>
       </button>
     </Navbar>
     <div class="w-full flex-shrink-0 body">
