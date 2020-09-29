@@ -32,7 +32,7 @@
           <tbody>
             <tr v-for="item in dataSimulasi.analisis.submateri" :key="item.submateri" class="odd:bg-gray-200">
               <td class="w-4/5">{{ item.submateri }}</td>
-              <td class="w-1/5 text-right font-bold">{{ item.skor }}</td>
+              <td class="w-1/5 text-right font-bold">{{ item.skor.toFixed(2) }}</td>
             </tr>
           </tbody>
         </table>

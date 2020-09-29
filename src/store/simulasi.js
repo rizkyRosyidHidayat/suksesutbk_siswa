@@ -8,7 +8,7 @@ var dataSimulasi = {
 		dataPaketSoal: [],
 		dataPtn: [],
 		dataKelompokUji: '',
-		namaPtnTerpilih: 'Nama Perguruan Tinggi Nasional',
+		namaPtnTerpilih: 'Nama Perguruan Tinggi Negeri',
 		dataSimulasi: {},
 		visible: false
 	},
