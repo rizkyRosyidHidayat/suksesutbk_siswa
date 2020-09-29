@@ -1,5 +1,5 @@
 <template>
-  <div class="flex content-between h-screen flex-wrap">
+  <div class="flex content-between h-screen flex-wrap bg-white">
     <Navbar 
       :soal="soal" 
       :submateri.sync="submateri"
