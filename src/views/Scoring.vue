@@ -35,7 +35,8 @@
           <center>
             <div @click="assessment" class="btn-primary inline-block my-4">
               <Spinner>
-                Lihat Assessment
+                <span v-if="done">Lihat Assessment</span>
+                <span v-else>Tes Selanjutnya</span>
               </Spinner>
             </div>
           </center>
@@ -46,25 +47,43 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import Spinner from '@/components/Spinner'
 export default {
   components: {
     Spinner
   },
   data: () => ({
-    skor: ''
+    skor: '',
+    done: false
   }),
   computed: {
+    ...mapState('dataDashboard', ['dataPaketSoal']),
     durasi() {
       return parseInt(this.skor.duration.value/60)
     },
   },
   created() {
     this.skor = JSON.parse(localStorage.skor_soal)
+    this.$store.dispatch('dataDashboard/getDataPaketSoal', {
+      id_peserta: JSON.parse(window.localStorage.getItem('dataPeserta')).id,
+      id_paket_soal: window.localStorage.getItem('id_paket_soal')
+    })
   },
   methods: {
     assessment() {
-      this.$store.dispatch('dataSoal/postFinishUjian')          
+      /**
+       * Mengecek apakah masih ada data completed = 0
+       * jika tidak ditemukan maka bisa melihat assessment report
+       */
+      const completed = this.dataPaketSoal.findIndex(x => x.completed == 0 )
+      if (completed == -1) {
+        this.done = true
+        this.$store.dispatch('dataSoal/postFinishUjian')          
+      } else {
+        this.done = false
+        this.$router.push({ name: 'paket-soal', params: { id: window.localStorage.getItem('id_paket_soal') } })
+      }
     }
   }
 }
