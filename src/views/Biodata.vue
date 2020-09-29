@@ -263,11 +263,11 @@ export default {
     this.kabupaten = peserta.sekolah.kabupaten
     this.sekolah = peserta.sekolah.nama
     this.$store.dispatch('dataBiodata/getDataProv')
-    // this.$store.dispatch('dataBiodata/getDataKab', peserta.sekolah.provinsi)
-    // this.$store.dispatch('dataBiodata/getDataSekolah', {
-    //   provinsi: peserta.sekolah.provinsi,
-    //   kabupaten: peserta.sekolah.kabupaten
-    // })
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    })
   },
   computed: {
     ...mapState('dataBiodata', ['dataProv', 'loading', 'dataSekolah', 'dataKab']),
