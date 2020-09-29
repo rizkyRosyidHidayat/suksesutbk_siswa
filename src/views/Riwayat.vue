@@ -25,7 +25,8 @@
           <div class="card">
             <div class="card-body bg-orange-400 text-white font-bold text-lg">{{ selected.text }}</div>
             <ul class="my-2 divide-y">
-              <li v-for="(item, i) in filterData" :key="i">
+              <li v-if="filterData.length == 0">Data tidak tersedia</li>
+              <li v-else v-for="(item, i) in filterData" :key="i">
                 <Invoice :item="item"/>
               </li>
             </ul>

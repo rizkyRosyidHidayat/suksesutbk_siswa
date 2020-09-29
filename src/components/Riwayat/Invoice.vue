@@ -154,7 +154,7 @@ export default {
       }, 1000);
     },
     pesan(token) {
-      window.open('https://app.sandbox.midtrans.com/snap/v2/vtweb/'+token, '_blank')      
+      window.open('https://app.midtrans.com/snap/v2/vtweb/'+token, '_blank')      
     }  
   },
   mounted () {
