@@ -8,7 +8,7 @@
             Untuk bisa melihat Assessment Report kamu harus 
             menyelesaikan semua Tes terlebih dahulu.
           </div>
-          <button @click="lihat" class="btn-primary bg-white text-blue-500 mt-4">
+          <button v-show="visible" @click="lihat" class="btn-primary bg-white text-blue-500 mt-4">
             Lihat Asessment Report
           </button>
         </div>
@@ -55,6 +55,9 @@ export default {
     FixedNavbar,
     ModalDownloadSoal
   },
+  data: () => ({
+    visible: false
+  }),
   computed: {
     ...mapState('dataDashboard', ['dataPaketSoal'])
   },
@@ -66,6 +69,7 @@ export default {
        */
       const completed = this.dataPaketSoal.findIndex(x => x.completed == 0 )
       if (completed == -1) {
+        this.visible = true
         this.$router.push({ name: 'assessment' })
       }
     },
