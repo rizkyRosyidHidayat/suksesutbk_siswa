@@ -156,7 +156,7 @@ export default {
 }
 @screen sm{
   .body{
-    height: calc(100vh - 115px);
+    height: calc(100vh - 127px);
   }
 }
 .card.active{
