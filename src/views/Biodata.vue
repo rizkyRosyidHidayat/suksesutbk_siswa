@@ -218,6 +218,7 @@ import Notif from '@/components/Notif'
 import Spinner from '@/components/Spinner'
 import Autocomplete from '@/components/Autocomplete'
 import Option from '@/components/Option'
+
 export default {
   directives: {mask},
   components: {
@@ -280,9 +281,18 @@ export default {
         { text: now-2, value: now-2 }
       ]
     }
-  },  
+  },
   methods: {
     onSubmit() {
+      if (this.data.nohp_wa == '') {
+        delete this.data.nohp_wa
+      }
+      if (this.data.sosmed_ig == '') {
+        delete this.data.sosmed_ig
+      }
+      if (this.data.sosmed_fb == '') {
+        delete this.data.sosmed_fb
+      }
       this.$store.dispatch('dataBiodata/postDataBiodata', this.data)
     }
   }
