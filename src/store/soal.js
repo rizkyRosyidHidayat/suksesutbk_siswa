@@ -156,9 +156,7 @@ const dataSoal = {
               msg: ''
             })
             store.dispatch('updateLoading', false)
-            window.localStorage.removeItem('soal')
-            window.localStorage.removeItem('dataDurasi')
-            window.localStorage.removeItem('dataJawaban') 
+            window.localStorage.removeItem('pilihan_ptn') 
             router.push({ name: 'assessment' })
           } else {
             store.dispatch('updateNotif', {

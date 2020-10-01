@@ -55,13 +55,24 @@ export default {
   },
   data: () => ({
     skor: '',
-    done: false
+    done: false,
+    completed: 0
   }),
   computed: {
     ...mapState('dataDashboard', ['dataPaketSoal']),
     durasi() {
       return parseInt(this.skor.duration.value/60)
     },
+  },
+  watch: {
+    dataPaketSoal() {
+      this.completed = this.dataPaketSoal.findIndex(x => x.completed == 0 )
+      if (this.completed == -1) {
+        this.done = true
+      } else {
+        this.done = false
+      }
+    }
   },
   created() {
     this.skor = JSON.parse(localStorage.skor_soal)
@@ -76,12 +87,9 @@ export default {
        * Mengecek apakah masih ada data completed = 0
        * jika tidak ditemukan maka bisa melihat assessment report
        */
-      const completed = this.dataPaketSoal.findIndex(x => x.completed == 0 )
-      if (completed == -1) {
-        this.done = true
+      if (this.completed == -1) {
         this.$store.dispatch('dataSoal/postFinishUjian')          
       } else {
-        this.done = false
         this.$router.push({ name: 'paket-soal', params: { id: window.localStorage.getItem('id_paket_soal') } })
       }
     }
