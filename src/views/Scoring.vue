@@ -92,6 +92,7 @@ export default {
       } else {
         this.$router.push({ name: 'paket-soal', params: { id: window.localStorage.getItem('id_paket_soal') } })
       }
+      window.localStorage.removeItem('dataDurasi')
     }
   }
 }
