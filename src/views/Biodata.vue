@@ -284,13 +284,13 @@ export default {
   },
   methods: {
     onSubmit() {
-      if (this.data.nohp_wa == '') {
+      if (this.data.nohp_wa == '' || this.data.nohp_wa == null) {
         delete this.data.nohp_wa
       }
-      if (this.data.sosmed_ig == '') {
+      if (this.data.sosmed_ig == '' || this.data.sosmed_ig == null) {
         delete this.data.sosmed_ig
       }
-      if (this.data.sosmed_fb == '') {
+      if (this.data.sosmed_fb == '' || this.data.sosmed_fb == null) {
         delete this.data.sosmed_fb
       }
       this.$store.dispatch('dataBiodata/postDataBiodata', this.data)
