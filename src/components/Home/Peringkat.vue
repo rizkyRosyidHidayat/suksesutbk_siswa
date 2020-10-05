@@ -61,6 +61,7 @@ export default {
   }),
   created() {
     this.getDataPeringkat()
+    this.getDataPeringkatSaintek()
   },
   methods: {
     getDataPeringkat: async function () {
@@ -78,14 +79,18 @@ export default {
       })
         .then(res => {
           if (res.status == 200) {
+            let data = []
             let index = 0
             for (const key in res.data.data) {
-              this.peringkatSoshum[index] = res.data.data[key];   
+              data[index] = res.data.data[key];   
               index++             
             }
+            this.peringkatSoshum = data
           }
         })
-        .catch(err => err)
+        .catch(err => err)      
+    },
+    getDataPeringkatSaintek: async function () {
       await getDataPeringkat({
         nama: '',
         kelompok: 'saintek',
@@ -95,7 +100,13 @@ export default {
       })
         .then(res => {
           if (res.status == 200) {
-            this.peringkatSaintek = res.data.data
+            let data = []
+            let index = 0
+            for (const key in res.data.data) {
+              data[index] = res.data.data[key];  
+              index++             
+            }
+            this.peringkatSaintek = data
           }
         })
         .catch(err => err)
