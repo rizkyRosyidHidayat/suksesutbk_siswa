@@ -24,18 +24,20 @@
         </div>
       </div>
       <!--  -->
-      <div class="mt-8">
-        <h1 class="text-lg font-bold text-gray-700">
-          {{ dataSimulasi.analisis.materi_uji }}
-        </h1>
-        <table class="table-fixed w-full md:w-1/2 mt-4">
-          <tbody>
-            <tr v-for="item in dataSimulasi.analisis.submateri" :key="item.submateri" class="odd:bg-gray-200">
-              <td class="w-4/5">{{ item.submateri }}</td>
-              <td class="w-1/5 text-right font-bold">{{ item.skor.toFixed(2) }}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div v-for="data in dataSimulasi.analisis" :key="data.id_sub">
+          <h1 class="text-lg font-bold text-gray-700">
+            {{ data.materi_uji }}
+          </h1>
+          <table class="table-fixed w-full mt-4">
+            <tbody>
+              <tr v-for="item in data.submateri" :key="item.submateri" class="odd:bg-gray-200">
+                <td class="w-4/5">{{ item.submateri }}</td>
+                <td class="w-1/5 text-right font-bold">{{ item.skor.toFixed(2) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <!--  -->
       <div class="mt-16">
