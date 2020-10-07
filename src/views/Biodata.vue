@@ -264,11 +264,6 @@ export default {
     this.kabupaten = peserta.sekolah.kabupaten
     this.sekolah = peserta.sekolah.nama
     this.$store.dispatch('dataBiodata/getDataProv')
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    })
   },
   computed: {
     ...mapState('dataBiodata', ['dataProv', 'loading', 'dataSekolah', 'dataKab']),
