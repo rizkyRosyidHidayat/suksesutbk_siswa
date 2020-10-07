@@ -11,7 +11,7 @@
           <div class="w-1/3 text-white">
             <p class="text-4xl mb-4">
               <span>Selamat Datang</span> <br>
-              <span class="font-bold italic">{{ nama }}</span>
+              <span class="font-bold italic capitalize">{{ nama }}</span>
             </p>
             <div>
               Selamat mengikuti TryOut UTBK 2021. Dapatkan Assessment Report, soal-soal
