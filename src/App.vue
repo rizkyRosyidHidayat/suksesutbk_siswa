@@ -12,11 +12,22 @@ export default {
     this.$store.dispatch('updateFullscreenRef', this.$refs['fullscreen'])
   },
   computed: {
-    ...mapState(['fullscreen'])
+    ...mapState(['fullscreen']),
+    route() {
+      return this.$route.name
+    }
   },
   methods: {
     fullscreenChange (fullscreen) {
       this.$store.dispatch('updateFullscreen', fullscreen)
+    }
+  },
+  watch: {
+    route() {
+      window.scroll({
+        top: 0,
+        left: 0
+      })
     }
   }
 }
