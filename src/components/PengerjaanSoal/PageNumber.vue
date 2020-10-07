@@ -117,9 +117,10 @@ export default {
          */
         if (this.number > 0) {
           this.$emit('update:number', this.number-1)
-        } else {
-          this.$emit('update:submateri', this.submateri-1)
         }
+        // } else {
+        //   this.$emit('update:submateri', this.submateri-1)
+        // }
       }
     }
   },
