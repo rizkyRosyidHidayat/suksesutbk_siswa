@@ -1,5 +1,5 @@
 <template>
-  <div class="flex content-between h-screen flex-wrap">
+  <div class="flex content-between h-screen flex-wrap bg-white">
     <Navbar 
       :submateri="submateri"
       class="w-full flex-shrink-0"/>
