@@ -34,8 +34,7 @@ export default {
   props: ['nav', 'active', 'full'],
   methods: {
     logout() {
-        window.localStorage.removeItem('token')
-        window.localStorage.removeItem('dataPeserta')
+        window.localStorage.clear()        
         this.$router.replace({ name: 'auth', params: { form: 'login' } })      
     }
   },
