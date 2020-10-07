@@ -7,6 +7,7 @@
       </div>
     </div>
     <div 
+      ref="page_number"
       class="page-number order-1 sm:order-2"
       :class="{'xl:justify-center': soal.length<=20?true:false}">
       <input type="button" 
@@ -103,6 +104,8 @@ export default {
            this.visible = true
          } else {
            this.$emit('update:submateri', this.submateri+val)
+           const pageNumber = this.$refs.page_number
+           pageNumber.scrollTo(0, 0)
          }
       }
     },
