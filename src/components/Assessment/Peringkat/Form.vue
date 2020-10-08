@@ -14,12 +14,15 @@
 </template>
 
 <script>
+import {
+  getDataPeringkat
+} from "@/config/assessment";
 import { mapState } from "vuex";
 import PilihKelompokUji from './PilihKelompokUji'
 import PilihPtnProdi from './PilihPtnProdi'
 
 export default {
-  props: ['page', 'visible'],
+  props: ['page', 'visible', 'data_peringkat'],
   components: {
     PilihPtnProdi,
     PilihKelompokUji
@@ -49,7 +52,9 @@ export default {
       if (val) {
         this.data.id_paket_soal = localStorage.id_paket_soal    
         this.data.page = this.page    
-        this.$store.dispatch('dataAssessment/getDataPeringkat', this.data) 
+        // this.$store.dispatch('dataAssessment/getDataPeringkat', this.data)
+        this.getDataPeringkat()
+        // this.$emit('update:ren', this.ren+1)
       } else if (val == false) {
         this.$emit('update:visible', true)
       }
@@ -62,6 +67,30 @@ export default {
     }
   },
   methods: {
+    getDataPeringkat() {
+      getDataPeringkat(this.data)
+        .then(res => {
+          if (res.status == 200) {
+            // context.dispatch('updateDataPeringkat', res.data.data)
+            let index = 0
+            let dataPeringkat = []
+            if (res.data.data.length == 0) {
+              dataPeringkat = res.data.data
+            } else {
+              for (const key in res.data.data) {
+                dataPeringkat[index] = res.data.data[key];   
+                index++             
+              }
+            }
+            this.$emit('update:data_peringkat', dataPeringkat)            
+            this.$store.commit('dataAssessment/updateLastPage', res.data.last_page)
+            this.$store.commit('dataAssessment/updateLoading', false)            
+          } else {
+            this.$store.commit('dataAssessment/updateLoading', false)
+          }
+        })
+        .catch(() => this.$store.commit('dataAssessment/updateLoading', false))
+    },
     onSubmit() {      
       this.$store.commit('dataAssessment/updateLoading', true)
       const peserta = JSON.parse(localStorage.dataPeserta)

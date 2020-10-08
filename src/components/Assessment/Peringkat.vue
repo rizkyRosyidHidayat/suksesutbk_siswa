@@ -4,7 +4,7 @@
     <h1 class="text-2xl font-bold text-gray-700">
       Peringkat Berdasarkan
     </h1>
-    <Form :page="page" :visible.sync="visible" />
+    <Form :page="page" :visible.sync="visible" :data_peringkat.sync="data_peringkat" />
     <table class="table-auto w-full mt-4 -mx-6 md:mx-0">
       <thead class="bg-gray-200">
         <tr>
@@ -25,9 +25,9 @@
           </td>
         </tr>
         <tr 
-          v-else-if="dataPeringkat.length > 0"
-          v-for="(item, i) in dataPeringkat" :key="i">
-          <td>{{ i }}</td>
+          v-else-if="data_peringkat.length > 0"
+          v-for="(item, i) in data_peringkat" :key="i">
+          <td>{{ i+1 }}</td>
           <td>{{ item.nama_peserta }}</td>
           <td>{{ item.sekolah.nama }}</td>
           <td>{{ item.sekolah.provinsi }}</td>
@@ -47,7 +47,7 @@
     </table>
     <div class="flex justify-center mt-8">
       <div 
-        v-show="dataPeringkat.length > 0"
+        v-show="data_peringkat.length > 0"
         v-for="item in lastPage" :key="item"
         @click="page=item"
         class="btn-primary py-1 px-3 btn-outline mr-3"
@@ -70,7 +70,8 @@ export default {
   },
   data: () => ({
     page: 1,
-    visible: false
+    visible: false,
+    data_peringkat: []
   }),
   computed: {
     ...mapState('dataAssessment', ['dataPeringkat', 'loading', 'lastPage'])
