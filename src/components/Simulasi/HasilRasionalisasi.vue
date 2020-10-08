@@ -54,7 +54,7 @@
             <h1 class="text-3xl font-bold text-gray-700">{{ dataSimulasi.ptn.stats.peminat }}</h1>
           </div>
           <div class="text-center">
-            <span>Indeks Ketetapan</span>
+            <span>Indeks Keketatan</span>
             <h1 class="text-3xl font-bold text-gray-700">{{ dataSimulasi.ptn.stats.indeks_keketatan.value.toFixed(2) }}%</h1>
           </div>
         </div>
